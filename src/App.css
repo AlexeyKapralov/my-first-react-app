@@ -1,8 +1,6 @@
 .app-wrapper{
 	display: grid;
-	width: 1200px;
 	margin: 0 auto;
-
 	grid-template-areas: 
 	"h h"
 	"n c";
@@ -10,18 +8,4 @@
 	grid-template-columns: 2fr 10fr;
 	grid-gap: 10px;
 }
-.nav{
-	grid-area: n;
-	background-color: rgb(118, 206, 148);
-}
-.header{
-	grid-area: h;
-	background-color: rgb(115, 205, 206);
-}
-.header img{
-	width: 20px;
-}
-.content{
-	grid-area: c;
-	background-color: rgb(252, 166, 166);
-}
+
