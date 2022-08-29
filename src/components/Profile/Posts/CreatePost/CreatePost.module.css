@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+.createPost{
+	margin-top: 10px;
+	display: flex;
+	flex-direction: column;
+	border-radius: 15px;
+	background-color: #fff;
+}
+.createPost textarea{
+	min-height: 70px;
+	padding: 15px;
+	margin: 20px;
+	border-radius: 15px;
+	border-color: #f1f1f1;
+	font-family: "Montserrat", sans-serif;
+	outline: none;
+}
+.createPost textarea:focus {
+	border-color: #bfbfbf;
+}
+.createPost button{
+	margin: 0 20px 20px 20px;
+	align-self: flex-start;
+	background: linear-gradient(135deg, #05f, #09f);
+	border: #fff;
+	padding: 10px;
+	font-family: "Montserrat", sans-serif;
+	border-radius: 15px;
+	color: #fff;
+	font-weight: 500;
+}

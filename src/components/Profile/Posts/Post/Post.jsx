@@ -2,7 +2,7 @@ import s from './Post.module.css'
 
 const Post = (props) => {
 	return (
-			<div>
+			<div className={s.post}>
 				{props.message};
 			</div>
 	)

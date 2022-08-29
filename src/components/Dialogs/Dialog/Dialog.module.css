@@ -1,0 +1,13 @@
+.dialog{
+	padding: 1rem;
+	font-family: "Montserrat", sans-serif;
+	font-size: 1rem;
+	color: #595959;
+	font-weight: 600;
+}
+a {
+	text-decoration: none;
+}
+.myLink{
+	color: #595959;
+}
