@@ -1,17 +1,16 @@
 .nav {
 	grid-area: n;
-	background-color: rgb(118, 206, 148);
-
-	
 }
-.item{
-	padding: 10px;
+.account{
+	background-color: #fff;
+	border-radius: 15px;
+	margin-left: 10px;	
+	padding: 15px;
 }
-.item a{
-	color: white;
-	text-decoration: none;
-	padding: 10px;
-}
-.item a.activeLink{
-	color: gold;
+.account .title{
+	color: #adb5bd;
+	font-weight: 600;
+	margin-bottom: 5px;
+	font-size: 12px;
+	font-family: "Montserrat", sans-serif;
 }
