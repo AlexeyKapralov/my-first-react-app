@@ -1,3 +1,5 @@
+import { reRender } from "../render";
+
 const state = {
 
 	dialogsPage: {
@@ -81,5 +83,11 @@ const state = {
 		]
 	}
 }
+
+export let addPost = (newMessage) => {
+	state.profilePage.posts.push({id: 5, message : newMessage})
+	reRender(state, addPost);
+}
+
 
 export default state;

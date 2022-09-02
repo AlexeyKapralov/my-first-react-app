@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import Dialog from "./Dialog/Dialog";
 import s from "./Dialogs.module.css";
 import Message from "./Message/Message";
@@ -18,6 +19,16 @@ const Dialogs = (props) => {
 		<div className={s.container}>
 			<div className={s.messages}>
 				{ messagesElements }
+				<div className={s.sendMessage}>
+					<div className={s.container}>
+						<input type="text" placeholder="Write your message!!!"/>
+						<div className={s.button}>
+							<NavLink to="">
+								<img src="https://cdn-icons-png.flaticon.com/512/3526/3526788.png" alt="..." />
+							</NavLink>
+						</div>
+					</div>
+				</div>
 			</div>
 
 			<div className={s.dialogs}>

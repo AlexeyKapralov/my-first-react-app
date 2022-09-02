@@ -3,7 +3,7 @@
 	border-radius: 0.5rem;
 	margin: 0.5rem 0.5rem 1rem 0.5rem;
 	padding: 1rem;
-	font-family: "Montserrat", sans-serif;;
+	font-family: "Montserrat", sans-serif;
 }
 .message:nth-child(2n) {
 	align-self: end;
