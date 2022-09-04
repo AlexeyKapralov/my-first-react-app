@@ -10,7 +10,7 @@ const Posts = (props) => {
 
 	return (
 		<div>
-			<CreatePost addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>
+			<CreatePost dispatch={props.dispatch}/>
 			{messageElements}
 		</div>
 	)

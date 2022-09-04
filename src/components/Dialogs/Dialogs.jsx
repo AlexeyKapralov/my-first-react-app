@@ -12,7 +12,7 @@ const Dialogs = (props) => {
 	let textYourNewMessage = React.createRef();
 
 	const sendNewMessage = () => {
-		props.sendNewMessage(textYourNewMessage.current.value);
+		props.dispatch ({type: "SEND-NEW-MESSAGE", textMessage: textYourNewMessage.current.value});
 	}
 
 	let dialogsElements = props.state.dialogs.map(dialog => {

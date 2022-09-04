@@ -90,19 +90,33 @@ export let store = {
 		return this._state;
 	},
 
-	addPost (newMessage) {
-		this._state.profilePage.posts.push({ id: this._state.dialogsPage.messages.length + 1, message : newMessage})
-		this.reRender();
+	dispatch (action) {
+		if (action.type = "ADD-POST"){
+			this._state.profilePage.posts.push({ id: this._state.dialogsPage.messages.length + 1, message: action.newMessage })
+			this.reRender();
+
+		} else if (action.type = "UPDATE-NEW-POST-TEXT"){
+			this._state.profilePage.newPostText = action.text;
+
+		} else if (action.type = "SEND-NEW-MESSAGE"){
+			this._state.dialogsPage.messages.push({ id: this._state.dialogsPage.messages.length + 1, message: action.textMessage })
+			this.reRender();
+		}
 	},
 
-	updateNewPostText (text) {
-		this._state.profilePage.newPostText = text;
-	},
+	// addPost (newMessage) {
+	// 	this._state.profilePage.posts.push({ id: this._state.dialogsPage.messages.length + 1, message : newMessage})
+	// 	this.reRender();
+	// },
 
-	sendNewMessage (textMessage) {
-		this._state.dialogsPage.messages.push({ id: this._state.dialogsPage.messages.length + 1, message: textMessage })
-		this.reRender();
-	},
+	// updateNewPostText (text) {
+	// 	this._state.profilePage.newPostText = text;
+	// },
+
+	// sendNewMessage (textMessage) {
+	// 	this._state.dialogsPage.messages.push({ id: this._state.dialogsPage.messages.length + 1, message: textMessage })
+	// 	this.reRender();
+	// },
 
 	subscribe (observer) {
 		this.reRender = observer;

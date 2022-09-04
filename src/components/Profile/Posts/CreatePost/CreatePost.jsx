@@ -7,11 +7,11 @@ const CreatePost = (props) => {
 
 
 	const addPost = () => {
-		props.addPost(textArea.current.value);
+		props.dispatch({ type: "ADD-POST", newMessage: textArea.current.value });
 	};
 
 	const updateNewPostText = () => {
-		props.updateNewPostText(textArea.current.value);
+		props.dispatch({ type: "UPDATE-NEW-POST-TEXT", text: textArea.current.value });
 	};
 
 	return (
