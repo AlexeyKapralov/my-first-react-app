@@ -1,4 +1,4 @@
-import { reRender } from "../render";
+let reRender;
 
 const state = {
 
@@ -56,6 +56,7 @@ const state = {
 				message: "Hello, it's my third message",
 			}
 		],
+		newPostText: 'some text',
 	},
 
 	navBar: {
@@ -86,7 +87,20 @@ const state = {
 
 export let addPost = (newMessage) => {
 	state.profilePage.posts.push({id: 5, message : newMessage})
-	reRender(state, addPost);
+	reRender(state, addPost, updateNewPostText, sendNewMessage);
+}
+
+export let updateNewPostText = (text) => {
+	state.profilePage.newPostText = text;
+}
+
+export let sendNewMessage = (textMessage) => {
+	state.dialogsPage.messages.push({ id: state.dialogsPage.messages.length + 1, message: textMessage })
+	reRender(state, addPost, updateNewPostText, sendNewMessage);
+}
+
+export let subscribe = (observer) => {
+	reRender = observer;
 }
 
 
