@@ -1,3 +1,6 @@
+const ADD_POST = "ADD-POST";
+const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+
 export let store = {
 	reRender(){},
 
@@ -91,34 +94,29 @@ export let store = {
 	},
 
 	dispatch (action) {
-		if (action.type = "ADD-POST"){
+		if (action.type === "ADD-POST"){
 			this._state.profilePage.posts.push({ id: this._state.dialogsPage.messages.length + 1, message: action.newMessage })
 			this.reRender();
 
-		} else if (action.type = "UPDATE-NEW-POST-TEXT"){
+		} else if (action.type === "UPDATE-NEW-POST-TEXT"){
 			this._state.profilePage.newPostText = action.text;
 
-		} else if (action.type = "SEND-NEW-MESSAGE"){
+		} else if (action.type === "SEND-NEW-MESSAGE"){
 			this._state.dialogsPage.messages.push({ id: this._state.dialogsPage.messages.length + 1, message: action.textMessage })
 			this.reRender();
 		}
 	},
 
-	// addPost (newMessage) {
-	// 	this._state.profilePage.posts.push({ id: this._state.dialogsPage.messages.length + 1, message : newMessage})
-	// 	this.reRender();
-	// },
-
-	// updateNewPostText (text) {
-	// 	this._state.profilePage.newPostText = text;
-	// },
-
-	// sendNewMessage (textMessage) {
-	// 	this._state.dialogsPage.messages.push({ id: this._state.dialogsPage.messages.length + 1, message: textMessage })
-	// 	this.reRender();
-	// },
-
 	subscribe (observer) {
 		this.reRender = observer;
 	}
+	
+}
+
+export const addPostActionCreator = (messageText) => {
+	return { type: ADD_POST, newMessage: messageText };
+};
+
+export const updateNewPostTextActionCreator = (text) => {
+	return { type: UPDATE_NEW_POST_TEXT, text: text }
 }
