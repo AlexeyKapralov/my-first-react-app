@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { updateTextMessageBody } from "../../redux/dialogs-reducer";
 import Dialog from "./Dialog/Dialog";
 import s from "./Dialogs.module.css";
 import Message from "./Message/Message";
@@ -9,10 +10,12 @@ import Message from "./Message/Message";
 
 const Dialogs = (props) => {
 
-	let textYourNewMessage = React.createRef();
+	const changeTextMessageBody = (e) => {
+		props.dispatch(updateTextMessageBody(e.target.value))
+	}
 
 	const sendNewMessage = () => {
-		props.dispatch ({type: "SEND-NEW-MESSAGE", textMessage: textYourNewMessage.current.value});
+		props.dispatch ({type: "SEND-NEW-MESSAGE" });
 	}
 
 	let dialogsElements = props.state.dialogs.map(dialog => {
@@ -22,13 +25,14 @@ const Dialogs = (props) => {
 		return <Message message={message.message}/>
 	})
 
+
 	return (
 		<div className={s.container}>
 			<div className={s.messages}>
 				{ messagesElements }
 				<div className={s.sendMessage}>
 					<div className={s.container}>
-						<input ref={textYourNewMessage} type="text" placeholder="Write your message!!!"/>
+						<input autoFocus onChange={changeTextMessageBody} value={props.state.messageBody} type="text" placeholder="Write your message!!!"/>
 						<div onClick={sendNewMessage} className={s.button}>
 							<NavLink to="">
 								<img src="https://cdn-icons-png.flaticon.com/512/3526/3526788.png" alt="..." />

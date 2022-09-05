@@ -1,5 +1,6 @@
-const ADD_POST = "ADD-POST";
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+import { dialogsReducer } from "./dialogs-reducer";
+import { navbarReducer } from "./navbar-reducer";
+import { profileReducer } from "./profile-reducer";
 
 export let store = {
 	reRender(){},
@@ -32,7 +33,7 @@ export let store = {
 				},
 				{
 					id: 3,
-					message: "And maybe Anzhela too"
+					message: "And maybe someone too"
 				},
 				{
 					id: 4,
@@ -43,6 +44,7 @@ export let store = {
 					message: "Because I never say about it"
 				}
 			],
+			messageBody: "",
 		},
 
 		profilePage: {
@@ -60,7 +62,7 @@ export let store = {
 					message: "Hello, it's my third message",
 				}
 			],
-			newPostText: 'some text',
+			newPostText: '',
 		},
 
 		navBar: {
@@ -94,29 +96,14 @@ export let store = {
 	},
 
 	dispatch (action) {
-		if (action.type === "ADD-POST"){
-			this._state.profilePage.posts.push({ id: this._state.dialogsPage.messages.length + 1, message: action.newMessage })
-			this.reRender();
-
-		} else if (action.type === "UPDATE-NEW-POST-TEXT"){
-			this._state.profilePage.newPostText = action.text;
-
-		} else if (action.type === "SEND-NEW-MESSAGE"){
-			this._state.dialogsPage.messages.push({ id: this._state.dialogsPage.messages.length + 1, message: action.textMessage })
-			this.reRender();
-		}
+		this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+		this._state.profilePage = profileReducer(this._state.profilePage, action);
+		this._state.navBar = navbarReducer(this._state.navBar, action);
+		this.reRender();
 	},
 
 	subscribe (observer) {
 		this.reRender = observer;
 	}
 	
-}
-
-export const addPostActionCreator = (messageText) => {
-	return { type: ADD_POST, newMessage: messageText };
-};
-
-export const updateNewPostTextActionCreator = (text) => {
-	return { type: UPDATE_NEW_POST_TEXT, text: text }
 }

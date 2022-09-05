@@ -1,22 +1,20 @@
 import React from 'react';
-import { addPostActionCreator, updateNewPostTextActionCreator } from '../../../../redux/state';
+import { addPostActionCreator, updateNewPostTextActionCreator } from '../../../../redux/profile-reducer';
 import s from './CreatePost.module.css'
 
 const CreatePost = (props) => {
 
-	let textArea = React.createRef();
-
 	const addPost = () => {
-		return props.dispatch(addPostActionCreator(textArea.current.value) );
+		return props.dispatch(addPostActionCreator() );
 	};
 
-	const updateNewPostText = () => {
-		props.dispatch(updateNewPostTextActionCreator(textArea.current.value) );
+	const updateNewPostText = (e) => {
+		props.dispatch(updateNewPostTextActionCreator(e.target.value) );
 	};
 
 	return (
 		<div className={s.createPost}>
-			<textarea onChange={updateNewPostText} ref={textArea} placeholder='Say some nice news for your friens!'></textarea>
+			<textarea onChange={updateNewPostText} value={props.state.newPostText} placeholder='Say some nice news for your friens!' autoFocus></textarea>
 			<button onClick={addPost}>Create post</button>
 		</div>
 	)
