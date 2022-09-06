@@ -14,7 +14,7 @@ const CreatePost = (props) => {
 
 	return (
 		<div className={s.createPost}>
-			<textarea onChange={updateNewPostText} value={props.state.newPostText} placeholder='Say some nice news for your friens!' autoFocus></textarea>
+			<textarea onChange={updateNewPostText} value={props.state.profilePage.newPostText} placeholder='Say some nice news for your friens!' autoFocus ></textarea>
 			<button onClick={addPost}>Create post</button>
 		</div>
 	)

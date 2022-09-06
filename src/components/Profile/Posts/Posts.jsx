@@ -3,8 +3,7 @@ import Post from './Post/Post';
 import s from './Posts.module.css'
 
 const Posts = (props) => {
-
-	let messageElements = props.state.posts.map (post => {
+	let messageElements = props.posts.map (post => {
 		return <Post message={post.message} />
 	})
 

@@ -46,6 +46,7 @@ export const dialogsReducer = (state = initialData, action) => {
 	switch (action.type) {
 		case SEND_NEW_MESSAGE:
 			state.messages.push({ id: state.messages.length + 1, message: state.messageBody })
+			state.messageBody = "";
 			return state;
 		case UPDATE_TEXT_MESSAGE_BODY:
 			state.messageBody = action.messageBody;
