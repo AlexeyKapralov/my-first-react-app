@@ -4,13 +4,13 @@ import s from './Posts.module.css'
 
 const Posts = (props) => {
 
-	let messageElements = props.state.posts.map (post => {
+	let messageElements = props.posts.map (post => {
 		return <Post message={post.message} />
 	})
 
 	return (
 		<div>
-			<CreatePost state={props.state} dispatch={props.dispatch}/>
+			<CreatePost newPostText={props.newPostText} dispatch={props.dispatch}/>
 			{messageElements}
 		</div>
 	)

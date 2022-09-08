@@ -18,10 +18,10 @@ const Dialogs = (props) => {
 		props.dispatch ({type: "SEND-NEW-MESSAGE" });
 	}
 
-	let dialogsElements = props.state.dialogs.map(dialog => {
+	let dialogsElements = props.dialogs.map(dialog => {
 		return <Dialog name={dialog.name} id={dialog.id} />
 	})
-	let messagesElements = props.state.messages.map(message => {
+	let messagesElements = props.messages.map(message => {
 		return <Message message={message.message}/>
 	})
 
@@ -32,7 +32,7 @@ const Dialogs = (props) => {
 				{ messagesElements }
 				<div className={s.sendMessage}>
 					<div className={s.container}>
-						<input autoFocus onChange={changeTextMessageBody} value={props.state.messageBody} type="text" placeholder="Write your message!!!"/>
+						<input autoFocus onChange={changeTextMessageBody} value={props.messageBody} type="text" placeholder="Write your message!!!"/>
 						<div onClick={sendNewMessage} className={s.button}>
 							<NavLink to="">
 								<img src="https://cdn-icons-png.flaticon.com/512/3526/3526788.png" alt="..." />
