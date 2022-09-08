@@ -5,20 +5,17 @@ import Dialog from "./Dialog/Dialog";
 import s from "./Dialogs.module.css";
 import Message from "./Message/Message";
 import Dialogs from "./Dialogs";
-import StoreContext from "../../StoreContext";
 
 
 
 
 const DialogsContainer = (props) => {
-	<StoreContext.Consumer>
-		{store => {
-			return (
-				<Dialogs dispatch={store.dispatch} dialogs={store.getState().dialogsPage.dialogs}
-						 messages={store.getState().dialogsPage.messages}
-						 messageBody={store.getState().dialogsPage.messageBody}/>
-			);
-		}};
-	</StoreContext.Consumer>
-}
+	return (
+		<Dialogs dialogs={props.store.getState().dialogsPage.dialogs}
+				 messages={props.store.getState().dialogsPage.messages}
+				 messageBody={props.store.getState().dialogsPage.messageBody}
+				 dispatch={props.store.dispatch}/>
+	);
+};
+
 export default DialogsContainer;

@@ -4,9 +4,10 @@ import s from './Navbar.module.css'
 
 const Navbar = (props) => {
 
-	const AccountMenuElements = props.nav.accountMenuItems.map( item => {
+	const AccountMenuElements = props.accountMenuItems.map( item => {
 		return <AccountMenu urlName = {item.urlName} title={item.title}/>
 	})
+
 	return(
 		<nav className={s.nav}>
 			<div className={s.account}>
