@@ -1,17 +1,18 @@
-import { NavLink } from 'react-router-dom';
-import AccountMenu from './AccountMenu/AccountMenu';
-import s from './Navbar.module.css'
 import Navbar from "./Navbar";
-import StoreContext from "../../StoreContext";
+import {connect} from "react-redux";
 
-const NavbarContainer = (props) => {
-
-	return (
-		<StoreContext.Consumer>
-			{(store) => {
-				return <Navbar accountMenuItems={store.getState().navBar.accountMenuItems}/>
-			}}
-		</StoreContext.Consumer>)
+const mapStateToProps = (state) => {
+	return {
+		accountMenuItems: state.navBar.accountMenuItems
+	}
 }
+const mapDispatchToProps = (dispatch) => {
+	return {
+
+	}
+}
+const NavbarContainer = connect(mapStateToProps, mapDispatchToProps)(Navbar);
+
+
 
 export default NavbarContainer;

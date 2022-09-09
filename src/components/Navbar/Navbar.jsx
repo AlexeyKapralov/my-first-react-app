@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router-dom';
 import AccountMenu from './AccountMenu/AccountMenu';
 import s from './Navbar.module.css'
 

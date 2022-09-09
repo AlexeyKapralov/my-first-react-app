@@ -1,21 +1,21 @@
-import CreatePost from './CreatePost/CreatePost';
-import Post from './Post/Post';
-import s from './Posts.module.css'
 import Posts from "./Posts";
-import StoreContext from "../../../StoreContext";
+import {connect} from "react-redux";
 
-const PostsContainer = (props) => {
-	return (
-		<StoreContext.Consumer>
-			{store => {
-				return (
-					<Posts posts={store.getState().profilePage.posts}
-						   newPostText={store.getState().profilePage.newPostText}
-						   dispatch={store.dispatch}/>
-				)
-			}}
-		</StoreContext.Consumer>
-	)
+
+const mapStateToProps = (state) => {
+	return {
+		posts: state.profilePage.posts,
+		newPostText: state.profilePage.newPostText
+	}
 }
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		dispatch: dispatch
+	}
+}
+
+const PostsContainer = connect(mapStateToProps, mapDispatchToProps)(Posts)
+
 
 export default PostsContainer;

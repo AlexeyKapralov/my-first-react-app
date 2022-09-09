@@ -1,28 +1,23 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import { updateTextMessageBody } from "../../redux/dialogs-reducer";
-import Dialog from "./Dialog/Dialog";
-import s from "./Dialogs.module.css";
-import Message from "./Message/Message";
 import Dialogs from "./Dialogs";
-import StoreContext from "../../StoreContext";
+import {connect} from "react-redux";
+
+const mapStateToProps = (state) => {
+	return {
+		dialogs: state.dialogsPage.dialogs,
+		messages: state.dialogsPage.messages,
+		messageBody: state.dialogsPage.messageBody
+
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		dispatch: dispatch
+	}
+}
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
 
 
 
-
-const DialogsContainer = (props) => {
-	return (
-		<StoreContext.Consumer>
-			{store => {
-				return (
-					<Dialogs dialogs={store.getState().dialogsPage.dialogs}
-							 messages={store.getState().dialogsPage.messages}
-							 messageBody={store.getState().dialogsPage.messageBody}
-							 dispatch={store.dispatch}/>
-				);
-			}}
-		</StoreContext.Consumer>
-	)
-};
 
 export default DialogsContainer;

@@ -1,6 +1,5 @@
 import CreatePost from './CreatePost/CreatePost';
 import Post from './Post/Post';
-import s from './Posts.module.css'
 
 const Posts = (props) => {
 
