@@ -9,3 +9,5 @@ let reducers = combineReducers({
     navBar: navbarReducer
 })
 export let store = createStore(reducers);
+
+window.store = store;
