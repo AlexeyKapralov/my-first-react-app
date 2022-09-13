@@ -20,6 +20,10 @@ let initialData = {
 		{
 			urlName: "settings",
 			title: "Settings"
+		},
+		{
+			urlName: "users",
+			title: "Users"
 		}
 	]
 }

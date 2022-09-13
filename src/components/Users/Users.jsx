@@ -1,58 +1,71 @@
 import styles from "./Users.module.css";
+import axios from "axios";
+import React from "react";
 
+export class Users extends React.Component{
 
-export const Users = (props) => {
-    if (props.users.length === 0) {
-        props.setUsers([
-            {
-                id:1,
-                avatar: 'http://sociala.uitheme.net/assets/images/user_2.png',
-                name: 'Aliqa Macale',
-                email: 'support@gmail.com',
-                subscriber: "follow"
-            },
-            {
-                id:2,
-                avatar: 'http://sociala.uitheme.net/assets/images/user-1.png',
-                name: 'Hendrix Stamp',
-                email: 'support@gmail.com',
-                subscriber: "unfollow"
-            },
-            {
-                id:3,
-                avatar: 'http://sociala.uitheme.net/assets/images/user-21.png',
-                name: 'Stephen Grider',
-                email: 'support@gmail.com',
-                subscriber: "follow"
-            }
-        ]);
+    componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.state.activePage}&count=${this.props.state.usersCountOnPage}`).then(response => {
+            this.props.setUsers(response.data.items);
+            this.props.setTotalUsers(response.data.totalCount);
+        });
     }
 
-    return (
-        <div>
-            {
-                props.users.map( (u)=>{
+    onChangePage = (p) => {
+        this.props.setChangePage(p);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.state.usersCountOnPage}`).then(response => {
+            this.props.setUsers(response.data.items);
+        });
+    }
+
+    render() {
+        let pagesCount = Math.ceil(this.props.state.totalCount / this.props.state.usersCountOnPage)
+
+        let pages =[]
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i)
+        }
+
+        return (
+            <div>
+                <div>
+                    {pages.map((p) => {
+                        if (this.props.state.activePage === p ) {
+                             return <span onClick={ (e) => { this.onChangePage(p) }} className={styles.activePage}>{p} </span>
+                        }else
+                            {
+                               return  <span onClick={ (e) => { this.onChangePage(p) }}>{p} </span>
+                            }
+                    }
+                    )}
+                </div>
+                {
+                this.props.users.map( (u)=>{
                     return (
                         <div>
                             <div className={styles.avatar}>
-                                <img src={u.avatar} alt="..."/>
+                                {   u.photos.small === null
+                                    ? <img className={styles.avatar} src="https://media.istockphoto.com/vectors/male-avatar-on-white-background-user-icon-vector-illustration-vector-id1191084605" alt="..."/>
+                                    : <img src={u.avatar} alt="..."/>
+                                }
                             </div>
                             <div className={styles.name}>
                                 {u.name}
                             </div>
-                            <div className={styles.email}>
-                                {u.email}
+                            <div className={styles.id}>
+                                {u.id}
                             </div>
                             <div>
-                                { u.subscriber === "unfollow"
-                                    ? <button onClick={() => {props.updateSubscribeFollow(u.id)}} className={styles.follow}> {u.subscriber} </button>
-                                    : <button onClick={() => {props.updateSubscribeUnfollow(u.id)}} className={styles.follow}> {u.subscriber} </button>
+                                { u.followed === false
+                                    ? <button onClick={() => {this.props.updateSubscribeFollow(u.id)}} className={styles.follow}>FOLLOW</button>
+                                    : <button onClick={() => {this.props.updateSubscribeUnfollow(u.id)}} className={styles.follow}>UNFOLLOW</button>
                                 }
                             </div>
                         </div>
                     )
                 })
-            }
-        </div>
-    )
+                }
+            </div>
+        )
+    }
 }
