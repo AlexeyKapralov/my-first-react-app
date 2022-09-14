@@ -1,11 +1,11 @@
 
 import {connect} from "react-redux";
 import {
-    changePageAC,
-    setTotalUsersAC,
-    setUsersAC, toggleIsFetchingAC,
-    updateSubscribeFollowAC,
-    updateSubscribeUnfollowAC
+    changePage, setChangePage,
+    setTotalUsers,
+    setUsers, toggleIsFetching,
+    updateSubscribeFollow,
+    updateSubscribeUnfollow
 } from "../../redux/users-reducer";
 import React from "react";
 import axios from "axios";
@@ -55,15 +55,6 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        updateSubscribeFollow: (id) => { dispatch(updateSubscribeFollowAC(id))},
-        updateSubscribeUnfollow: (id) => { dispatch(updateSubscribeUnfollowAC(id))},
-        setUsers: (users) => { dispatch(setUsersAC(users)) },
-        setTotalUsers: (countTotalUsers) => {dispatch(setTotalUsersAC(countTotalUsers) )},
-        setChangePage : (page) => {dispatch(changePageAC(page) )},
-        toggleIsFetching: (isFetching) => {dispatch(toggleIsFetchingAC(isFetching))}
-    }
-}
-
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersClass);
+export const UsersContainer = connect(mapStateToProps,
+    {updateSubscribeFollow, updateSubscribeUnfollow, setUsers, setTotalUsers, setChangePage, toggleIsFetching})
+(UsersClass);
