@@ -11,7 +11,7 @@ import React from "react";
 import axios from "axios";
 
 import {UsersComponent} from "./UsersComponent";
-import {Preloader} from "../Preloader/Prealoader";
+import {Preloader} from "../Preloader/Preloader";
 
 export class UsersClass extends React.Component{
 
@@ -25,23 +25,24 @@ export class UsersClass extends React.Component{
     }
 
     onChangePage = (p) => {
-        this.props.toggleIsFetching(true)
         this.props.setChangePage(p);
+        this.props.toggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.state.usersCountOnPage}`).then(response => {
             this.props.toggleIsFetching(false)
             this.props.setUsers(response.data.items);
         });
     }
 
-    render() {return (
+    render() { return (
         <div>
-            <Preloader />
+            { this.props.state.isFetching ? <Preloader /> : null}
             <UsersComponent
                 state = {this.props.state}
                 users = {this.props.users}
                 onChangePage = {this.onChangePage}
                 updateSubscribeFollow = {this.props.updateSubscribeFollow}
                 updateSubscribeUnfollow = {this.props.updateSubscribeUnfollow}/>
+
         </div>
     )
         }
