@@ -1,5 +1,6 @@
 import styles from "./Users.module.css";
 import React from "react";
+import {NavLink} from "react-router-dom";
 
 export const UsersComponent = (props) => {
 
@@ -27,12 +28,14 @@ export const UsersComponent = (props) => {
                 props.users.map( (u)=>{
                     return (
                         <div>
-                            <div className={styles.avatar}>
-                                {   u.photos.large === null
-                                    ? <img className={styles.avatar} src="https://media.istockphoto.com/vectors/male-avatar-on-white-background-user-icon-vector-illustration-vector-id1191084605" alt="..."/>
-                                    : <img className={styles.avatar} src={u.photos.large} alt="..."/>
-                                }
-                            </div>
+                            <NavLink to={`/profile/${u.id}`}>
+                                <div className={styles.avatar}>
+                                    {   u.photos.large === null
+                                        ? <img className={styles.avatar} src="https://media.istockphoto.com/vectors/male-avatar-on-white-background-user-icon-vector-illustration-vector-id1191084605" alt="..."/>
+                                        : <img className={styles.avatar} src={u.photos.large} alt="..."/>
+                                    }
+                                </div>
+                            </NavLink>
                             <div className={styles.name}>
                                 {u.name}
                             </div>

@@ -1,7 +1,25 @@
 import s from './Profile.module.css'
 import PostsContainer from "./Posts/PostsContainer";
+import {connect} from "react-redux";
+import {setUsers} from "../../redux/users-reducer";
+import {useEffect, useState} from "react";
+import axios from "axios";
+import {useParams} from "react-router-dom";
 
-const Profile = (props) => {
+const ProfileFunc = (props) => {
+	const {userId} = useParams()
+	const [post, setPost] = useState([]);
+	const [img, setImg] = useState('https://media.istockphoto.com/vectors/user-icon-male-avatar-in-business-suitvector-flat-design-vector-id843193172');
+
+	useEffect(()=>{
+			axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId===null ? userId : 2}`).then(response => {
+				setPost(response.data)
+				setImg(response.data.photos.large);
+			});
+		console.log(post)
+		window.post = post
+		}, [])
+
 	return (
 		<div className={s.profile}>
 			<div className={s.about}>
@@ -10,10 +28,14 @@ const Profile = (props) => {
 				</div>
 				<div className={s.avatar}>
 					<div className={s.photo}>
-						<img  src="https://pinotmasters.sk/wp-content/uploads/2014/10/speaker-2-v2.jpg" alt="ava" />
+						{
+							img === null
+							? <img  src="https://media.istockphoto.com/vectors/user-icon-male-avatar-in-business-suitvector-flat-design-vector-id843193172" alt="ava" />
+ 							: <img  src={img} alt="ava" />
+						}
 					</div>
 					<div className={s.nameAndDesc}>
-						<div className={s.name}>Anastasia</div>
+						<div className={s.name}>{post.fullName}</div>
 						<div className={s.description}>Middle Full Stack Developer</div>
 					</div>
 				</div>
@@ -23,4 +45,11 @@ const Profile = (props) => {
 	)
 }
 
-export default Profile;
+const MapStateToProps = (state) =>  {
+	return {
+		users: state.usersPage.users
+	}
+}
+
+
+export const Profile = connect(MapStateToProps, {setUsers})(ProfileFunc)
