@@ -12,12 +12,10 @@ const ProfileFunc = (props) => {
 	const [img, setImg] = useState('https://media.istockphoto.com/vectors/user-icon-male-avatar-in-business-suitvector-flat-design-vector-id843193172');
 
 	useEffect(()=>{
-			axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId===null ? userId : 2}`).then(response => {
+			axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId===undefined ? 2 : userId}`).then(response => {
 				setPost(response.data)
 				setImg(response.data.photos.large);
 			});
-		console.log(post)
-		window.post = post
 		}, [])
 
 	return (

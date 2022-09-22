@@ -17,7 +17,9 @@ export class UsersClass extends React.Component{
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.state.activePage}&count=${this.props.state.usersCountOnPage}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.state.activePage}&count=${this.props.state.usersCountOnPage}`, {
+            withCredentials:true
+            }).then(response => {
             this.props.toggleIsFetching(false)
             this.props.setUsers(response.data.items);
             this.props.setTotalUsers(response.data.totalCount);
@@ -27,7 +29,9 @@ export class UsersClass extends React.Component{
     onChangePage = (p) => {
         this.props.setChangePage(p);
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.state.usersCountOnPage}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.state.usersCountOnPage}`, {
+            withCredentials:true
+        }).then(response => {
             this.props.toggleIsFetching(false)
             this.props.setUsers(response.data.items);
         });
@@ -35,7 +39,7 @@ export class UsersClass extends React.Component{
 
     render() { return (
         <div>
-            { this.props.state.isFetching ? <Preloader /> : null}
+            { this.props.state.isFetching ? <Preloader /> : null }
             <UsersComponent
                 state = {this.props.state}
                 users = {this.props.users}

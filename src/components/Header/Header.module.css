@@ -1,7 +1,9 @@
 .header {
 	grid-area: h;
 	background-color: #fe8064;
-	display: grid;
+	display: flex;
+	justify-content: space-between;
+	padding: 20px;
 	align-items: center;
 }
 
