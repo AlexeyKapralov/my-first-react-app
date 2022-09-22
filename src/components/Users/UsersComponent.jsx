@@ -1,7 +1,6 @@
 import styles from "./Users.module.css";
 import React from "react";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
 
 export const UsersComponent = (props) => {
 
@@ -27,7 +26,6 @@ export const UsersComponent = (props) => {
             </div>
             {
                 props.users.map( (u)=>{
-
                     return (
                         <div>
                             <NavLink to={`/profile/${u.id}`}>
@@ -46,34 +44,29 @@ export const UsersComponent = (props) => {
                             </div>
                             <div>
                                 { u.followed === false
-                                    ? <button onClick={() => {
+                                    ? <button disabled={props.state.IsToggleFollowingUserID === u.id} onClick={() => {
 
-                                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                                            withCredentials: true,
-                                            headers: {
-                                                "API-KEY": "a5656080-b348-40d8-a859-ae26d4a30ea1"
+                                        props.ToggleFollowingUserID(u.id)
+                                        props.usersAPI.follow(u.id).then(data => {
+                                            props.ToggleFollowingUserID(u.id)
+                                            if (data.resultCode === 0) {
+                                                props.updateSubscribeFollow(u.id)
                                             }
+
                                         })
-                                            .then(response => {
-                                                if (response.data.resultCode === 0){
-                                                    props.updateSubscribeFollow(u.id)
-                                                }
-                                            })
+
 
                                     }} className={styles.follow}>FOLLOW</button>
-                                    : <button onClick={() => {
 
-                                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{
-                                            withCredentials: true,
-                                            headers: {
-                                                "API-KEY": "a5656080-b348-40d8-a859-ae26d4a30ea1"
+                                    : <button disabled={props.state.IsToggleFollowingUserID === u.id} onClick={() => {
+
+                                        props.ToggleFollowingUserID(u.id)
+                                        props.usersAPI.unfollow(u.id).then(data => {
+                                            props.ToggleFollowingUserID(u.id)
+                                            if (data.resultCode === 0) {
+                                                props.updateSubscribeUnfollow(u.id)
                                             }
                                         })
-                                            .then(response => {
-                                                if (response.data.resultCode === 0){
-                                                    props.updateSubscribeUnfollow(u.id)
-                                                }
-                                            })
                                     }} className={styles.follow}>UNFOLLOW</button>
                                 }
                             </div>
