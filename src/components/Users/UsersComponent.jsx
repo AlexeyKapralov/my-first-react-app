@@ -44,11 +44,11 @@ export const UsersComponent = (props) => {
                             </div>
                             <div>
                                 { u.followed === false
-                                    ? <button disabled={props.state.IsToggleFollowingUserID === u.id} onClick={() => {
+                                    ? <button disabled={props.state.isToggleFollowingUserID.some(i => i === u.id )} onClick={() => {
 
-                                        props.ToggleFollowingUserID(u.id)
+                                        props.ToggleFollowingUserID(u.id, true)
                                         props.usersAPI.follow(u.id).then(data => {
-                                            props.ToggleFollowingUserID(u.id)
+                                            props.ToggleFollowingUserID(u.id, false)
                                             if (data.resultCode === 0) {
                                                 props.updateSubscribeFollow(u.id)
                                             }
@@ -58,11 +58,11 @@ export const UsersComponent = (props) => {
 
                                     }} className={styles.follow}>FOLLOW</button>
 
-                                    : <button disabled={props.state.IsToggleFollowingUserID === u.id} onClick={() => {
+                                    : <button disabled={props.state.isToggleFollowingUserID.some(i => i === u.id )} onClick={() => {
 
-                                        props.ToggleFollowingUserID(u.id)
+                                        props.ToggleFollowingUserID(u.id, true)
                                         props.usersAPI.unfollow(u.id).then(data => {
-                                            props.ToggleFollowingUserID(u.id)
+                                            props.ToggleFollowingUserID(u.id, false)
                                             if (data.resultCode === 0) {
                                                 props.updateSubscribeUnfollow(u.id)
                                             }

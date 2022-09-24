@@ -14,7 +14,7 @@ let initialData = {
 	activePage: 3,
 	totalCount: 100,
 	isFetching: false,
-	IsToggleFollowingUserID: []
+	isToggleFollowingUserID: []
 
 }
 
@@ -54,7 +54,13 @@ export const usersReducer = (state = initialData, action) => {
 			return {...state, isFetching: action.isFetching}
 		}
 		case TOGGLE_IS_FOLLOWING: {
-			return {...state, IsToggleFollowingUserID: action.IsToggleFollowingUserID}
+			return {
+				...state,
+				isToggleFollowingUserID:
+					action.isFetch === true
+					? [action.IsToggleFollowingUserID]
+					: state.isToggleFollowingUserID.filter(i => i != action.IsToggleFollowingUserID)
+				}
 		}
 		default:
 			return state;
@@ -80,6 +86,6 @@ export const setChangePage = (page) => {
 export const toggleIsFetching = (isFetching) => {
 	return { type: TOGGLE_IS_FETCHING, isFetching}
 }
-export const ToggleFollowingUserID = (IsToggleFollowingUserID) => {
-	return { type: TOGGLE_IS_FOLLOWING, IsToggleFollowingUserID}
+export const ToggleFollowingUserID = (IsToggleFollowingUserID, isFetch) => {
+	return { type: TOGGLE_IS_FOLLOWING, IsToggleFollowingUserID, isFetch}
 }
