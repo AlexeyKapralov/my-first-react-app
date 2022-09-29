@@ -1,36 +1,20 @@
 
 import {connect} from "react-redux";
 import {
-    changePage, setChangePage,
-    setTotalUsers,
-    setUsers, toggleIsFetching, ToggleFollowingUserID,
-    updateSubscribeFollow,
-    updateSubscribeUnfollow
+    getUsers, onChangePage, follow, unfollow
 } from "../../redux/users-reducer";
 import React from "react";
-
 import {UsersComponent} from "./UsersComponent";
 import {Preloader} from "../Preloader/Preloader";
-import {UsersAPI} from "../../api/api";
 
 export class UsersClass extends React.Component{
 
     componentDidMount() {
-        this.props.toggleIsFetching(true)
-        UsersAPI.getUsers(this.props.users.activePage, this.props.users.usersCountOnPage).then(data => {
-            this.props.toggleIsFetching(false)
-            this.props.setUsers(data.items);
-            this.props.setTotalUsers(data.totalCount);
-        });
+        this.props.getUsers(this.props.users.activePage, this.props.users.usersCountOnPage)
     }
 
     onChangePage = (p) => {
-        this.props.setChangePage(p);
-        this.props.toggleIsFetching(true)
-        UsersAPI.getUsers(p, this.props.state.usersCountOnPage).then(data => {
-            this.props.toggleIsFetching(false)
-            this.props.setUsers(data.items);
-        });
+        this.props.onChangePage(p, this.props.state.usersCountOnPage)
     }
 
     render() { return (
@@ -39,11 +23,9 @@ export class UsersClass extends React.Component{
             <UsersComponent
                 state = {this.props.state}
                 users = {this.props.users}
+                follow = {this.props.follow}
+                unfollow = {this.props.unfollow}
                 onChangePage = {this.onChangePage}
-                updateSubscribeFollow = {this.props.updateSubscribeFollow}
-                updateSubscribeUnfollow = {this.props.updateSubscribeUnfollow}
-                ToggleFollowingUserID = {this.props.ToggleFollowingUserID}
-                usersAPI = {UsersAPI}
             />
 
         </div>
@@ -59,5 +41,5 @@ const mapStateToProps = (state) => {
 }
 
 export const UsersContainer = connect(mapStateToProps,
-    {updateSubscribeFollow, updateSubscribeUnfollow, setUsers, setTotalUsers, setChangePage, toggleIsFetching, ToggleFollowingUserID})
+    {getUsers, onChangePage, follow, unfollow})
 (UsersClass);

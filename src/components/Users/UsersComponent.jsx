@@ -46,27 +46,15 @@ export const UsersComponent = (props) => {
                                 { u.followed === false
                                     ? <button disabled={props.state.isToggleFollowingUserID.some(i => i === u.id )} onClick={() => {
 
-                                        props.ToggleFollowingUserID(u.id, true)
-                                        props.usersAPI.follow(u.id).then(data => {
-                                            props.ToggleFollowingUserID(u.id, false)
-                                            if (data.resultCode === 0) {
-                                                props.updateSubscribeFollow(u.id)
-                                            }
-
-                                        })
+                                        props.follow(u.id);
 
 
                                     }} className={styles.follow}>FOLLOW</button>
 
                                     : <button disabled={props.state.isToggleFollowingUserID.some(i => i === u.id )} onClick={() => {
 
-                                        props.ToggleFollowingUserID(u.id, true)
-                                        props.usersAPI.unfollow(u.id).then(data => {
-                                            props.ToggleFollowingUserID(u.id, false)
-                                            if (data.resultCode === 0) {
-                                                props.updateSubscribeUnfollow(u.id)
-                                            }
-                                        })
+                                        props.unfollow(u.id);
+
                                     }} className={styles.follow}>UNFOLLOW</button>
                                 }
                             </div>

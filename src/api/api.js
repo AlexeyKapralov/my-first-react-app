@@ -18,6 +18,13 @@ export const UsersAPI = {
     },
     follow(userID){
         return instance.post(`follow/${userID}`).then(response => (response.data))
+    },
+    getProfile(userId) {
+        return instance.get(`profile/${userId === undefined ? 2 : userId}`).then(response => (response.data))
     }
-
+}
+export const AuthAPI = {
+    authMe() {
+        return instance.get(`auth/me`).then(response => (response.data))
+    },
 }

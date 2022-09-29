@@ -5,6 +5,7 @@ import {setUsers} from "../../redux/users-reducer";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useParams} from "react-router-dom";
+import {UsersAPI} from "../../api/api";
 
 const ProfileFunc = (props) => {
 	const {userId} = useParams()
@@ -12,11 +13,16 @@ const ProfileFunc = (props) => {
 	const [img, setImg] = useState('https://media.istockphoto.com/vectors/user-icon-male-avatar-in-business-suitvector-flat-design-vector-id843193172');
 
 	useEffect(()=>{
-			axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId===undefined ? 2 : userId}`).then(response => {
-				setPost(response.data)
-				setImg(response.data.photos.large);
-			});
-		}, [])
+		// axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId===undefined ? 2 : userId}`).then(response => {
+		// 	setPost(response)
+		// 	setImg(response.photos.large);\
+		// });
+		UsersAPI.getProfile(userId).then(data => {
+				setPost(data);
+				setImg(data.photos.large);
+			}
+		)
+	}, [])
 
 	return (
 		<div className={s.profile}>

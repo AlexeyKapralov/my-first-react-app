@@ -1,3 +1,5 @@
+import {UsersAPI} from "../api/api";
+
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
@@ -40,7 +42,6 @@ export const usersReducer = (state = initialData, action) => {
 				} )
 			}
 		}
-
 		case SET_USERS: {
 			return {...state, users: [...action.users]}
 		}
@@ -88,4 +89,49 @@ export const toggleIsFetching = (isFetching) => {
 }
 export const ToggleFollowingUserID = (IsToggleFollowingUserID, isFetch) => {
 	return { type: TOGGLE_IS_FOLLOWING, IsToggleFollowingUserID, isFetch}
+}
+// below thunk functions
+
+export const getUsers = (activePage, usersCountOnPage) => {
+	return (dispatch) => {
+		dispatch(toggleIsFetching(true))
+		UsersAPI.getUsers(activePage, usersCountOnPage).then(data => {
+			dispatch(toggleIsFetching(false))
+			dispatch(setUsers(data.items));
+			dispatch(setTotalUsers(data.totalCount));
+		});
+	}
+}
+export const onChangePage = (page, usersCountOnPage) => {
+	return (dispatch) => {
+		dispatch(setChangePage(page));
+		dispatch(toggleIsFetching(true))
+		UsersAPI.getUsers(page, usersCountOnPage).then(data => {
+			dispatch(toggleIsFetching(false))
+			dispatch(setUsers(data.items));
+		});
+	}
+}
+export const follow = (userID) => {
+	return (dispatch) => {
+		dispatch(ToggleFollowingUserID(userID, true))
+		UsersAPI.follow(userID).then(data => {
+			dispatch(ToggleFollowingUserID(userID, false))
+			if (data.resultCode === 0) {
+				dispatch(updateSubscribeFollow(userID))
+			}
+
+		})
+	}
+}
+export const unfollow = (userID) => {
+	return (dispatch) => {
+		dispatch(ToggleFollowingUserID(userID, true))
+		UsersAPI.unfollow(userID).then(data => {
+			dispatch(ToggleFollowingUserID(userID, false))
+			if (data.resultCode === 0) {
+				dispatch(updateSubscribeUnfollow(userID))
+			}
+		})
+	}
 }
