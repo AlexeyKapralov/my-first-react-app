@@ -1,21 +1,18 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import { updateTextMessageBody } from "../../redux/dialogs-reducer";
+import {NavLink} from "react-router-dom";
 import Dialog from "./Dialog/Dialog";
 import s from "./Dialogs.module.css";
 import Message from "./Message/Message";
 
 
-
-
 const Dialogs = (props) => {
 
 	const changeTextMessageBody = (e) => {
-		props.dispatch(updateTextMessageBody(e.target.value))
+		props.updateTextMessageBody(e.target.value)
 	}
 
 	const sendNewMessage = () => {
-		props.dispatch ({type: "SEND-NEW-MESSAGE" });
+		props.sendNewMessage();
 	}
 
 	let dialogsElements = props.dialogs.map(dialog => {
