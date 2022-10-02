@@ -60,7 +60,7 @@ export const usersReducer = (state = initialData, action) => {
 				isToggleFollowingUserID:
 					action.isFetch === true
 					? [action.IsToggleFollowingUserID]
-					: state.isToggleFollowingUserID.filter(i => i != action.IsToggleFollowingUserID)
+					: state.isToggleFollowingUserID.filter(i => i !== action.IsToggleFollowingUserID)
 				}
 		}
 		default:

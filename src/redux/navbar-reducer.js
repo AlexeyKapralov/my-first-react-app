@@ -10,6 +10,10 @@ let initialData = {
 			title: "Messages"
 		},
 		{
+			urlName: "users",
+			title: "Users"
+		},
+		{
 			urlName: "news",
 			title: "News"
 		},
@@ -21,10 +25,6 @@ let initialData = {
 			urlName: "settings",
 			title: "Settings"
 		},
-		{
-			urlName: "users",
-			title: "Users"
-		}
 	]
 }
 

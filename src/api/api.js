@@ -20,11 +20,23 @@ export const UsersAPI = {
         return instance.post(`follow/${userID}`).then(response => (response.data))
     },
     getProfile(userId) {
-        return instance.get(`profile/${userId === undefined ? 2 : userId}`).then(response => (response.data))
+        console.warn("Obsolete method, please use same method from ProfileAPI")
+        return ProfileAPI.getProfile(userId)
     }
 }
 export const AuthAPI = {
     authMe() {
         return instance.get(`auth/me`).then(response => (response.data))
+    },
+}
+export const ProfileAPI = {
+    getProfile(userId) {
+        return instance.get(`profile/${userId === undefined ? 25975 : userId}`).then(response => (response.data))
+    },
+    setStatus(status) {
+        return instance.put(`/profile/status`, {status: status}).then(response => (response.data))
+    },
+    getStatus(userID) {
+        return instance.get(`/profile/status/${userID === undefined ? 25975 : userID}`)
     },
 }

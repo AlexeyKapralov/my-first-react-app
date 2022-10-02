@@ -3,23 +3,44 @@ import PostsContainer from "./Posts/PostsContainer";
 import {connect} from "react-redux";
 import {setUsers} from "../../redux/users-reducer";
 import {useEffect, useState} from "react";
-import axios from "axios";
 import {useParams} from "react-router-dom";
-import {UsersAPI} from "../../api/api";
+import {ProfileAPI, UsersAPI} from "../../api/api";
 import {withAuthRedirect} from "../HOC/withAuthRedirect";
+import {compose} from "redux";
 
 const ProfileFunc = (props) => {
 	const {userId} = useParams()
 	const [post, setPost] = useState([]);
 	const [img, setImg] = useState('https://media.istockphoto.com/vectors/user-icon-male-avatar-in-business-suitvector-flat-design-vector-id843193172');
+	const [status, setStatus] = useState('no status');
+	const [isStatusEditMode, setEditMode] = useState(false)
 
 	useEffect(()=>{
-		UsersAPI.getProfile(userId).then(data => {
+		ProfileAPI.getProfile(userId).then(data => {
 				setPost(data);
 				setImg(data.photos.large);
 			}
 		)
-	}, [])
+	}, [userId])
+
+	useEffect(()=>{
+		ProfileAPI.getStatus(userId).then(response => {
+				if (response.data === null){
+					setStatus('no status')
+				} else (setStatus(response.data))
+			}
+		)
+	}, [userId])
+
+	let isChangeStatus = () => {
+		setEditMode(false)
+		ProfileAPI.setStatus(status).then(response => {
+				if (response.resultCode === 0) {
+					console.log("All is good")
+				}
+			}
+		)
+	}
 
 	return (
 		<div className={s.profile}>
@@ -40,6 +61,12 @@ const ProfileFunc = (props) => {
 						<div className={s.description}>Middle Full Stack Developer</div>
 					</div>
 				</div>
+				<div className={s.profileStatus}>
+					{(isStatusEditMode)
+						? <div><input onChange={ e => ( setStatus(e.target.value) )} onBlur={ isChangeStatus } autoFocus className={s.statusTitleInput} value={status}/></div>
+						: <div onDoubleClick={ () => ( setEditMode(true)) } className={s.statusTitleSpan}>{status}</div>
+					}
+				</div>
 			</div>
 			<PostsContainer/>
 		</div>
@@ -52,6 +79,7 @@ const MapStateToProps = (state) =>  {
 	}
 }
 
-let ProfileWithRedirect = withAuthRedirect(ProfileFunc)
-
-export const Profile = connect(MapStateToProps, {setUsers})(ProfileWithRedirect)
+export const Profile = compose (
+	connect(MapStateToProps, {setUsers}),
+	withAuthRedirect,
+)(ProfileFunc)
