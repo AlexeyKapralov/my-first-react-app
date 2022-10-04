@@ -1,7 +1,7 @@
 import s from './Header.module.css';
 import React from "react";
 import {connect} from "react-redux";
-import {SetAuthData} from "../../redux/auth-reducer";
+import {Logout, SetAuthData} from "../../redux/auth-reducer";
 import Header from "./Header";
 import {AuthAPI} from "../../api/api";
 
@@ -10,16 +10,19 @@ class HeaderContainer extends React.Component {
 	componentDidMount() {
 		AuthAPI.authMe().then(data => {
 			if ( data.resultCode === 0 ) {
-				this.props.SetAuthData(data);
+				this.props.SetAuthData(data, true);
 			}
 		});
 	}
-	componentDidUpdate() {
-		AuthAPI.authMe().then(data => {
-			if ( data.resultCode === 0 ) {
-				this.props.SetAuthData(data);
-			}
-		});
+	componentDidUpdate(prevProps) {
+		if (prevProps.state.isAuth !== this.props.state.isAuth){
+			AuthAPI.authMe().then(data => {
+				if ( data.resultCode === 0 ) {
+					this.props.SetAuthData(data, true);
+				}
+			});
+		}
+
 	}
 
 	render(){
@@ -36,4 +39,4 @@ const mapStateToProps = (state) => {
 	}
 }
 
-export default connect(mapStateToProps, {SetAuthData})(HeaderContainer);
+export default connect(mapStateToProps, {SetAuthData, Logout})(HeaderContainer);

@@ -22,7 +22,7 @@ export const AuthReducer = (state = initialData, action) => {
             return {
                 ...state,
                 ...action.data,
-                isAuth: true
+                isAuth: action.isAuth
             }
 
         }
@@ -31,17 +31,27 @@ export const AuthReducer = (state = initialData, action) => {
     }
 }
 
-export const SetAuthData = (data) => {
-    return { type: SET_DATA_AUTH, data}
+export const SetAuthData = (data, isAuth) => {
+    return { type: SET_DATA_AUTH, data, isAuth}
 }
 //thunk's
 export const Login = data => {
     return dispatch => {
         AuthAPI.login(data).then(
             response => {
-                console.log(response)
                 if (response.resultCode === 0) {
-                    dispatch(SetAuthData(data))
+                    dispatch(SetAuthData(data, true))
+                }
+            }
+        );
+    }
+}
+export const Logout = (data) => {
+    return dispatch => {
+        AuthAPI.logout().then(
+            response => {
+                if (response.resultCode === 0) {
+                    dispatch(SetAuthData(data, false))
                 }
             }
         );

@@ -1,4 +1,4 @@
-import preloader from "../../assets/Preloader.svg"
+import preloader from "../../../assets/Preloader.svg"
 
 export const Preloader = () => {
     return (

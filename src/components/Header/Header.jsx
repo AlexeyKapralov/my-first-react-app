@@ -6,7 +6,10 @@ const Header = (props) => {
 		<header className={s.header}>
 			<img src="https://logos-world.net/wp-content/uploads/2020/04/Huawei-Logo.png" alt="" />
 			{ props.state.isAuth === true
-				? <div>{props.state.data.login}</div>
+				? <div>
+					{props.state.data.login}
+					<div><button onClick={props.Logout}>Logout</button></div>
+				</div>
 				: <NavLink to="/login">Login</NavLink>
 			}
 		</header>
