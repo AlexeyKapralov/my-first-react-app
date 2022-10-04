@@ -44,12 +44,15 @@
 	font-family: "Montserrat", sans-serif;
 }
 .sendMessage .container .button{
-	width: 25px;
-	height: 25px;	
+	width: 35px;
+	height: 30px;
 	position: absolute;
 	right: 10px;
 	top: 50%;
 	transform: translateY(-50%);
+	border: none;
+	background: none;
+	cursor: pointer;
 }
 .sendMessage .container img{
 	width: 100%;

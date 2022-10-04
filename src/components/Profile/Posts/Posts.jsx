@@ -1,4 +1,4 @@
-import CreatePost from './CreatePost/CreatePost';
+import CreatePostForm from './CreatePost/CreatePostForm';
 import Post from './Post/Post';
 
 const Posts = (props) => {
@@ -9,7 +9,7 @@ const Posts = (props) => {
 
 	return (
 		<div>
-			<CreatePost newPostText={props.newPostText} dispatch={props.dispatch}/>
+			<CreatePostForm addPost={props.addPost}/>
 			{messageElements}
 		</div>
 	)

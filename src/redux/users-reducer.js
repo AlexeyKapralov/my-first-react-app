@@ -135,3 +135,13 @@ export const unfollow = (userID) => {
 		})
 	}
 }
+export const getProfile = (activePage, usersCountOnPage) => {
+	return (dispatch) => {
+		dispatch(toggleIsFetching(true))
+		UsersAPI.getUsers(activePage, usersCountOnPage).then(data => {
+			dispatch(toggleIsFetching(false))
+			dispatch(setUsers(data.items));
+			dispatch(setTotalUsers(data.totalCount));
+		});
+	}
+}

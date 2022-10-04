@@ -1,18 +1,14 @@
 import React from "react";
-import {NavLink} from "react-router-dom";
 import Dialog from "./Dialog/Dialog";
 import s from "./Dialogs.module.css";
 import Message from "./Message/Message";
+import {SendMessageForm} from "./Message/SendMessageForm";
 
 
 const Dialogs = (props) => {
 
-	const changeTextMessageBody = (e) => {
-		props.updateTextMessageBody(e.target.value)
-	}
-
-	const sendNewMessage = () => {
-		props.sendNewMessage();
+	const sendNewMessage = (message) => {
+		props.sendNewMessage(message);
 	}
 
 	let dialogsElements = props.dialogs.map(dialog => {
@@ -28,14 +24,9 @@ const Dialogs = (props) => {
 			<div className={s.messages}>
 				{ messagesElements }
 				<div className={s.sendMessage}>
-					<div className={s.container}>
-						<input autoFocus onChange={changeTextMessageBody} value={props.messageBody} type="text" placeholder="Write your message!!!"/>
-						<div onClick={sendNewMessage} className={s.button}>
-							<NavLink to="">
-								<img src="https://cdn-icons-png.flaticon.com/512/3526/3526788.png" alt="..." />
-							</NavLink>
-						</div>
-					</div>
+
+					<SendMessageForm sendNewMessage={sendNewMessage}/>
+
 				</div>
 			</div>
 
@@ -46,5 +37,6 @@ const Dialogs = (props) => {
 		</div>
 	);
 };
+
 
 export default Dialogs;

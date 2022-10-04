@@ -1,7 +1,4 @@
-import {UsersAPI} from "../api/api";
-
 const ADD_POST = "ADD-POST";
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 
 let initialData = {
 
@@ -18,8 +15,7 @@ let initialData = {
 			id: 3,
 			message: "Hello, it's my third message",
 		}
-	],
-	newPostText: '',
+	]
 
 }
 
@@ -29,14 +25,7 @@ export const profileReducer = (state = initialData, action) => {
 		case ADD_POST: {
 			return{
 				...state,
-				posts: [...state.posts, {id: state.posts.length + 1, message: state.newPostText}],
-				newPostText: ""
-			}
-		}
-		case UPDATE_NEW_POST_TEXT: {
-			return {
-				...state,
-				newPostText: action.text,
+				posts: [...state.posts, {id: state.posts.length + 1, message: action.newPostText}]
 			}
 		}
 		default:
@@ -46,10 +35,6 @@ export const profileReducer = (state = initialData, action) => {
 	
 }
 
-export const addPostActionCreator = () => {
-	return { type: ADD_POST };
+export const addPost = (newPostText) => {
+	return { type: ADD_POST , newPostText};
 };
-
-export const updateNewPostTextActionCreator = (text) => {
-	return { type: UPDATE_NEW_POST_TEXT, text: text }
-}

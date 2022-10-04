@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {setUsers} from "../../redux/users-reducer";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import {ProfileAPI, UsersAPI} from "../../api/api";
+import {ProfileAPI} from "../../api/api";
 import {withAuthRedirect} from "../HOC/withAuthRedirect";
 import {compose} from "redux";
 
