@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import {connect} from "react-redux";
 import {SetAuthData, Login, Logout} from "../../redux/auth-reducer";
+import {Navigate} from "react-router-dom";
 
 export const LoginForm = (props) => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -11,15 +12,19 @@ export const LoginForm = (props) => {
     }
 
     return (
+        (props.state.isAuth)
+            ? <Navigate to={"/profile"}/>
+            : <form onSubmit={handleSubmit(onSubmit)}>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
             <div>
+                { props.state.messages && <div style={{color:"red"}}>{props.state.messages}</div> }
+
                 <input type="text" placeholder={"E-mail"} {...register
                 ("email",
                     {
-                       required:true,
-                       maxLength: 20,
-                       pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                        required:true,
+                        maxLength: 20,
+                        pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
                     }
                 )} />
                 {errors.email?.type === 'required' && <div style={{color:'red'}} role="alert">Need to write some text</div>}
@@ -52,4 +57,6 @@ const mapStateToProps = (state) => {
     }
 }
 
-export const LoginFormContainer = connect(mapStateToProps, {SetAuthData,Login, Logout})(LoginForm);
+export default
+    connect(mapStateToProps, {SetAuthData,Login,Logout})
+(LoginForm);

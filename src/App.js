@@ -6,10 +6,10 @@ import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import NavbarContainer from "./components/Navbar/NavbarContainer";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-import {UsersContainer} from "./components/Users/UsersContainer";
+import Users from "./components/Users/UsersContainer";
 import {Profile} from "./components/Profile/Profile";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import {LoginFormContainer} from "./components/Login/LoginForm";
+import LoginForm from "./components/Login/LoginForm";
 
 
 const App = (props) => {
@@ -23,11 +23,11 @@ const App = (props) => {
 					<Route path="/profile" element={<Profile/>}/>
 					<Route path="/profile/:userId" element={<Profile/>}/>
 					<Route path="/dialogs" element={<DialogsContainer/>}/>
-					<Route path="/users" element={<UsersContainer/>}/>
+					<Route path="/users" element={<Users/>}/>
 					<Route path='/news' element={<News/>}/>
 					<Route path='/music' element={<Music />} />
 					<Route path='/settings' element={<Settings />} />
-					<Route path='/login' element={<LoginFormContainer />} />
+					<Route path='/login' element={<LoginForm />} />
 
 				</Routes>
 				<aside></aside>
