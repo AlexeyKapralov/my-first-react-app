@@ -7,6 +7,7 @@ import {UsersComponent} from "./UsersComponent";
 import {Preloader} from "../CommonComponents/Preloader/Preloader";
 import {withAuthRedirect} from "../HOC/withAuthRedirect";
 import {compose} from "redux";
+import {getStateSelector, getUsersSelector} from "../../redux/users-selectors";
 
 export class Users extends React.Component{
 
@@ -35,9 +36,10 @@ export class Users extends React.Component{
 }
 
 const mapStateToProps = (state) => {
+    // console.log("render mStP Users")
     return {
-        users: state.usersPage.users,
-        state: state.usersPage,
+        users: getUsersSelector(state),
+        state: getStateSelector(state),
     }
 }
 

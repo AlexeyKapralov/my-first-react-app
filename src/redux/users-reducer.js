@@ -13,7 +13,7 @@ let initialData = {
 	users:[],
 	usersCountOnPage: 100,
 	pageNumber: 10,
-	activePage: 3,
+	activePage: 1,
 	totalCount: 100,
 	isFetching: false,
 	isToggleFollowingUserID: []
