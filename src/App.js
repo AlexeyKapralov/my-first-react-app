@@ -1,18 +1,42 @@
 // import logo from './logo.svg';
 import './App.css';
-import {Route, Routes, BrowserRouter} from 'react-router-dom';
+import {Route, Routes, BrowserRouter, Navigate} from 'react-router-dom';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import NavbarContainer from "./components/Navbar/NavbarContainer";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import Users from "./components/Users/UsersContainer";
-import {Profile} from "./components/Profile/Profile";
+import Profile from "./components/Profile/Profile";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginForm from "./components/Login/LoginForm";
+import {AuthAPI} from "./api/api";
+import {useEffect, useState} from "react";
+import {Preloader} from "./components/CommonComponents/Preloader/Preloader";
+import {connect} from "react-redux";
+import {SetAuthData, setIsInit} from "./redux/auth-reducer";
 
 
 const App = (props) => {
+
+	useEffect(() => {
+		const one = AuthAPI.authMe().then(data => {
+			if ( data.resultCode === 0 ) {
+				props.SetAuthData(data, true)
+				props.setIsInit(true)
+			}else{
+				props.setIsInit(true)
+			}
+		})
+	}, [])
+
+	if (!props.state.isInit && (props.state.isAuth !== null)) {
+		return <Preloader/>
+	}
+	if (!props.state.isInit && props.state.isAuth) {
+		return <Navigate to={"/login"}/>
+	}
+
 	return (
 		<BrowserRouter>
 			<div className='app-wrapper'>
@@ -37,5 +61,10 @@ const App = (props) => {
 }
 
 
+const mapStateToProps = (state) => {
+	return{
+		state: state.auth
+	}
+}
 
-export default App;
+export default connect(mapStateToProps, {SetAuthData, setIsInit})(App);

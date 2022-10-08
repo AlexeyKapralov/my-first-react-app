@@ -37,12 +37,12 @@ export const AuthAPI = {
 }
 export const ProfileAPI = {
     getProfile(userId) {
-        return instance.get(`profile/${userId === undefined ? 25975 : userId}`).then(response => (response.data))
+        return instance.get(`profile/${userId}`).then(response => (response.data))
     },
     setStatus(status) {
         return instance.put(`/profile/status`, {status: status}).then(response => (response.data))
     },
-    getStatus(userID) {
-        return instance.get(`/profile/status/${userID === undefined ? 25975 : userID}`)
+    getStatus(userId) {
+        return instance.get(`/profile/status/${userId}`)
     },
 }

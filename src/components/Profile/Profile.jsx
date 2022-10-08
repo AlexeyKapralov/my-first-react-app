@@ -3,47 +3,60 @@ import PostsContainer from "./Posts/PostsContainer";
 import {connect} from "react-redux";
 import {setUsers} from "../../redux/users-reducer";
 import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {Navigate, useNavigate, useParams} from "react-router-dom";
 import {ProfileAPI} from "../../api/api";
 import {withAuthRedirect} from "../HOC/withAuthRedirect";
 import {compose} from "redux";
 
-const ProfileFunc = (props) => {
-	const {userId} = useParams()
+const Profile = (props) => {
+	let {userId} = useParams()
 	const [post, setPost] = useState([]);
 	const [img, setImg] = useState('https://media.istockphoto.com/vectors/user-icon-male-avatar-in-business-suitvector-flat-design-vector-id843193172');
 	const [status, setStatus] = useState('no status');
 	const [isStatusEditMode, setEditMode] = useState(false)
 
+	if (!userId) {
+		userId = props.auth.data.id
+	}
+
 	useEffect(()=>{
-		ProfileAPI.getProfile(userId).then(data => {
-				setPost(data);
-				setImg(data.photos.large);
-			}
-		)
+		if (userId) {
+			ProfileAPI.getProfile(userId).then(data => {
+					setPost(data);
+					setImg(data.photos.large);
+				}
+			)
+		}
 	}, [userId])
 
 	useEffect(()=>{
-		ProfileAPI.getStatus(userId).then(response => {
-				if (response.data === null){
-					setStatus('no status')
-				} else (setStatus(response.data))
-			}
-		)
+		if (userId) {
+			ProfileAPI.getStatus(userId).then(response => {
+					if (response.data === null) {
+						setStatus('no status')
+					} else (setStatus(response.data))
+				}
+			)
+		}
 	}, [userId])
 
 	let isChangeStatus = () => {
-		setEditMode(false)
-		ProfileAPI.setStatus(status).then(response => {
-				if (response.resultCode === 0) {
-					console.log("All is good")
+		if (userId) {
+			setEditMode(false)
+			ProfileAPI.setStatus(status).then(response => {
+					if (response.resultCode === 0) {
+						console.log("All is good")
+					}
 				}
-			}
-		)
+			)
+		}
 	}
 
 	return (
-		<div className={s.profile}>
+		(!userId)
+		? <Navigate to={"/login"}/>
+
+		: <div className={s.profile}>
 			<div className={s.about}>
 				<div className={s.image}>
 					<img src="https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg" alt="..." />
@@ -75,11 +88,11 @@ const ProfileFunc = (props) => {
 
 const MapStateToProps = (state) =>  {
 	return {
-		users: state.usersPage.users
+		users: state.usersPage.users,
+		auth: state.auth
 	}
 }
 
-export const Profile = compose (
+export default compose (
 	connect(MapStateToProps, {setUsers}),
-	withAuthRedirect,
-)(ProfileFunc)
+)(Profile)
