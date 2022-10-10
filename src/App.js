@@ -11,7 +11,7 @@ import Profile from "./components/Profile/Profile";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginForm from "./components/Login/LoginForm";
 import {AuthAPI} from "./api/api";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {Preloader} from "./components/CommonComponents/Preloader/Preloader";
 import {connect} from "react-redux";
 import {SetAuthData, setIsInit} from "./redux/auth-reducer";
@@ -19,15 +19,20 @@ import {SetAuthData, setIsInit} from "./redux/auth-reducer";
 
 const App = (props) => {
 
+	// const [isLoading, setIsLoading] = useState()
+
 	useEffect(() => {
-		const one = AuthAPI.authMe().then(data => {
-			if ( data.resultCode === 0 ) {
-				props.SetAuthData(data, true)
-				props.setIsInit(true)
-			}else{
-				props.setIsInit(true)
-			}
-		})
+		const fetchData = () => {
+			AuthAPI.authMe().then(data => {
+				if ( data.resultCode === 0 ) {
+					props.SetAuthData(data, true)
+					props.setIsInit(true)
+				}else{
+					props.setIsInit(true)
+				}
+			})
+		}
+		fetchData()
 	}, [])
 
 	if (!props.state.isInit && (props.state.isAuth !== null)) {
@@ -44,6 +49,7 @@ const App = (props) => {
 				<NavbarContainer/>
 				<Routes>
 
+					<Route path="/" element={<Profile/>}/>
 					<Route path="/profile" element={<Profile/>}/>
 					<Route path="/profile/:userId" element={<Profile/>}/>
 					<Route path="/dialogs" element={<DialogsContainer/>}/>
