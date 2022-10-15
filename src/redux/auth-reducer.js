@@ -1,9 +1,9 @@
 import {AuthAPI} from "../api/api";
 
-const SET_DATA_AUTH = "SET_DATA_AUTH"
-const SET_DATA_AUTH_NULL = "SET_DATA_AUTH_NULL"
-const SET_ERRORS_MESSAGES = "SET_ERRORS_MESSAGES"
-const SET_IS_INIT = "SET_IS_INIT"
+const SET_DATA_AUTH = "auth/SET_DATA_AUTH"
+const SET_DATA_AUTH_NULL = "auth/SET_DATA_AUTH_NULL"
+const SET_ERRORS_MESSAGES = "auth/SET_ERRORS_MESSAGES"
+const SET_IS_INIT = "auth/SET_IS_INIT"
 
 
 let initialData = {
@@ -75,27 +75,21 @@ export const setIsInit = (isInit) => {
 }
 //thunk's
 export const Login = data => {
-    return dispatch => {
-        AuthAPI.login(data).then(
-            response => {
-                if (response.resultCode === 0) {
-                    dispatch(SetAuthData(data, true))
-                }else{
-                    dispatch(SetErrorsMessages(response.messages))
-                    console.log(response)
-                }
-            }
-        );
+    return async dispatch => {
+        let response = await AuthAPI.login(data)
+        if (response.resultCode === 0) {
+            dispatch(SetAuthData(data, true))
+        } else {
+            dispatch(SetErrorsMessages(response.messages))
+            console.log(response)
+        }
     }
 }
 export const Logout = () => {
-    return dispatch => {
-        AuthAPI.logout().then(
-            response => {
-                if (response.resultCode === 0) {
-                    dispatch(SetAuthDataNull())
-                }
-            }
-        );
-    }
+    return async dispatch => {
+        let response = await AuthAPI.logout()
+        if (response.resultCode === 0) {
+            dispatch(SetAuthDataNull())
+        }
+    };
 }

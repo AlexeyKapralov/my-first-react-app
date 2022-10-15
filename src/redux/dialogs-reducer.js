@@ -1,5 +1,4 @@
-const SEND_NEW_MESSAGE = "SEND-NEW-MESSAGE";
-const UPDATE_TEXT_MESSAGE_BODY = "UPDATE-TEXT-MESSAGE-BODY"
+const SEND_NEW_MESSAGE = "dialogs/SEND-NEW-MESSAGE";
 
 let initialData = {
 
@@ -28,7 +27,7 @@ let initialData = {
 		},
 		{
 			id: 3,
-			message: "And maybe someone too"
+			message: "And Anzhela too"
 		},
 		{
 			id: 4,

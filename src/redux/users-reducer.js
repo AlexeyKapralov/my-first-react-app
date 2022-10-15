@@ -1,12 +1,12 @@
 import {UsersAPI} from "../api/api";
 
-const FOLLOW = "FOLLOW";
-const UNFOLLOW = "UNFOLLOW";
-const SET_USERS = "SET_USERS";
-const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
-const CHANGE_PAGE = "CHANGE_PAGE";
-const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
-const TOGGLE_IS_FOLLOWING = "TOGGLE_IS_FOLLOWING";
+const FOLLOW = "users/FOLLOW";
+const UNFOLLOW = "users/UNFOLLOW";
+const SET_USERS = "users/SET_USERS";
+const SET_TOTAL_USERS_COUNT = "users/SET_TOTAL_USERS_COUNT";
+const CHANGE_PAGE = "users/CHANGE_PAGE";
+const TOGGLE_IS_FETCHING = "users/TOGGLE_IS_FETCHING";
+const TOGGLE_IS_FOLLOWING = "users/TOGGLE_IS_FOLLOWING";
 
 
 let initialData = {
@@ -17,7 +17,6 @@ let initialData = {
 	totalCount: 100,
 	isFetching: false,
 	isToggleFollowingUserID: []
-
 }
 
 export const usersReducer = (state = initialData, action) => {
@@ -93,55 +92,41 @@ export const ToggleFollowingUserID = (IsToggleFollowingUserID, isFetch) => {
 // below thunk functions
 
 export const getUsers = (activePage, usersCountOnPage) => {
-	return (dispatch) => {
+	return async dispatch => {
 		dispatch(toggleIsFetching(true))
-		UsersAPI.getUsers(activePage, usersCountOnPage).then(data => {
-			dispatch(toggleIsFetching(false))
-			dispatch(setUsers(data.items));
-			dispatch(setTotalUsers(data.totalCount));
-		});
+		let data = await UsersAPI.getUsers(activePage, usersCountOnPage)
+		dispatch(toggleIsFetching(false))
+		dispatch(setUsers(data.items))
+		dispatch(setTotalUsers(data.totalCount))
 	}
 }
 export const onChangePage = (page, usersCountOnPage) => {
-	return (dispatch) => {
+	return async dispatch => {
 		dispatch(setChangePage(page));
 		dispatch(toggleIsFetching(true))
-		UsersAPI.getUsers(page, usersCountOnPage).then(data => {
-			dispatch(toggleIsFetching(false))
-			dispatch(setUsers(data.items));
-		});
+		let data = await UsersAPI.getUsers(page, usersCountOnPage)
+		dispatch(toggleIsFetching(false))
+		dispatch(setUsers(data.items))
 	}
 }
-export const follow = (userID) => {
-	return (dispatch) => {
-		dispatch(ToggleFollowingUserID(userID, true))
-		UsersAPI.follow(userID).then(data => {
-			dispatch(ToggleFollowingUserID(userID, false))
-			if (data.resultCode === 0) {
-				dispatch(updateSubscribeFollow(userID))
-			}
 
-		})
+export const follow = (userID) => {
+	return async dispatch => {
+		dispatch(ToggleFollowingUserID(userID, true))
+		let data = await UsersAPI.follow(userID)
+		dispatch(ToggleFollowingUserID(userID, false))
+		if (data.resultCode === 0) {
+			dispatch(updateSubscribeFollow(userID))
+		}
 	}
 }
 export const unfollow = (userID) => {
-	return (dispatch) => {
+	return async dispatch => {
 		dispatch(ToggleFollowingUserID(userID, true))
-		UsersAPI.unfollow(userID).then(data => {
-			dispatch(ToggleFollowingUserID(userID, false))
-			if (data.resultCode === 0) {
-				dispatch(updateSubscribeUnfollow(userID))
-			}
-		})
-	}
-}
-export const getProfile = (activePage, usersCountOnPage) => {
-	return (dispatch) => {
-		dispatch(toggleIsFetching(true))
-		UsersAPI.getUsers(activePage, usersCountOnPage).then(data => {
-			dispatch(toggleIsFetching(false))
-			dispatch(setUsers(data.items));
-			dispatch(setTotalUsers(data.totalCount));
-		});
+		let data = await UsersAPI.unfollow(userID)
+		dispatch(ToggleFollowingUserID(userID, false))
+		if (data.resultCode === 0) {
+			dispatch(updateSubscribeUnfollow(userID))
+		}
 	}
 }

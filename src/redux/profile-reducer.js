@@ -1,4 +1,4 @@
-const ADD_POST = "ADD-POST";
+const ADD_POST = "profile/ADD-POST";
 
 let initialData = {
 

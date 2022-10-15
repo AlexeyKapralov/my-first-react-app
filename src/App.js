@@ -11,15 +11,13 @@ import Profile from "./components/Profile/Profile";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginForm from "./components/Login/LoginForm";
 import {AuthAPI} from "./api/api";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {Preloader} from "./components/CommonComponents/Preloader/Preloader";
 import {connect} from "react-redux";
 import {SetAuthData, setIsInit} from "./redux/auth-reducer";
 
 
 const App = (props) => {
-
-	// const [isLoading, setIsLoading] = useState()
 
 	useEffect(() => {
 		const fetchData = () => {
@@ -35,7 +33,7 @@ const App = (props) => {
 		fetchData()
 	}, [])
 
-	if (!props.state.isInit && (props.state.isAuth !== null)) {
+	if (!props.state.isInit) {
 		return <Preloader/>
 	}
 	if (!props.state.isInit && props.state.isAuth) {
@@ -43,7 +41,7 @@ const App = (props) => {
 	}
 
 	return (
-		<BrowserRouter>
+
 			<div className='app-wrapper'>
 				<HeaderContainer/>
 				<NavbarContainer/>
@@ -62,7 +60,6 @@ const App = (props) => {
 				</Routes>
 				<aside></aside>
 			</div>
-		</BrowserRouter>
 	);
 }
 
