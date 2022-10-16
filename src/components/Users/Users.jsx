@@ -8,35 +8,40 @@ import {Preloader} from "../CommonComponents/Preloader/Preloader";
 import {withAuthRedirect} from "../HOC/withAuthRedirect";
 import {compose} from "redux";
 import {getStateSelector, getUsersSelector} from "../../redux/users-selectors";
+import {Paginator} from "../CommonComponents/Paginator/Paginator";
 
 export class Users extends React.Component{
 
     componentDidMount() {
-        this.props.getUsers(this.props.users.activePage, this.props.users.usersCountOnPage)
+        this.props.getUsers(this.props.state.activePage, this.props.state.usersCountOnPage)
     }
 
     onChangePage = (p) => {
         this.props.onChangePage(p, this.props.state.usersCountOnPage)
     }
 
-    render() { return (
-        <div>
-            { this.props.state.isFetching ? <Preloader /> : null }
-            <UsersComponent
-                state = {this.props.state}
-                users = {this.props.users}
-                follow = {this.props.follow}
-                unfollow = {this.props.unfollow}
-                onChangePage = {this.onChangePage}
-            />
-
-        </div>
-    )
+    render() {
+        return (
+            <div>
+                <div>
+                    <Paginator totalCount={this.props.state.totalCount} usersCountOnPage={this.props.state.usersCountOnPage} onChangePage={this.onChangePage} activePage={this.props.state.activePage}/>
+                </div>
+                {this.props.state.isFetching
+                    ? <Preloader/>
+                    : <UsersComponent
+                        state={this.props.state}
+                        users={this.props.users}
+                        follow={this.props.follow}
+                        unfollow={this.props.unfollow}
+                        onChangePage={this.onChangePage}
+                    />}
+            </div>
+        )
         }
 }
 
 const mapStateToProps = (state) => {
-    // console.log("render mStP Users")
+
     return {
         users: getUsersSelector(state),
         state: getStateSelector(state),

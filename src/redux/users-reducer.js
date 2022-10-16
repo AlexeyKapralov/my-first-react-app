@@ -11,7 +11,7 @@ const TOGGLE_IS_FOLLOWING = "users/TOGGLE_IS_FOLLOWING";
 
 let initialData = {
 	users:[],
-	usersCountOnPage: 100,
+	usersCountOnPage: 50,
 	pageNumber: 10,
 	activePage: 1,
 	totalCount: 100,
