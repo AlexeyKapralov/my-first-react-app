@@ -10,7 +10,7 @@
 }
 .image{
 	padding: 15px;
-	height: 60%;
+	height: 50%;
 	
 }
 
@@ -72,4 +72,17 @@
 	line-height: 1.8rem;
 	color: #adb5bd;
 	font-size: 1rem;
+}
+.setPhoto{
+	input{
+		opacity: 0;
+		visibility: hidden;
+		position: absolute;
+	}
+	label{
+		padding-left: 1.3rem;
+		&:hover{
+			color:#1E74FD;
+		}
+	}
 }

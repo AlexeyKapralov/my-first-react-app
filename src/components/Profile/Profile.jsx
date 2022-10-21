@@ -1,4 +1,4 @@
-import s from './Profile.module.css'
+import s from './Profile.module.scss'
 import PostsContainer from "./Posts/PostsContainer";
 import {connect} from "react-redux";
 import {setUsers} from "../../redux/users-reducer";
@@ -6,12 +6,11 @@ import {useEffect, useState} from "react";
 import {Navigate, useParams} from "react-router-dom";
 import {ProfileAPI} from "../../api/api";
 import {compose} from "redux";
-import {withAuthRedirect} from "../HOC/withAuthRedirect";
 
 const Profile = (props) => {
 	let {userId} = useParams()
 	const [post, setPost] = useState([]);
-	const [img, setImg] = useState('https://media.istockphoto.com/vectors/user-icon-male-avatar-in-business-suitvector-flat-design-vector-id843193172');
+	const [img, setImg] = useState();
 	const [status, setStatus] = useState('no status');
 	const [isStatusEditMode, setEditMode] = useState(false)
 
@@ -52,6 +51,15 @@ const Profile = (props) => {
 		}
 	}
 
+	const setPhotoFunction = async (e) => {
+		if (e.target.files.length){
+			const result = await ProfileAPI.setPhoto(e.target.files[0])
+			if (result.data.resultCode === 0) {
+				setImg(result.data.data.photos.large)
+			}
+		}
+	}
+
 	return (
 		(!props.auth.isAuth && !userId)
 		? <Navigate to={"/login"}/>
@@ -75,8 +83,19 @@ const Profile = (props) => {
 							<div className={s.description}>Middle Full Stack Developer</div>
 						</div>
 					</div>
+
+					{userId === props.auth.data.id &&
+						<div className={s.setPhoto}>
+							<input id="input__file" accept="image/jpeg,image/png,image/gif" type="file" onChange={setPhotoFunction}/>
+							<label for="input__file">Change photo</label>
+						</div>
+						
+					}
+
+					<div className={s.setAvatar}></div>
+
 					<div className={s.profileStatus}>
-						{(isStatusEditMode)
+						{(isStatusEditMode && (userId === props.auth.data.id) )
 							? <div><input onChange={e => (setStatus(e.target.value))} onBlur={isChangeStatus} autoFocus
 										  className={s.statusTitleInput} value={status}/></div>
 							:
@@ -91,6 +110,7 @@ const Profile = (props) => {
 
 const MapStateToProps = (state) =>  {
 	return {
+		profile: state.profilePage.profile,
 		users: state.usersPage.users,
 		auth: state.auth
 	}
