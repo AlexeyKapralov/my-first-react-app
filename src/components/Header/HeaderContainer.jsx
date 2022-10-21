@@ -1,4 +1,4 @@
-import s from './Header.module.css';
+import s from './Header.module.scss';
 import React from "react";
 import {connect} from "react-redux";
 import {Logout, SetAuthData} from "../../redux/auth-reducer";
@@ -13,9 +13,13 @@ class HeaderContainer extends React.Component {
 				this.props.SetAuthData(data, true);
 			}
 		});
+
 	}
 	componentDidUpdate(prevProps) {
+
 		if (prevProps.state.isAuth !== this.props.state.isAuth){
+
+
 			AuthAPI.authMe().then(data => {
 				if ( data.resultCode === 0 ) {
 					this.props.SetAuthData(data, true);

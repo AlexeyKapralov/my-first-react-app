@@ -1,0 +1,53 @@
+.header {
+	font-family: "Montserrat", sans-serif;
+	color: #888;
+	font-size: 1rem;
+	margin: 10px;
+	border-radius: 10px;
+	grid-area: h;
+	background-color: #ffffff;
+	display: flex;
+	justify-content: space-between;
+	padding: 20px;
+	align-items: center;
+	img {
+		width: 80px;
+	}
+	.loginTrue{
+
+		display: flex;
+		align-items: center;
+		padding: 10px;
+		column-gap: 10px;
+		span{
+			color: #05f;
+		}
+
+
+		button{
+			font-family: "Montserrat", sans-serif;
+			border: none;
+			background: none;
+			color: #888;
+
+			font-size: 1rem;
+
+			&:hover{
+				color: #05f;
+				cursor: pointer;
+			}
+
+		}
+	}
+	.loginFalse{
+		color: #888;
+		text-decoration: none;
+		padding: 10px;
+		font-size: 1rem;
+		&:hover{
+			color: #05f;
+		}
+	}
+}
+
+

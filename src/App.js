@@ -1,5 +1,5 @@
 // import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 import {Route, Routes, Navigate} from 'react-router-dom';
 import News from './components/News/News';
 import Music from './components/Music/Music';
@@ -24,8 +24,8 @@ const Users = lazy(() => import ('./components/Users/Users'));
 const App = (props) => {
 
 	useEffect(() => {
-		const fetchData = () => {
-			AuthAPI.authMe().then(data => {
+		const fetchData = async () => {
+			await AuthAPI.authMe().then(data => {
 				if ( data.resultCode === 0 ) {
 					props.SetAuthData(data, true)
 					props.setIsInit(true)

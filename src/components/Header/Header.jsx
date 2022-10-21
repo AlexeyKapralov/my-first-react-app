@@ -1,16 +1,17 @@
-import s from './Header.module.css';
+import s from './Header.module.scss';
 import {NavLink} from "react-router-dom";
+import SiteLogo from "../../assets/Logo.jpg"
 
 const Header = (props) => {
 	return(
 		<header className={s.header}>
-			<img src="https://logos-world.net/wp-content/uploads/2020/04/Huawei-Logo.png" alt="" />
+			<img src={SiteLogo} alt="" />
 			{ props.state.isAuth === true
-				? <div>
-					{props.state.data.login}
+				? <div className={s.loginTrue}>
+					<span>{props.state.data.login}</span>
 					<div><button onClick={props.Logout}>Logout</button></div>
 				</div>
-				: <NavLink to="/login">Login</NavLink>
+				: <NavLink to="/login" className={s.loginFalse}>Login</NavLink>
 			}
 		</header>
 	)
