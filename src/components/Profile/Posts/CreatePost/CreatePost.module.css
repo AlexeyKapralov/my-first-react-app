@@ -4,11 +4,14 @@
 	margin-top: 10px;
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 	border-radius: 15px;
 	background-color: #fff;
+	width: 60%;
+	max-height: 300px;
 }
 .createPost textarea{
-	min-height: 70px;
+	height: 100%;
 	padding: 15px;
 	margin: 20px;
 	border-radius: 15px;

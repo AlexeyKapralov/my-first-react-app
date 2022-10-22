@@ -18,6 +18,7 @@ const CreatePostForm = (props) => {
 			{errors.newPostText?.type === 'required' && <div style={{color:'red', padding: "0rem 1rem 1rem 1.5rem"}} role="alert">Need to write some text</div>}
 			{errors.newPostText?.type === 'maxLength' && <div style={{color:'red', padding: "0rem 1rem 1rem 1.5rem"}} role="alert">Max length 50</div>}
 			{/*{console.log(errors)}*/}
+
 			<button>Create post</button>
 		</form>
 	)

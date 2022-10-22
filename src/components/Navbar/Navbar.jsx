@@ -4,7 +4,7 @@ import s from './Navbar.module.css'
 const Navbar = (props) => {
 
 	const AccountMenuElements = props.accountMenuItems.map( item => {
-		return <AccountMenu urlName = {item.urlName} title={item.title}/>
+		return <AccountMenu key={item.urlName} urlName = {item.urlName} title={item.title}/>
 	})
 
 	return(

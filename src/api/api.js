@@ -56,5 +56,8 @@ export const ProfileAPI = {
         })
 
     },
+    setNewProfileData(data) {
+        return instance.put('/profile',data)
+    },
 
 }

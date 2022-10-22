@@ -1,11 +1,12 @@
 import s from './Profile.module.scss'
-import PostsContainer from "./Posts/PostsContainer";
 import {connect} from "react-redux";
 import {setUsers} from "../../redux/users-reducer";
 import {useEffect, useState} from "react";
 import {Navigate, useParams} from "react-router-dom";
 import {ProfileAPI} from "../../api/api";
 import {compose} from "redux";
+import {addPost} from "../../redux/profile-reducer";
+import Posts from "./Posts/Posts";
 
 const Profile = (props) => {
 	let {userId} = useParams()
@@ -60,6 +61,16 @@ const Profile = (props) => {
 		}
 	}
 
+	const setNewProfileData = async (data) => {
+		const result = await ProfileAPI.setNewProfileData(data)
+		if (result.data.resultCode === 0) {
+			setPost(data)
+			console.log("from setNewProfileData")
+			console.log(result.data)
+			console.log(data)
+		}
+	}
+
 	return (
 		(!props.auth.isAuth && !userId)
 		? <Navigate to={"/login"}/>
@@ -71,7 +82,7 @@ const Profile = (props) => {
 					<div className={s.avatar}>
 						<div className={s.photo}>
 							{
-								img === null
+								!img
 									? <img
 										src="https://media.istockphoto.com/vectors/user-icon-male-avatar-in-business-suitvector-flat-design-vector-id843193172"
 										alt="ava"/>
@@ -87,9 +98,10 @@ const Profile = (props) => {
 					{userId === props.auth.data.id &&
 						<div className={s.setPhoto}>
 							<input id="input__file" accept="image/jpeg,image/png,image/gif" type="file" onChange={setPhotoFunction}/>
-							<label for="input__file">Change photo</label>
+							<label htmlFor="input__file">Change photo</label>
+
 						</div>
-						
+
 					}
 
 					<div className={s.setAvatar}></div>
@@ -103,20 +115,20 @@ const Profile = (props) => {
 						}
 					</div>
 				</div>
-				<PostsContainer/>
+			<Posts posts={props.posts} addPost={props.addPost} post={post} userId={userId} propsUserId={props.auth.data.id} setNewProfileData={setNewProfileData}/>
 			</div>
 	)
 }
 
 const MapStateToProps = (state) =>  {
 	return {
-		profile: state.profilePage.profile,
+		posts: state.profilePage.posts,
 		users: state.usersPage.users,
 		auth: state.auth
 	}
 }
 
 export default compose (
-	connect(MapStateToProps, {setUsers}),
+	connect(MapStateToProps, {setUsers, addPost}),
 	// withAuthRedirect,
 )(Profile)
