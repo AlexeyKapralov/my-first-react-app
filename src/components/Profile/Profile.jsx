@@ -14,6 +14,7 @@ const Profile = (props) => {
 	const [img, setImg] = useState();
 	const [status, setStatus] = useState('no status');
 	const [isStatusEditMode, setEditMode] = useState(false)
+	const [exErrors, setExErrors] = useState()
 
 	if (!userId) {
 		userId = props.auth.data.id
@@ -65,9 +66,8 @@ const Profile = (props) => {
 		const result = await ProfileAPI.setNewProfileData(data)
 		if (result.data.resultCode === 0) {
 			setPost(data)
-			console.log("from setNewProfileData")
-			console.log(result.data)
-			console.log(data)
+		} else {
+			setExErrors(result.data.messages)
 		}
 	}
 
@@ -115,7 +115,7 @@ const Profile = (props) => {
 						}
 					</div>
 				</div>
-			<Posts posts={props.posts} addPost={props.addPost} post={post} userId={userId} propsUserId={props.auth.data.id} setNewProfileData={setNewProfileData}/>
+			<Posts exErrors={exErrors} posts={props.posts} addPost={props.addPost} post={post} userId={userId} propsUserId={props.auth.data.id} setNewProfileData={setNewProfileData}/>
 			</div>
 	)
 }

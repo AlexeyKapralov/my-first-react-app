@@ -1,11 +1,11 @@
-import styles from "./AboutProfile.module.scss"
+import styles from "./AboutProfileForm.module.scss"
 import { useForm } from "react-hook-form";
 import s from "../../Profile.module.scss";
 import React, {useState} from "react";
 
-export const AboutProfile = ({post, userId, propsUserId,setNewProfileData}) => {
+export const AboutProfileForm = ({post, userId, propsUserId,setNewProfileData, exErrors}) => {
     const [profileEditMode, setProfileEditMode] = useState(false)
-    const {register, handleSubmit, formState: { errors }} = useForm()
+    const {setError,register, handleSubmit, formState: { errors }} = useForm()
     const onSubmit = data => {
         setNewProfileData(data)
         setProfileEditMode(false)
@@ -88,10 +88,17 @@ export const AboutProfile = ({post, userId, propsUserId,setNewProfileData}) => {
                         {
                             Object.keys(post.contacts || {}).map(i => {
                                 return <div key={i}>
-                                    <div >{i}</div>
-                                    <input placeholder={`Enter your ${i}`} {...register("contacts."+i)} defaultValue={post.contacts[i]}/>
+                                    <div>{i}</div>
+                                    <input placeholder={`Enter your ${i}`} {...register("contacts."+i,
+                                { pattern: {
+                                            value: /^(https:|http:|www\.)\S*/gm,
+                                            message: "Enter correctly URL"
+                                        }
+                                    })} defaultValue={post.contacts[i]}/>
                                 </div>
                             })
+
+
                         }
                     </div>
                 </div>
