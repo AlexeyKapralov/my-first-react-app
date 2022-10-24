@@ -95,6 +95,7 @@ export const AboutProfileForm = ({post, userId, propsUserId,setNewProfileData, e
                                             message: "Enter correctly URL"
                                         }
                                     })} defaultValue={post.contacts[i]}/>
+                                    {errors.contacts && <div style={{color:"red"}}>{errors.contacts[i]?.message}</div>}
                                 </div>
                             })
 
