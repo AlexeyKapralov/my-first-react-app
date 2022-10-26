@@ -46,6 +46,19 @@ export const LoginForm = (props) => {
                 <input type="checkbox" id={"rememberMe"} {...register("rememberMe")} />
                 <label htmlFor="rememberMe">Remember Me</label>
             </div>
+                <div>
+                    <div>
+                        {props.state.captcha && <img src={props.state.captcha} alt=""/>}
+                    </div>
+                    {props.state.captcha &&
+                        <input type={"text"} {...register("captcha",
+                            {
+                                required: true
+                            }
+                        )} />}
+                    {errors.captcha?.type === 'required' &&
+                        <div style={{color: 'red'}} role={"alert"}>Need to write some text</div>}
+                </div>
             <button>Send</button>
         </form>
     );

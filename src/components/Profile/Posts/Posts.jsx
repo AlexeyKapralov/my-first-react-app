@@ -1,5 +1,4 @@
 import CreatePostForm from './CreatePost/CreatePostForm';
-import styles from "./Posts.module.scss"
 import Post from './Post/Post';
 import {AboutProfileForm} from "./About/AboutProfileForm";
 
@@ -12,7 +11,7 @@ const Posts = ({addPost, posts, post,userId, propsUserId,setNewProfileData, exEr
 
 	return (
 		<div>
-			<div className={styles.wrapper}>
+			<div>
 				<AboutProfileForm exErrors={exErrors} post={post} userId={userId} propsUserId={propsUserId} setNewProfileData={setNewProfileData}/>
 				<CreatePostForm addPost={addPost}/>
 			</div>
