@@ -3,6 +3,8 @@
 	grid-template-columns: 10fr 3fr;
 	grid-gap: 10px;
 	margin-right: 10px;
+	align-items: flex-start;
+
 }
 .messages {
 	background-color: #fff;
@@ -13,6 +15,8 @@
 	align-items: start;
 }
 .dialogs {
+	position: sticky;
+	top: 80px;
 	background-color: #fff;
 	padding: 1rem;
 	border-radius: 0.5rem;

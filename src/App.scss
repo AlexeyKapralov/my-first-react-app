@@ -4,9 +4,11 @@
 	grid-template-areas: 
 	"h h"
 	"n c";
-	grid-template-rows: 50px 1fr;
+	grid-template-rows: 70px 1fr;
 	grid-template-columns: 2fr 10fr;
 	grid-gap: 10px;
 	background-color: rgb(241, 241, 241);
+	min-height: 100vh;
+	max-height:100%
 }
 

@@ -46,7 +46,7 @@ const Profile = (props) => {
 			setEditMode(false)
 			ProfileAPI.setStatus(status).then(response => {
 					if (response.resultCode === 0) {
-						console.log("All is good")
+						// console.log("All is good")
 					}
 				}
 			)
@@ -91,7 +91,14 @@ const Profile = (props) => {
 						</div>
 						<div className={s.nameAndDesc}>
 							<div className={s.name}>{post.fullName}</div>
-							<div className={s.description}>Middle Full Stack Developer</div>
+							<div className={s.profileStatus}>
+								{(isStatusEditMode && (userId === props.auth.data.id) )
+									? <div><input onChange={e => (setStatus(e.target.value))} onBlur={isChangeStatus} autoFocus
+												  className={s.statusTitleInput} value={status}/></div>
+									:
+									<div onDoubleClick={() => (setEditMode(true))} className={s.statusTitleSpan}>{status}</div>
+								}
+							</div>
 						</div>
 					</div>
 
@@ -106,14 +113,6 @@ const Profile = (props) => {
 
 					<div className={s.setAvatar}></div>
 
-					<div className={s.profileStatus}>
-						{(isStatusEditMode && (userId === props.auth.data.id) )
-							? <div><input onChange={e => (setStatus(e.target.value))} onBlur={isChangeStatus} autoFocus
-										  className={s.statusTitleInput} value={status}/></div>
-							:
-							<div onDoubleClick={() => (setEditMode(true))} className={s.statusTitleSpan}>{status}</div>
-						}
-					</div>
 				</div>
 			<Posts exErrors={exErrors} posts={props.posts} addPost={props.addPost} post={post} userId={userId} propsUserId={props.auth.data.id} setNewProfileData={setNewProfileData}/>
 			</div>

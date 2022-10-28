@@ -10,12 +10,12 @@ export const UsersComponent = (props) => {
             <div className={styles.users}>
                 {props.users.map((u) => {
                     return (
-                        <div>
+                        <div className={styles.user}>
                             <NavLink to={`/profile/${u.id}`}>
                                 <div className={styles.avatar}>
                                     {u.photos.large === null
                                         ? <img className={styles.avatar}
-                                               src="https://media.istockphoto.com/vectors/male-avatar-on-white-background-user-icon-vector-illustration-vector-id1191084605"
+                                               src="https://hwchamber.co.uk/wp-content/uploads/2022/04/avatar-placeholder.gif"
                                                alt="..."/>
                                         : <img className={styles.avatar} src={u.photos.large} alt="..."/>
                                     }
@@ -42,7 +42,7 @@ export const UsersComponent = (props) => {
 
                                                   props.unfollow(u.id);
 
-                                              }} className={styles.follow}>UNFOLLOW</button>
+                                              }} className={styles.unfollow}>UNFOLLOW</button>
                                 }
                             </div>
                         </div>

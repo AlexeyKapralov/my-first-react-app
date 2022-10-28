@@ -23,19 +23,19 @@ let initialData = {
 		},
 		{
 			id: 2,
-			message: "I love React"
+			message: "Hi"
 		},
 		{
 			id: 3,
-			message: "And Anzhela too"
+			message: "How are you"
 		},
 		{
 			id: 4,
-			message: "But I'm so fear it"
+			message: "I'm great. Thank you. How are you?"
 		},
 		{
 			id: 5,
-			message: "Because I never say about it"
+			message: "Not bad"
 		}
 	],
 	messageBody: "",

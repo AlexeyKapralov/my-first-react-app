@@ -43,11 +43,16 @@
     font-size: 1rem;
     margin: 0 0 0.5rem 0;
   }
-  .fieldContent{
-    margin: 0 0 1.5rem 0;
+  .fieldContent, .fieldContent:visited{
+    margin: 0 0 0 0;
+    text-decoration: none;
+    color: #515184;
+  }
+  .fieldContentMissing{
+    color: rgba(81, 81, 132, 0.55);
   }
   .fieldContentInput{
-    margin: 0 0 1.5rem 0;
+    margin: 0 0 0 0;
     color: #515184;
     font-size: 1rem;
     font-family: "Montserrat", sans-serif;

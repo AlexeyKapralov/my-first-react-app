@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import './App.scss';
 import {Route, Routes, Navigate} from 'react-router-dom';
 import News from './components/News/News';
@@ -64,10 +63,11 @@ const App = (props) => {
 								<Users/>
 							</Suspense>
 						}/>
-						<Route path='/news' element={<News/>}/>
-						<Route path='/music' element={<Music/>}/>
-						<Route path='/settings' element={<Settings/>}/>
+						<Route path='/news' element={<div>Sorry. Functionality not implemented</div>}/>
+						<Route path='/music' element={<div>Sorry. Functionality not implemented</div>}/>
+						<Route path='/settings' element={<div>Sorry. Functionality not implemented</div>}/>
 						<Route path='/login' element={<LoginForm/>}/>
+						<Route path='*' element={<div>404 Not found</div>}/>
 					</Routes>
 				<aside></aside>
 			</div>

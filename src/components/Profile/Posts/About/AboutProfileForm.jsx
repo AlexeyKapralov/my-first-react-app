@@ -55,7 +55,12 @@ export const AboutProfileForm = ({post, userId, propsUserId,setNewProfileData}) 
                             Object.keys(post.contacts || {}).map(i => {
                                 return <div key={i}>
                                     <div className={styles.fieldTitle}>{i}</div>
-                                    <div className={styles.fieldContent}>{post.contacts[i] || "unknown"}</div>
+                                    { post.contacts[i] &&
+                                        <a target="_blank"  href={post.contacts[i]} className={styles.fieldContent}>{post.contacts[i]}</a>
+                                    }
+                                    { !post.contacts[i] &&
+                                        <div className={styles.fieldContentMissing}>missing</div>
+                                    }
                                 </div>
                             })
                         }
@@ -95,11 +100,11 @@ export const AboutProfileForm = ({post, userId, propsUserId,setNewProfileData}) 
                                     <div className={styles.fieldTitle}>{i}</div>
                                     <input className={styles.fieldContentInput} placeholder={`Enter your ${i}`} {...register("contacts."+i,
                                 { pattern: {
-                                            value: /^(https:|http:|www\.)\/\/\S*\.\S+/gm,
+                                            // value: /^(https:|http:|www\.)\/\/\S*\.\S+/gm,
                                             message: "Enter correctly URL"
                                         }
                                     })} defaultValue={post.contacts[i]}/>
-                                    {errors.contacts && <div style={{color:"red"}}>{errors.contacts[i]?.message}</div>}
+                                    {/*{errors.contacts && <div style={{color:"red"}}>{errors.contacts[i]?.message}</div>}*/}
                                 </div>
                             })
 
