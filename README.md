@@ -2,8 +2,8 @@
 A reactive Single-Page Social-Network!! 
 
 # Test Account
-Login - [free@samuraijs.com]()
-Password - **free**
+- Login - free@samuraijs.com
+- Password - **free**
 
 # Some Screenshots
 ![Login](https://user-images.githubusercontent.com/78748524/198710277-eb6a23ce-1631-45fc-86a2-3a668d089b03.png)
