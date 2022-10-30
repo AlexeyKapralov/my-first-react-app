@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/social-network-react-spa/static/css/main.c747772d.css",
-    "main.js": "/social-network-react-spa/static/js/main.91fc442e.js",
-    "static/css/71.1bc5c035.chunk.css": "/social-network-react-spa/static/css/71.1bc5c035.chunk.css",
+    "main.css": "/social-network-react-spa/static/css/main.c3cf35d6.css",
+    "main.js": "/social-network-react-spa/static/js/main.47b99fd7.js",
+    "static/css/71.c515437c.chunk.css": "/social-network-react-spa/static/css/71.c515437c.chunk.css",
     "static/js/71.8e28aafd.chunk.js": "/social-network-react-spa/static/js/71.8e28aafd.chunk.js",
     "static/css/761.a6009f49.chunk.css": "/social-network-react-spa/static/css/761.a6009f49.chunk.css",
     "static/js/761.4626b3d9.chunk.js": "/social-network-react-spa/static/js/761.4626b3d9.chunk.js",
@@ -10,16 +10,16 @@
     "static/media/Logo.jpg": "/social-network-react-spa/static/media/Logo.69f7a98235548d80bb80.jpg",
     "static/media/Preloader.svg": "/social-network-react-spa/static/media/Preloader.88d5f65b9343a58f92a72cf0cd3fe49b.svg",
     "index.html": "/social-network-react-spa/index.html",
-    "main.c747772d.css.map": "/social-network-react-spa/static/css/main.c747772d.css.map",
-    "main.91fc442e.js.map": "/social-network-react-spa/static/js/main.91fc442e.js.map",
-    "71.1bc5c035.chunk.css.map": "/social-network-react-spa/static/css/71.1bc5c035.chunk.css.map",
+    "main.c3cf35d6.css.map": "/social-network-react-spa/static/css/main.c3cf35d6.css.map",
+    "main.47b99fd7.js.map": "/social-network-react-spa/static/js/main.47b99fd7.js.map",
+    "71.c515437c.chunk.css.map": "/social-network-react-spa/static/css/71.c515437c.chunk.css.map",
     "71.8e28aafd.chunk.js.map": "/social-network-react-spa/static/js/71.8e28aafd.chunk.js.map",
     "761.a6009f49.chunk.css.map": "/social-network-react-spa/static/css/761.a6009f49.chunk.css.map",
     "761.4626b3d9.chunk.js.map": "/social-network-react-spa/static/js/761.4626b3d9.chunk.js.map",
     "787.93c0ff9f.chunk.js.map": "/social-network-react-spa/static/js/787.93c0ff9f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c747772d.css",
-    "static/js/main.91fc442e.js"
+    "static/css/main.c3cf35d6.css",
+    "static/js/main.47b99fd7.js"
   ]
 }
