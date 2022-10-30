@@ -15,7 +15,7 @@ export const LoginForm = (props) => {
     return (
         (props.state.isAuth)
             ? <Navigate to={"/profile"}/>
-            : <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+            : <div className={styles.wrapper}><form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 
             <div>
                 { props.state.messages && <div className={styles.error}>{props.state.messages}</div> }
@@ -61,7 +61,7 @@ export const LoginForm = (props) => {
                         <div className={styles.error} role={"alert"}>Need to write some text</div>}
                 </div>
             <button className={styles.formButton}>Login</button>
-        </form>
+        </form></div>
     );
 }
 

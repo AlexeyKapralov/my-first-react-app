@@ -2,7 +2,7 @@ import s from './Header.module.scss';
 import {NavLink} from "react-router-dom";
 import SiteLogo from "../../assets/Logo.jpg"
 
-const Header = (props) => {
+export const Header = (props) => {
 	return(
 		<header className={s.header}>
 			<img src={SiteLogo} alt="" />
@@ -16,5 +16,3 @@ const Header = (props) => {
 		</header>
 	)
 }
-
-export default Header;

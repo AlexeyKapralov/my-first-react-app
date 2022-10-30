@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 
 .profile{
-	margin-right: 10px;
+	grid-area: c;
 }
 .about {
 	height: 270px;
@@ -88,5 +88,10 @@
 		&:hover{
 			color:#1E74FD;
 		}
+	}
+}
+@media screen and (max-width: 600px){
+	.profile{
+		margin: 10px 0 0 0;
 	}
 }

@@ -4,7 +4,14 @@ import s from './AccountMenu.module.css'
 const AccountMenu = (props) => {
 	return(
 		<div className={s.AccountMenuItem}>
-			<NavLink to={`/${props.urlName}`} className={({isActive}) => isActive ? s.activeLink : undefined}>{props.title}</NavLink>
+			<NavLink  to={`/${props.urlName}`}
+					  onClick={()=>{
+						  const elem = document.getElementsByClassName(props.nav)[0]
+						  const btn = document.getElementsByClassName(props.menuBtn)[0]
+						  elem.className = props.nav
+						  document.body.style.overflow="visible"
+						  btn.className = props.menuBtn}}
+					  className={({isActive}) => isActive ? s.activeLink : undefined}>{props.title}</NavLink>
 		</div>
 	)
 }

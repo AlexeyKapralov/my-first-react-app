@@ -22,6 +22,8 @@ const Users = lazy(() => import ('./components/Users/Users'));
 
 const App = (props) => {
 
+	App.displayName = 'App';
+
 	useEffect(() => {
 		const fetchData = async () => {
 			await AuthAPI.authMe().then(data => {
@@ -43,6 +45,7 @@ const App = (props) => {
 		return <Navigate to={"/login"}/>
 	}
 
+	console.log()
 	return (
 
 			<div className='app-wrapper'>
@@ -69,7 +72,6 @@ const App = (props) => {
 						<Route path='/login' element={<LoginForm/>}/>
 						<Route path='*' element={<div>404 Not found</div>}/>
 					</Routes>
-				<aside></aside>
 			</div>
 	);
 }

@@ -5,19 +5,19 @@ import './index.css';
 import { store } from './redux/redux-store';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from "react-redux";
-import {BrowserRouter} from "react-router-dom";
+import {BrowserRouter, HashRouter} from "react-router-dom";
 
 	const root = ReactDOM.createRoot(document.getElementById('root'));
 	root.render(
 		<React.StrictMode>
 			{/*below line for gitHub Pages deploy*/}
-			{/*<HashRouter>*/}
-			<BrowserRouter  basename = {process.env.PUBLIC_URL}>
+			<HashRouter>
+			{/*<BrowserRouter  basename = {process.env.PUBLIC_URL}>*/}
 				<Provider store={store}>
 					<App/>
 				</Provider>
-			</BrowserRouter>
-			{/*</HashRouter>*/}
+			{/*</BrowserRouter>*/}
+			</HashRouter>
 		</React.StrictMode>
 	);
 

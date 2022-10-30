@@ -5,7 +5,7 @@
 	font-family: "Montserrat", sans-serif;
 	color: #888;
 	font-size: 1rem;
-	margin: 0 0 10px 0;
+	margin: 0 0 0 0;
 	border-radius: 10px;
 	grid-area: h;
 	background-color: #ffffff;
@@ -17,8 +17,8 @@
 		width: 80px;
 	}
 	.loginTrue{
-
 		display: flex;
+		flex-wrap: wrap;
 		align-items: center;
 		padding: 10px;
 		column-gap: 10px;
@@ -49,6 +49,11 @@
 		font-size: 1rem;
 		&:hover{
 			color: #05f;
+		}
+	}
+	@media screen and (max-width: 600px){
+		img{
+			margin-left: 50px;
 		}
 	}
 }
