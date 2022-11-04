@@ -3,7 +3,7 @@ import {dialogsReducer} from "./dialogs-reducer";
 import {profileReducer} from "./profile-reducer";
 import {navbarReducer} from "./navbar-reducer";
 import {usersReducer} from "./users-reducer";
-import {AuthReducer} from "./auth-reducer";
+import {AuthReducer} from "./auth-reducer.tsx";
 import thunkMiddleware from "redux-thunk";
 
 let reducers = combineReducers({

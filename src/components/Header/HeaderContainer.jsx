@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Logout, SetAuthData} from "../../redux/auth-reducer";
+import {Logout, SetAuthData} from "../../redux/auth-reducer.tsx";
 import {Header} from "./Header";
 import {AuthAPI} from "../../api/api";
 

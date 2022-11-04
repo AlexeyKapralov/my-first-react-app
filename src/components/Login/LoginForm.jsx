@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import {connect} from "react-redux";
-import {SetAuthData, Login, Logout} from "../../redux/auth-reducer";
+import {SetAuthData, Login, Logout} from "../../redux/auth-reducer.tsx";
 import {Navigate} from "react-router-dom";
 import styles from "./LoginForm.module.scss"
 
