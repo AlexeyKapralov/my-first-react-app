@@ -33,7 +33,7 @@ let initialData: initialDataType = {
     resultCode: null,
     messages: [],
     isAuth: false,
-    isInit:false,
+    isInit: false,
     captcha: null
 
 }
@@ -127,6 +127,7 @@ export const getCaptcha = (captcha: string | null): getCaptchaActionActionType =
 //thunk's
 export const Login = (data: any) => {
     return async (dispatch:any) => {
+        setIsInit(true)
         let response = await AuthAPI.login(data)
         if (response.data.resultCode === 0) {
             dispatch(SetAuthData(data, true))
@@ -137,6 +138,7 @@ export const Login = (data: any) => {
             }
             dispatch(SetErrorsMessages(response.data.messages))
         }
+        setIsInit(false)
     }
 }
 export const Logout = () => {

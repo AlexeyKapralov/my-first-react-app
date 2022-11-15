@@ -1,11 +1,17 @@
-import s from "../Dialogs.module.css";
+import s from "../Dialogs.module.scss";
 import React from "react";
-import {useForm} from "react-hook-form";
+import {SubmitHandler, useForm} from "react-hook-form";
 
-export const SendMessageForm = (props) => {
 
-    const {register, handleSubmit, reset, formState:{errors}}  = useForm();
-    const onSubmit = data => {
+interface ISendMessageFormFields{
+    message: string
+}
+
+
+export const SendMessageForm = (props:any) => {
+
+    const {register, handleSubmit, reset, formState:{errors}}  = useForm<ISendMessageFormFields>();
+    const onSubmit:SubmitHandler<ISendMessageFormFields> = data => {
         props.sendNewMessage(data.message)
         reset()
     }

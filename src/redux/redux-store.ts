@@ -3,10 +3,10 @@ import {dialogsReducer} from "./dialogs-reducer";
 import {profileReducer} from "./profile-reducer";
 import {navbarReducer} from "./navbar-reducer";
 import {usersReducer} from "./users-reducer";
-import {AuthReducer} from "./auth-reducer.tsx";
+import {AuthReducer} from "./auth-reducer";
 import thunkMiddleware from "redux-thunk";
 
-let reducers = combineReducers({
+let RootReducer = combineReducers({
     dialogsPage: dialogsReducer,
     profilePage: profileReducer,
     navBar: navbarReducer,
@@ -14,7 +14,12 @@ let reducers = combineReducers({
     auth: AuthReducer,
 })
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-export const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)));
+type RootReducerType = typeof RootReducer
+export type AppStateType = ReturnType<RootReducerType>
 
+// @ts-ignore
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export const store = createStore(RootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)));
+
+// @ts-ignore
 window.__store__ = store;

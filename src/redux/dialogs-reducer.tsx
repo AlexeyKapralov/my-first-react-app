@@ -1,13 +1,7 @@
+import {DialogsType, MessageType } from "../types/types";
+
 const SEND_NEW_MESSAGE = "dialogs/SEND-NEW-MESSAGE";
 
-type DialogsType = {
-	id:number
-	name: string
-}
-type MessageType = {
-	id:number
-	message: string
-}
 
 let initialData = {
 	dialogs: [

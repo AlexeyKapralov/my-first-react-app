@@ -12,17 +12,32 @@ import {useEffect, lazy, Suspense} from "react";
 import {Preloader} from "./components/CommonComponents/Preloader/Preloader";
 import {connect} from "react-redux";
 import {SetAuthData, setIsInit} from "./redux/auth-reducer";
+import {AppStateType} from "./redux/redux-store";
 
 // import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-const DialogsContainer = lazy(() => import ('./components/Dialogs/DialogsContainer'));
+const Dialogs = lazy(() => import ('./components/Dialogs/Dialogs'));
 
 // import Users from "./components/Users/Users";
 const Users = lazy(() => import ('./components/Users/Users'));
 
 
-const App = (props) => {
+type MapStateToPropsType = {
+	isInit: boolean
+	isAuth: boolean
+}
 
-	App.displayName = 'App';
+type MapDispatchToPropsType = {
+	SetAuthData: (data: any, isAuth: boolean) => void
+	setIsInit: (isInit: boolean) => void
+}
+type OwnPropsType = {
+
+}
+type PropsType = MapStateToPropsType & MapDispatchToPropsType & OwnPropsType
+
+const App: React.FC<PropsType> = props => {
+
+	// App.displayName = 'App';
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -38,10 +53,10 @@ const App = (props) => {
 		fetchData()
 	}, [])
 
-	if (!props.state.isInit) {
+	if (!props.isInit) {
 		return <Preloader/>
 	}
-	if (!props.state.isInit && props.state.isAuth) {
+	if (!props.isInit && props.isAuth) {
 		return <Navigate to={"/login"}/>
 	}
 
@@ -58,7 +73,7 @@ const App = (props) => {
 						<Route path="/profile/:userId" element={<Profile/>}/>
 						<Route path="/dialogs" element={
 							<Suspense fallback={<div>Loading...</div>}>
-								<DialogsContainer/>
+								<Dialogs/>
 							</Suspense>
 						}/>
 						<Route path="/users" element={
@@ -77,10 +92,11 @@ const App = (props) => {
 }
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state:AppStateType):MapStateToPropsType => {
 	return{
-		state: state.auth
+		isInit: state.auth.isInit,
+		isAuth: state.auth.isAuth,
 	}
 }
 
-export default connect(mapStateToProps, {SetAuthData, setIsInit})(App);
+export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, AppStateType>(mapStateToProps, {SetAuthData, setIsInit})(App);
