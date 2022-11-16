@@ -30,7 +30,7 @@ const mapStateToProps = (state: AppStateType) => {
 	return {
 		dialogs: state.dialogsPage.dialogs,
 		messages: state.dialogsPage.messages,
-		messageBody: state.dialogsPage.messageBody,
+		messageBody: state.dialogsPage.messageBody
 	}
 }
 

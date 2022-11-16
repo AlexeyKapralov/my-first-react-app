@@ -43,7 +43,7 @@ let initialData = {
 	messageBody: "",
 }
 
-export const dialogsReducer = (state = initialData, action: any) => {
+export const dialogsReducer = (state = initialData, action: tActions) => {
 	switch (action.type) {
 		case SEND_NEW_MESSAGE: {
 			return {
@@ -56,6 +56,7 @@ export const dialogsReducer = (state = initialData, action: any) => {
 	}
 	
 }
+type tActions = SendNewMessageActionType
 
 type SendNewMessageActionType = {
 	type: typeof SEND_NEW_MESSAGE

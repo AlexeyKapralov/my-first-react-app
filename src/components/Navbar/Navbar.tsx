@@ -1,7 +1,8 @@
 import AccountMenu from './AccountMenu/AccountMenu';
 import s from './Navbar.module.scss'
+import { MapStateToPropsNavbarContainerType } from './NavbarContainer';
 
-const Navbar = (props) => {
+const Navbar:React.FC<MapStateToPropsNavbarContainerType> = (props) => {
 
 	const AccountMenuElements = props.accountMenuItems.map( item => {
 		return <AccountMenu menuBtn={s.menuBtn} nav={s.nav} key={item.urlName} urlName = {item.urlName} title={item.title} />

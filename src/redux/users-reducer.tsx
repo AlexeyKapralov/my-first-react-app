@@ -1,4 +1,6 @@
 import {UsersAPI} from "../api/api";
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./redux-store";
 
 const FOLLOW = "users/FOLLOW";
 const UNFOLLOW = "users/UNFOLLOW";
@@ -12,7 +14,7 @@ type PhotosType = {
 	small: string
 	large: string
 }
- type UserType = {
+ export type UserType = {
 	id: number
 	name: string
 	status: string | null
@@ -33,7 +35,7 @@ let initialData = {
 
 export type initialDataType = typeof initialData
 
-export const usersReducer = (state = initialData, action:any):initialDataType => {
+export const usersReducer = (state = initialData, action:tActions):initialDataType => {
 	switch (action.type) {
 		case FOLLOW: {
 			return {
@@ -71,7 +73,7 @@ export const usersReducer = (state = initialData, action:any):initialDataType =>
 			return {
 				...state,
 				isToggleFollowingUserID:
-					action.isFetch === true
+					action.isFetch
 					? [action.IsToggleFollowingUserID]
 					: state.isToggleFollowingUserID.filter(i => i !== action.IsToggleFollowingUserID)
 				}
@@ -79,8 +81,11 @@ export const usersReducer = (state = initialData, action:any):initialDataType =>
 		default:
 			return state;
 	}
-	
 }
+
+type tActions = UpdateSubscribeFollowActionType | UpdateSubscribeUnfollowActionType | SetUsersActionType |
+	CountTotalUsersActionType | setChangePageActionType | toggleIsFetchingActionType |
+	ToggleFollowingUserIDActionType
 
 type UpdateSubscribeFollowActionType = {
 	type: typeof FOLLOW
@@ -89,6 +94,7 @@ type UpdateSubscribeFollowActionType = {
 export const updateSubscribeFollow = (id:number):UpdateSubscribeFollowActionType => {
 	return { type: FOLLOW, id: id }
 }
+
 type UpdateSubscribeUnfollowActionType = {
 	type: typeof UNFOLLOW
 	id: number
@@ -99,11 +105,12 @@ export const updateSubscribeUnfollow = (id:number):UpdateSubscribeUnfollowAction
 
 type SetUsersActionType = {
 	type: typeof SET_USERS
-	users: UserType
+	users: Array<UserType>
 }
-export const setUsers = (users:UserType):SetUsersActionType => {
+export const setUsers = (users:Array<UserType>):SetUsersActionType => {
 	return {type: SET_USERS, users: users}
 }
+
 type CountTotalUsersActionType = {
 	type: typeof SET_TOTAL_USERS_COUNT
 	countTotalUsers: number
@@ -138,8 +145,9 @@ export const ToggleFollowingUserID = (IsToggleFollowingUserID:number, isFetch:bo
 }
 // below thunk functions
 
-export const getUsers = (activePage:number, usersCountOnPage:number) => {
-	return async (dispatch:any) => {
+type tUserReducerThunk = ThunkAction<Promise<void>, AppStateType, unknown, tActions>
+export const getUsers = (activePage:number, usersCountOnPage:number):tUserReducerThunk => {
+	return async (dispatch, getState) => {
 		dispatch(toggleIsFetching(true))
 		let data = await UsersAPI.getUsers(activePage, usersCountOnPage)
 		dispatch(toggleIsFetching(false))
@@ -147,8 +155,8 @@ export const getUsers = (activePage:number, usersCountOnPage:number) => {
 		dispatch(setTotalUsers(data.totalCount))
 	}
 }
-export const onChangePage = (page:number, usersCountOnPage:number) => {
-	return async (dispatch:any) => {
+export const onChangePage = (page:number, usersCountOnPage:number):tUserReducerThunk => {
+	return async (dispatch) => {
 		dispatch(setChangePage(page));
 		dispatch(toggleIsFetching(true))
 		let data = await UsersAPI.getUsers(page, usersCountOnPage)
@@ -157,8 +165,8 @@ export const onChangePage = (page:number, usersCountOnPage:number) => {
 	}
 }
 
-export const follow = (userID: number) => {
-	return async (dispatch:any) => {
+export const follow = (userID: number):tUserReducerThunk => {
+	return async (dispatch) => {
 		dispatch(ToggleFollowingUserID(userID, true))
 		let data = await UsersAPI.follow(userID)
 		dispatch(ToggleFollowingUserID(userID, false))
@@ -167,8 +175,8 @@ export const follow = (userID: number) => {
 		}
 	}
 }
-export const unfollow = (userID:number) => {
-	return async (dispatch:any) => {
+export const unfollow = (userID:number):tUserReducerThunk => {
+	return async (dispatch) => {
 		dispatch(ToggleFollowingUserID(userID, true))
 		let data = await UsersAPI.unfollow(userID)
 		dispatch(ToggleFollowingUserID(userID, false))

@@ -1,4 +1,4 @@
-type AccountMenuItemType = {
+export type AccountMenuItemType = {
 	urlName: string
 	title: string
 }

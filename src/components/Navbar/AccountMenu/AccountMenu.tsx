@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
-import s from './AccountMenu.module.css'
+import s from './AccountMenu.module.scss'
 
-const AccountMenu = (props) => {
+const AccountMenu = (props:any) => {
 	return(
 		<div className={s.AccountMenuItem}>
 			<NavLink  to={`/${props.urlName}`}

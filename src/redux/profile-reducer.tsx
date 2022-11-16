@@ -1,7 +1,7 @@
 
 const ADD_POST = "profile/ADD-POST";
 
-type PostType = {
+export type PostType = {
 	id: number
 	message: string
 }
@@ -25,7 +25,7 @@ let initialData = {
 
 export type initialDataType = typeof initialData
 
-export const profileReducer = (state = initialData, action:any):initialDataType => {
+export const profileReducer = (state = initialData, action:tActions):initialDataType => {
 	
 	switch (action.type) {
 		case ADD_POST: {
@@ -41,7 +41,7 @@ export const profileReducer = (state = initialData, action:any):initialDataType 
 	
 }
 
-
+type tActions = AddPostActionType
 type AddPostActionType = {
 	type: typeof ADD_POST
 	newPostText: string

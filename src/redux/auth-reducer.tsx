@@ -1,4 +1,6 @@
 import {AuthAPI, CaptchaAPI} from "../api/api";
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./redux-store";
 
 const SET_DATA_AUTH = "auth/SET_DATA_AUTH"
 const SET_DATA_AUTH_NULL = "auth/SET_DATA_AUTH_NULL"
@@ -38,7 +40,7 @@ let initialData: initialDataType = {
 
 }
 
-export const AuthReducer = (state = initialData, action:any):initialDataType => {
+export const AuthReducer = (state = initialData, action:tActions):initialDataType => {
     switch (action.type){
         case SET_DATA_AUTH: {
             return {
@@ -84,6 +86,9 @@ export const AuthReducer = (state = initialData, action:any):initialDataType => 
     }
 }
 
+type tActions = SetAuthDataActionType | SetAuthDataNullActionType |
+    SetErrorsMessagesActionType | SetIsInitActionType | getCaptchaActionActionType
+
 type SetAuthDataActionType = {
     type: typeof SET_DATA_AUTH
     data: any
@@ -125,8 +130,10 @@ export const getCaptcha = (captcha: string | null): getCaptchaActionActionType =
 }
 
 //thunk's
-export const Login = (data: any) => {
-    return async (dispatch:any) => {
+type tAuthReducerThunk = ThunkAction<Promise<void>, AppStateType, unknown, tActions>
+
+export const Login = (data: []): tAuthReducerThunk => {
+    return async (dispatch) => {
         setIsInit(true)
         let response = await AuthAPI.login(data)
         if (response.data.resultCode === 0) {
@@ -141,7 +148,7 @@ export const Login = (data: any) => {
         setIsInit(false)
     }
 }
-export const Logout = () => {
+export const Logout = (): tAuthReducerThunk => {
     return async (dispatch:any) => {
         let response = await AuthAPI.logout()
         if (response.resultCode === 0) {
@@ -150,7 +157,7 @@ export const Logout = () => {
         }
     };
 }
-export const getCaptchaUrl = (isActive= true) => {
+export const getCaptchaUrl = (isActive= true):tAuthReducerThunk => {
     return async (dispatch: any) => {
         if (!isActive) {
             dispatch(getCaptcha(null))
