@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {setUsers, UserType} from "../../redux/users-reducer";
 import {useEffect, useState} from "react";
 import {Navigate, useParams} from "react-router-dom";
-import {ProfileAPI} from "../../api/api";
+import {ProfileAPI, tProfileData} from "../../api/api";
 import {compose} from "redux";
 import {addPost, PostType} from "../../redux/profile-reducer";
 import Posts from "./Posts/Posts";
@@ -26,12 +26,12 @@ type OwnProps = {
 type Props = MapStateToPropsType & MapDispatchToProps & OwnProps
 
 const Profile:React.FC<Props> = (props) => {
-	let {userId} = useParams<any>()
+	let {userId} = useParams<string>()
 	const [post, setPost] = useState<any>([]);
 	const [img, setImg] = useState<string>();
 	const [status, setStatus] = useState('no status');
 	const [isStatusEditMode, setEditMode] = useState(false)
-	const [exErrors, setExErrors] = useState()
+	const [exErrors, setExErrors] = useState<any>()
 
 	if (!userId) {
 		userId = props.id
@@ -74,12 +74,12 @@ const Profile:React.FC<Props> = (props) => {
 		if (e.target.files != null && e.target.files.length){
 			const result = await ProfileAPI.setPhoto(e.target.files[0])
 			if (result.data.resultCode === 0) {
-				setImg(result.data.data.photos.large)
+				setImg(result.data.data.large)
 			}
 		}
 	}
 
-	const setNewProfileData = async (data:string) => {
+	const setNewProfileData = async (data:tProfileData) => {
 		const result = await ProfileAPI.setNewProfileData(data)
 		if (result.data.resultCode === 0) {
 			setPost(data)

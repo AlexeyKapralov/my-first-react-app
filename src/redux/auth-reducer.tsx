@@ -132,7 +132,7 @@ export const getCaptcha = (captcha: string | null): getCaptchaActionActionType =
 //thunk's
 type tAuthReducerThunk = ThunkAction<Promise<void>, AppStateType, unknown, tActions>
 
-export const Login = (data: []): tAuthReducerThunk => {
+export const Login = (data: any): tAuthReducerThunk => {
     return async (dispatch) => {
         setIsInit(true)
         let response = await AuthAPI.login(data)
