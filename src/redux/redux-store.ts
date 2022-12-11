@@ -14,6 +14,10 @@ let RootReducer = combineReducers({
     auth: AuthReducer,
 })
 
+type PropertiesType<T> = T extends {[key: string]: infer U} ? U : never
+
+export type InferActionsType<T extends {[key: string]: (...args: any[])=>any}> = ReturnType<PropertiesType<T>>
+
 type RootReducerType = typeof RootReducer
 export type AppStateType = ReturnType<RootReducerType>
 

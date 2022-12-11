@@ -1,6 +1,9 @@
 import CreatePostForm from './CreatePost/CreatePostForm';
 import Post from './Post/Post';
 import {AboutProfileForm} from "./About/AboutProfileForm";
+import {UserType} from "../../../redux/users-reducer";
+import {PostType} from "../../../redux/profile-reducer";
+
 
 
 const Posts = ({addPost, posts, post, userId, propsUserId,setNewProfileData, exErrors}) => {

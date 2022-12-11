@@ -145,7 +145,7 @@ export const AboutProfileForm:React.FC<Props> = ({post, userId, propsUserId,setN
                                     }
                                 })} defaultValue={post.contacts.facebook}/>
 
-                            {/*{errors.contacts && <div style={{color:"red"}}>{errors.contacts[i]?.message}</div>}*/}
+                            {errors.contacts && <div style={{color:"red"}}>{errors.contacts.facebook?.message}</div>}
                         </div>
                         <div>
                             <div className={styles.fieldTitle}>website</div>
@@ -155,7 +155,7 @@ export const AboutProfileForm:React.FC<Props> = ({post, userId, propsUserId,setN
                                         message: "Enter correctly URL"
                                     }
                                 })} defaultValue={post.contacts.website}/>
-                            {/*{errors.contacts && <div style={{color:"red"}}>{errors.contacts[i]?.message}</div>}*/}
+                            {errors.contacts && <div style={{color:"red"}}>{errors.contacts.website?.message}</div>}
                         </div>
                         <div>
                             <div className={styles.fieldTitle}>Vk</div>
@@ -165,7 +165,7 @@ export const AboutProfileForm:React.FC<Props> = ({post, userId, propsUserId,setN
                                         message: "Enter correctly URL"
                                     }
                                 })}defaultValue={post.contacts.vk}/>
-                            {/*{errors.contacts && <div style={{color:"red"}}>{errors.contacts[i]?.message}</div>}*/}
+                            {errors.contacts && <div style={{color:"red"}}>{errors.contacts.vk?.message}</div>}
                         </div>
                         <div>
                             <div className={styles.fieldTitle}>twitter</div>
@@ -175,7 +175,7 @@ export const AboutProfileForm:React.FC<Props> = ({post, userId, propsUserId,setN
                                         message: "Enter correctly URL"
                                     }
                                 })}defaultValue={post.contacts.twitter}/>
-                            {/*{errors.contacts && <div style={{color:"red"}}>{errors.contacts[i]?.message}</div>}*/}
+                            {errors.contacts && <div style={{color:"red"}}>{errors.contacts.twitter?.message}</div>}
                         </div>
                         <div>
                             <div className={styles.fieldTitle}>instagram</div>
@@ -185,7 +185,7 @@ export const AboutProfileForm:React.FC<Props> = ({post, userId, propsUserId,setN
                                         message: "Enter correctly URL"
                                     }
                                 })}defaultValue={post.contacts.instagram}/>
-                            {/*{errors.contacts && <div style={{color:"red"}}>{errors.contacts[i]?.message}</div>}*/}
+                            {errors.contacts && <div style={{color:"red"}}>{errors.contacts.instagram?.message}</div>}
                         </div>
                         <div>
                             <div className={styles.fieldTitle}>youtube</div>
@@ -195,7 +195,7 @@ export const AboutProfileForm:React.FC<Props> = ({post, userId, propsUserId,setN
                                         message: "Enter correctly URL"
                                     }
                                 })}defaultValue={post.contacts.youtube}/>
-                            {/*{errors.contacts && <div style={{color:"red"}}>{errors.contacts[i]?.message}</div>}*/}
+                            {errors.contacts && <div style={{color:"red"}}>{errors.contacts.youtube?.message}</div>}
                         </div>
                         <div>
                             <div className={styles.fieldTitle}>Github</div>
@@ -205,7 +205,7 @@ export const AboutProfileForm:React.FC<Props> = ({post, userId, propsUserId,setN
                                         message: "Enter correctly URL"
                                     }
                                 })}defaultValue={post.contacts.github}/>
-                            {/*{errors.contacts && <div style={{color:"red"}}>{errors.contacts[i]?.message}</div>}*/}
+                            {errors.contacts && <div style={{color:"red"}}>{errors.contacts.github?.message}</div>}
                         </div>
                         <div>
                             <div className={styles.fieldTitle}>mainLink</div>
@@ -215,7 +215,7 @@ export const AboutProfileForm:React.FC<Props> = ({post, userId, propsUserId,setN
                                         message: "Enter correctly URL"
                                     }
                                 })}defaultValue={post.contacts.mainLink}/>
-                            {/*{errors.contacts && <div style={{color:"red"}}>{errors.contacts[i]?.message}</div>}*/}
+                            {errors.contacts && <div style={{color:"red"}}>{errors.contacts.mainLink?.message}</div>}
                         </div>
                     </div>
                 <button className={styles.formButton}>Change info</button>

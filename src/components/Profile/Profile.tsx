@@ -1,6 +1,6 @@
 import s from './Profile.module.scss'
 import {connect} from "react-redux";
-import {setUsers, UserType} from "../../redux/users-reducer";
+import {UserType} from "../../redux/users-reducer";
 import {useEffect, useState} from "react";
 import {Navigate, useParams} from "react-router-dom";
 import {ProfileAPI, tProfileData} from "../../api/api";
@@ -11,7 +11,6 @@ import {AppStateType} from "../../redux/redux-store";
 
 
 type MapDispatchToProps = {
-	setUsers: (users:Array<UserType>) => void
 	addPost: (newPostText:string)=> void
 }
 type MapStateToPropsType = {
@@ -147,6 +146,6 @@ const MapStateToProps = (state: AppStateType) =>  {
 }
 
 export default compose (
-	connect(MapStateToProps, {setUsers, addPost}),
+	connect(MapStateToProps, { addPost}),
 	// withAuthRedirect,
 )(Profile)
