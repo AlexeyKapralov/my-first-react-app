@@ -1,6 +1,7 @@
-import {AuthAPI, CaptchaAPI} from "../api/api";
 import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "./redux-store";
+import {AuthAPI} from "../api/auth-api";
+import {CaptchaAPI} from "../api/captcha-api";
 
 const SET_DATA_AUTH = "auth/SET_DATA_AUTH"
 const SET_DATA_AUTH_NULL = "auth/SET_DATA_AUTH_NULL"

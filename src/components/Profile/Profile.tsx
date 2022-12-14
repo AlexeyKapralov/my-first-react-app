@@ -3,11 +3,12 @@ import {connect} from "react-redux";
 import {UserType} from "../../redux/users-reducer";
 import {useEffect, useState} from "react";
 import {Navigate, useParams} from "react-router-dom";
-import {ProfileAPI, tProfileData} from "../../api/api";
+import {tProfileData} from "../../api/profile-api";
 import {compose} from "redux";
 import {addPost, PostType} from "../../redux/profile-reducer";
 import Posts from "./Posts/Posts";
 import {AppStateType} from "../../redux/redux-store";
+import {ProfileAPI} from "../../api/profile-api";
 
 
 type MapDispatchToProps = {
@@ -27,7 +28,7 @@ type Props = MapStateToPropsType & MapDispatchToProps & OwnProps
 const Profile:React.FC<Props> = (props) => {
 	let {userId} = useParams<string>()
 	const [post, setPost] = useState<any>([]);
-	const [img, setImg] = useState<string>();
+	const [img, setImg] = useState<string | null>();
 	const [status, setStatus] = useState('no status');
 	const [isStatusEditMode, setEditMode] = useState(false)
 	const [exErrors, setExErrors] = useState<any>()

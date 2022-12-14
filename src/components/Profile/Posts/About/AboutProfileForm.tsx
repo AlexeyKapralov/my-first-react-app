@@ -2,7 +2,7 @@ import styles from "./AboutProfileForm.module.scss"
 import {SubmitHandler, useForm} from "react-hook-form";
 import settingsIcon from "../../../../assets/Settings.png"
 import React, {useState} from "react";
-import {tProfileData} from "../../../../api/api";
+import {tProfileData} from "../../../../api/profile-api";
 
 type FormData = {
     userId: string

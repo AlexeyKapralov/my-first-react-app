@@ -1,6 +1,6 @@
-import {UsersAPI} from "../api/api";
 import {ThunkAction} from "redux-thunk";
 import {AppStateType, InferActionsType} from "./redux-store";
+import {UsersAPI} from "../api/users-api";
 
 type PhotosType = {
 	small: string

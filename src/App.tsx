@@ -7,12 +7,12 @@ import NavbarContainer from "./components/Navbar/NavbarContainer";
 import Profile from "./components/Profile/Profile";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginForm from "./components/Login/LoginForm";
-import {AuthAPI} from "./api/api";
 import {useEffect, lazy, Suspense} from "react";
 import {Preloader} from "./components/CommonComponents/Preloader/Preloader";
 import {connect} from "react-redux";
 import {SetAuthData, setIsInit} from "./redux/auth-reducer";
 import {AppStateType} from "./redux/redux-store";
+import {AuthAPI} from "./api/auth-api";
 
 // import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 const Dialogs = lazy(() => import ('./components/Dialogs/Dialogs'));
