@@ -1,5 +1,5 @@
+import {InferActionsType} from "./redux-store";
 
-const ADD_POST = "profile/ADD-POST";
 
 export type PostType = {
 	id: number
@@ -28,7 +28,7 @@ export type initialDataType = typeof initialData
 export const profileReducer = (state = initialData, action:tActions):initialDataType => {
 	
 	switch (action.type) {
-		case ADD_POST: {
+		case "profile/ADD-POST": {
 			return{
 				...state,
 				posts: [...state.posts, {id: state.posts.length + 1, message: action.newPostText}]
@@ -41,11 +41,8 @@ export const profileReducer = (state = initialData, action:tActions):initialData
 	
 }
 
-type tActions = AddPostActionType
-type AddPostActionType = {
-	type: typeof ADD_POST
-	newPostText: string
+type tActions = InferActionsType<typeof actions>
+
+export const actions = {
+	addPost: (newPostText:string) => ({type: "profile/ADD-POST" , newPostText} as const)
 }
-export const addPost = (newPostText:string):AddPostActionType => {
-	return { type: ADD_POST , newPostText};
-};

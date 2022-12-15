@@ -10,7 +10,7 @@ import LoginForm from "./components/Login/LoginForm";
 import {useEffect, lazy, Suspense} from "react";
 import {Preloader} from "./components/CommonComponents/Preloader/Preloader";
 import {connect} from "react-redux";
-import {SetAuthData, setIsInit} from "./redux/auth-reducer";
+import {actions} from "./redux/auth-reducer";
 import {AppStateType} from "./redux/redux-store";
 import {AuthAPI} from "./api/auth-api";
 
@@ -99,4 +99,6 @@ const mapStateToProps = (state:AppStateType):MapStateToPropsType => {
 	}
 }
 
+let SetAuthData = actions.SetAuthData
+let setIsInit = actions.setIsInit
 export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, AppStateType>(mapStateToProps, {SetAuthData, setIsInit})(App);

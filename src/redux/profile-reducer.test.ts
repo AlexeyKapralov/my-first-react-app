@@ -1,4 +1,4 @@
-import {addPost, profileReducer} from "./profile-reducer";
+import {actions, profileReducer} from "./profile-reducer";
 
 let state = {
 	posts: [
@@ -18,7 +18,7 @@ let state = {
 }
 
 it('should add new post', function () {
-	let action = addPost("text")
+	let action = actions.addPost("text")
 	let newState = profileReducer(state, action)
 
 	expect(newState.posts[3].message).toBe("text")

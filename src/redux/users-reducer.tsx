@@ -1,5 +1,5 @@
 import {ThunkAction} from "redux-thunk";
-import {AppStateType, InferActionsType} from "./redux-store";
+import {AppStateType, CommonThunkType, InferActionsType} from "./redux-store";
 import {UsersAPI} from "../api/users-api";
 
 type PhotosType = {
@@ -77,7 +77,7 @@ export const usersReducer = (state = initialData, action:tActions):initialDataTy
 
 type tActions = InferActionsType<typeof actions>
 
-export const actions = {
+const actions = {
 	updateSubscribeFollow: (id:number) => ({ type: 'FOLLOW', id: id } as const),
 	updateSubscribeUnfollow: (id:number) => ({ type: 'UNFOLLOW', id: id } as const),
 	setUsers: (users:Array<UserType>) => ({type: 'SET_USERS', users: users} as const),
@@ -87,8 +87,7 @@ export const actions = {
 	ToggleFollowingUserID: (IsToggleFollowingUserID:number, isFetch:boolean) => ({ type: 'TOGGLE_IS_FOLLOWING', IsToggleFollowingUserID, isFetch} as const)
 }
 // below thunk functions
-
-type tUserReducerThunk = ThunkAction<Promise<void>, AppStateType, unknown, tActions>
+type tUserReducerThunk = CommonThunkType<tActions>
 export const getUsers = (activePage:number, usersCountOnPage:number):tUserReducerThunk => {
 	return async (dispatch, getState) => {
 		dispatch(actions.toggleIsFetching(true))

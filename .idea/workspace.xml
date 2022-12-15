@@ -2,19 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0aa02b60-a84e-42fc-a391-bb183057058e" name="Changes" comment="In folder API all is typing">
-      <change afterPath="$PROJECT_DIR$/src/api/auth-api.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/captcha-api.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/profile-api.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/users-api.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header/HeaderContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/HeaderContainer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/Posts/About/AboutProfileForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/Posts/About/AboutProfileForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/profile-api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/profile-api.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Profile/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/Profile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/auth-reducer.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/auth-reducer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/auth-reducer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/users-reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/users-reducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/dialogs-reducer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/dialogs-reducer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/profile-reducer.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/profile-reducer.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/profile-reducer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/profile-reducer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/redux-store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/redux-store.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/users-reducer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/users-reducer.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -236,6 +232,7 @@
       <workItem from="1670780269400" duration="6066000" />
       <workItem from="1670909311605" duration="2540000" />
       <workItem from="1670932483959" duration="3893000" />
+      <workItem from="1671031480810" duration="11092000" />
     </task>
     <task id="LOCAL-00001" summary="Add redux">
       <created>1662402025825</created>
@@ -552,7 +549,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670788620846</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="In folder API all is typing">
+      <created>1671031617228</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1671031617228</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -560,10 +564,9 @@
     <option name="exactExcludedFiles">
       <list>
         <option value="$PROJECT_DIR$/src/redux/dialogs-reducer.js" />
-        <option value="$PROJECT_DIR$/src/redux/navbar-reducer.js" />
-        <option value="$PROJECT_DIR$/src/redux/auth-reducer.js" />
-        <option value="$PROJECT_DIR$/src/redux/profile-reducer.js" />
         <option value="$PROJECT_DIR$/src/redux/users-reducer.js" />
+        <option value="$PROJECT_DIR$/src/redux/profile-reducer.js" />
+        <option value="$PROJECT_DIR$/src/redux/navbar-reducer.js" />
       </list>
     </option>
   </component>
@@ -592,7 +595,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="add HOC withAuthRedirect for DialogsContainer.jsx, UsersContainer.jsx, Profile.jsx" />
     <MESSAGE value="put API to profile.jsx to input with status" />
     <MESSAGE value="Added form using React-Hook-Form for CreatePostForm.jsx, LoginComponent.jsx, SendMessageForm.jsx. While there is no data verification for forms" />
     <MESSAGE value="validate all forms, &#10;login work, &#10;logout not work" />
@@ -617,6 +619,7 @@
     <MESSAGE value="added TypeScript for all remaining components and all reducers (actions, thunks)" />
     <MESSAGE value="added TypeScript for AboutProfileForm.tsx, api.ts, auth-reducer.tsx, Profile.tsx" />
     <MESSAGE value="Actions was refactor in users-reducer.tsx" />
-    <option name="LAST_COMMIT_MESSAGE" value="Actions was refactor in users-reducer.tsx" />
+    <MESSAGE value="In folder API all is typing" />
+    <option name="LAST_COMMIT_MESSAGE" value="In folder API all is typing" />
   </component>
 </project>

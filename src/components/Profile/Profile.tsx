@@ -5,10 +5,11 @@ import {useEffect, useState} from "react";
 import {Navigate, useParams} from "react-router-dom";
 import {tProfileData} from "../../api/profile-api";
 import {compose} from "redux";
-import {addPost, PostType} from "../../redux/profile-reducer";
+import {actions, PostType} from "../../redux/profile-reducer";
 import Posts from "./Posts/Posts";
 import {AppStateType} from "../../redux/redux-store";
 import {ProfileAPI} from "../../api/profile-api";
+
 
 
 type MapDispatchToProps = {
@@ -145,8 +146,9 @@ const MapStateToProps = (state: AppStateType) =>  {
 
 	}
 }
+let addPost = actions.addPost //maybe need to correct
 
 export default compose (
-	connect(MapStateToProps, { addPost}),
+	connect(MapStateToProps, { addPost }),
 	// withAuthRedirect,
 )(Profile)

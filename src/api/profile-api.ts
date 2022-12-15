@@ -45,7 +45,7 @@ export const ProfileAPI = {
     getStatus(userId: string) {
         return instance.get<string>(`profile/status/${userId}`)
     },
-    setPhoto(photo: any) {
+    setPhoto(photo: File) {
         const formData = new FormData();
         formData.append("image", photo);
 

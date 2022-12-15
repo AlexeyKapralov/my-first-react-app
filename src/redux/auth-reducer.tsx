@@ -1,29 +1,9 @@
 import {ThunkAction} from "redux-thunk";
-import {AppStateType} from "./redux-store";
+import {AppStateType, CommonThunkType, InferActionsType} from "./redux-store";
 import {AuthAPI} from "../api/auth-api";
 import {CaptchaAPI} from "../api/captcha-api";
 
-const SET_DATA_AUTH = "auth/SET_DATA_AUTH"
-const SET_DATA_AUTH_NULL = "auth/SET_DATA_AUTH_NULL"
-const SET_ERRORS_MESSAGES = "auth/SET_ERRORS_MESSAGES"
-const SET_IS_INIT = "auth/SET_IS_INIT"
-const SET_CAPTCHA_SUCCESS = "auth/SET_CAPTCHA_SUCCESS"
 
-type initialDataType = {
-    data: {
-        id: number | null
-        email: string | null
-        password: string | null
-        rememberMe: boolean | null
-        login: string | null
-    },
-    resultCode: 1 | 0 | null
-    messages: any | null
-    isAuth: boolean
-    isInit: boolean
-    captcha: string | null
-
-}
 
 let initialData: initialDataType = {
     data: {
@@ -43,7 +23,7 @@ let initialData: initialDataType = {
 
 export const AuthReducer = (state = initialData, action:tActions):initialDataType => {
     switch (action.type){
-        case SET_DATA_AUTH: {
+        case "auth/SET_DATA_AUTH": {
             return {
                 ...state,
                 ...action.data,
@@ -51,7 +31,7 @@ export const AuthReducer = (state = initialData, action:tActions):initialDataTyp
             }
 
         }
-        case SET_DATA_AUTH_NULL: {
+        case "auth/SET_DATA_AUTH_NULL": {
             return {
                 ...state,
                 data: {
@@ -64,19 +44,19 @@ export const AuthReducer = (state = initialData, action:tActions):initialDataTyp
                 isAuth: false
             }
         }
-        case SET_ERRORS_MESSAGES: {
+        case "auth/SET_ERRORS_MESSAGES": {
             return {
                 ...state,
                 messages: action.messages
             }
         }
-        case SET_IS_INIT: {
+        case "auth/SET_IS_INIT": {
             return {
                 ...state,
                 isInit: action.isInit
             }
         }
-        case SET_CAPTCHA_SUCCESS: {
+        case "auth/SET_CAPTCHA_SUCCESS": {
             return {
                 ...state,
                 captcha: action.captcha
@@ -87,84 +67,67 @@ export const AuthReducer = (state = initialData, action:tActions):initialDataTyp
     }
 }
 
-type tActions = SetAuthDataActionType | SetAuthDataNullActionType |
-    SetErrorsMessagesActionType | SetIsInitActionType | getCaptchaActionActionType
-
-type SetAuthDataActionType = {
-    type: typeof SET_DATA_AUTH
-    data: any
-    isAuth: boolean
-}
-export const SetAuthData = (data:object, isAuth:boolean):SetAuthDataActionType => {
-    return { type: SET_DATA_AUTH, data, isAuth}
+export const actions = {
+    SetAuthData: (data:object, isAuth:boolean) => ({type: "auth/SET_DATA_AUTH", data, isAuth} as const),
+    SetAuthDataNull: () => ({type: "auth/SET_DATA_AUTH_NULL"} as const),
+    SetErrorsMessages: (messages:object) => ( {type: "auth/SET_ERRORS_MESSAGES", messages} as const),
+    setIsInit: (isInit:boolean) => ({ type: "auth/SET_IS_INIT", isInit} as const),
+    getCaptcha: (captcha: string | null) => ({ type: "auth/SET_CAPTCHA_SUCCESS", captcha} as const)
 }
 
-type SetAuthDataNullActionType = {
-    type: typeof SET_DATA_AUTH_NULL
-}
-export const SetAuthDataNull = ():SetAuthDataNullActionType => {
-    return { type: SET_DATA_AUTH_NULL}
-}
 
-type SetErrorsMessagesActionType = {
-    type: typeof SET_ERRORS_MESSAGES
-    messages: object
-}
-export const SetErrorsMessages = (messages:object):SetErrorsMessagesActionType => {
-    return { type: SET_ERRORS_MESSAGES, messages}
-}
-
-type SetIsInitActionType = {
-    type: typeof SET_IS_INIT
-    isInit: boolean
-}
-export const setIsInit = (isInit:boolean):SetIsInitActionType => {
-    return { type: SET_IS_INIT, isInit}
-}
-
-type getCaptchaActionActionType = {
-    type: typeof SET_CAPTCHA_SUCCESS
-    captcha: string | null
-}
-export const getCaptcha = (captcha: string | null): getCaptchaActionActionType => {
-    return { type: SET_CAPTCHA_SUCCESS, captcha}
-}
 
 //thunk's
-type tAuthReducerThunk = ThunkAction<Promise<void>, AppStateType, unknown, tActions>
 
-export const Login = (data: any): tAuthReducerThunk => {
+export const Login = (data: any): CommonThunkType<tActions> => {
     return async (dispatch) => {
-        setIsInit(true)
+        actions.setIsInit(true)
         let response = await AuthAPI.login(data)
         if (response.data.resultCode === 0) {
-            dispatch(SetAuthData(data, true))
+            dispatch(actions.SetAuthData(data, true))
             dispatch(getCaptchaUrl(false))
         } else {
             if (response.data.resultCode === 10){
                 dispatch(getCaptchaUrl())
             }
-            dispatch(SetErrorsMessages(response.data.messages))
+            dispatch(actions.SetErrorsMessages(response.data.messages))
         }
-        setIsInit(false)
+        actions.setIsInit(false)
     }
 }
-export const Logout = (): tAuthReducerThunk => {
-    return async (dispatch:any) => {
+export const Logout = (): CommonThunkType<tActions> => {
+    return async (dispatch) => {
         let response = await AuthAPI.logout()
         if (response.resultCode === 0) {
-            dispatch(SetAuthDataNull())
+            dispatch(actions.SetAuthDataNull())
             dispatch(getCaptchaUrl(false))
         }
     };
 }
-export const getCaptchaUrl = (isActive= true):tAuthReducerThunk => {
-    return async (dispatch: any) => {
+export const getCaptchaUrl = (isActive= true):CommonThunkType<tActions> => {
+    return async (dispatch) => {
         if (!isActive) {
-            dispatch(getCaptcha(null))
+            dispatch(actions.getCaptcha(null))
             return
         }
         let response = await CaptchaAPI.getCaptchaUrl()
-        dispatch(getCaptcha(response.data.url))
+        dispatch(actions.getCaptcha(response.data.url))
     };
 }
+
+type initialDataType = {
+    data: {
+        id: number | null
+        email: string | null
+        password: string | null
+        rememberMe: boolean | null
+        login: string | null
+    },
+    resultCode: 1 | 0 | null
+    messages: { } | null
+    isAuth: boolean
+    isInit: boolean
+    captcha: string | null
+
+}
+type tActions = InferActionsType<typeof actions>
