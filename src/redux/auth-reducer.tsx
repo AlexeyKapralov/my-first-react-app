@@ -14,7 +14,7 @@ let initialData: initialDataType = {
         login: null,
     },
     resultCode: null,
-    messages: [],
+    messages: {},
     isAuth: false,
     isInit: false,
     captcha: null
@@ -124,7 +124,7 @@ type initialDataType = {
         login: string | null
     },
     resultCode: 1 | 0 | null
-    messages: { } | null
+    messages: {} | null
     isAuth: boolean
     isInit: boolean
     captcha: string | null

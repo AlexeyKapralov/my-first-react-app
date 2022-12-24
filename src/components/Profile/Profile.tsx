@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {UserType} from "../../redux/users-reducer";
 import {useEffect, useState} from "react";
 import {Navigate, useParams} from "react-router-dom";
-import {tProfileData} from "../../api/profile-api";
+import {tGetProfile} from "../../api/profile-api";
 import {compose} from "redux";
 import {actions, PostType} from "../../redux/profile-reducer";
 import Posts from "./Posts/Posts";
@@ -13,12 +13,12 @@ import {ProfileAPI} from "../../api/profile-api";
 
 
 type MapDispatchToProps = {
-	addPost: (newPostText:string)=> void
+	addPost: (newPostText:string)=>void
 }
 type MapStateToPropsType = {
 	posts: Array<PostType>
 	users: Array<UserType>
-	id: any
+	id: number | null
 	isAuth: boolean
 }
 type OwnProps = {
@@ -28,20 +28,20 @@ type Props = MapStateToPropsType & MapDispatchToProps & OwnProps
 
 const Profile:React.FC<Props> = (props) => {
 	let {userId} = useParams<string>()
-	const [post, setPost] = useState<any>([]);
+	const [post, setPost] = useState<tGetProfile | undefined>();
 	const [img, setImg] = useState<string | null>();
 	const [status, setStatus] = useState('no status');
 	const [isStatusEditMode, setEditMode] = useState(false)
-	const [exErrors, setExErrors] = useState<any>()
+	const [exErrors, setExErrors] = useState< String[] | undefined>()
 
 	if (!userId) {
-		userId = props.id
+		userId = props.id?.toString()
 	}
 
 	useEffect(()=>{
 			if (userId) {
 			ProfileAPI.getProfile(userId).then(data => {
-					setPost(data);
+				setPost(data);
 					setImg(data.photos.large);
 				}
 			)
@@ -80,7 +80,7 @@ const Profile:React.FC<Props> = (props) => {
 		}
 	}
 
-	const setNewProfileData = async (data:tProfileData) => {
+	const setNewProfileData = async (data:tGetProfile) => {
 		const result = await ProfileAPI.setNewProfileData(data)
 		if (result.data.resultCode === 0) {
 			setPost(data)
@@ -108,9 +108,9 @@ const Profile:React.FC<Props> = (props) => {
 							}
 						</div>
 						<div className={s.nameAndDesc}>
-							<div className={s.name}>{post.fullName}</div>
+							<div className={s.name}>{post?.fullname}</div>
 							<div className={s.profileStatus}>
-								{(isStatusEditMode && (userId === props.id) )
+								{(isStatusEditMode && (userId === props.id?.toString()) )
 									? <div><input onChange={e => (setStatus(e.target.value))} onBlur={isChangeStatus} autoFocus
 												  className={s.statusTitleInput} value={status}/></div>
 									:
@@ -120,7 +120,7 @@ const Profile:React.FC<Props> = (props) => {
 						</div>
 					</div>
 
-					{userId === props.id &&
+					{userId === props.id?.toString() &&
 						<div className={s.setPhoto}>
 							<input id="input__file" accept="image/jpeg,image/png,image/gif" type="file" onChange={setPhotoFunction}/>
 							<label htmlFor="input__file">Change photo</label>
@@ -132,7 +132,7 @@ const Profile:React.FC<Props> = (props) => {
 					<div className={s.setAvatar}></div>
 
 				</div>
-			<Posts exErrors={exErrors} posts={props.posts} addPost={props.addPost} post={post} userId={userId} propsUserId={props.id} setNewProfileData={setNewProfileData}/>
+			<Posts posts={props.posts} addPost={actions.addPost} post={post} propsUserId={props.id!} setNewProfileData={setNewProfileData}/>
 			</div>
 	)
 }
@@ -146,9 +146,8 @@ const MapStateToProps = (state: AppStateType) =>  {
 
 	}
 }
-let addPost = actions.addPost //maybe need to correct
 
 export default compose (
-	connect(MapStateToProps, { addPost }),
+	connect(MapStateToProps, { addPost: actions.addPost }),
 	// withAuthRedirect,
 )(Profile)

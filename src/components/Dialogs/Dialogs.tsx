@@ -1,5 +1,4 @@
 import {connect} from "react-redux";
-import {sendNewMessage} from "../../redux/dialogs-reducer";
 import {withAuthRedirect} from "../HOC/withAuthRedirect";
 import {compose} from "redux";
 import {DialogsType, MessageType} from "../../types/types";
@@ -9,6 +8,7 @@ import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
 import s from "./Dialogs.module.scss";
 import {SendMessageForm} from "./Message/SendMessageForm";
+import {actions} from "../../redux/dialogs-reducer";
 
 type MapStateToPropsType = {
 	dialogs: Array<DialogsType>
@@ -67,8 +67,7 @@ const Dialogs:React.FC<PropsType> = (props) => {
 	);
 };
 
-
-export default compose(
-	connect(mapStateToProps, {sendNewMessage}),
+export default compose<React.ComponentType>(
+	connect(mapStateToProps, {sendNewMessage: actions.sendNewMessage}),
 	withAuthRedirect
-)(Dialogs);
+)(Dialogs)

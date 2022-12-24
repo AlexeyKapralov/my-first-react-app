@@ -1,8 +1,6 @@
 import {DialogsType, MessageType } from "../types/types";
 import {InferActionsType} from "./redux-store";
 
-
-
 let initialData = {
 	dialogs: [
 		{
@@ -56,9 +54,9 @@ export const dialogsReducer = (state = initialData, action: tActions) => {
 	}
 	
 }
-type tActions = InferActionsType<typeof actions>
 
-const actions = {
+export const actions = {
 	sendNewMessage: (message:string)=> ({type: "dialogs/SEND-NEW-MESSAGE" , message} as const)
 }
 
+type tActions = InferActionsType<typeof actions>

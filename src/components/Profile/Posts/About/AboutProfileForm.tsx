@@ -2,49 +2,17 @@ import styles from "./AboutProfileForm.module.scss"
 import {SubmitHandler, useForm} from "react-hook-form";
 import settingsIcon from "../../../../assets/Settings.png"
 import React, {useState} from "react";
-import {tProfileData} from "../../../../api/profile-api";
+import {tGetProfile, tProfileData} from "../../../../api/profile-api";
 
-type FormData = {
-    userId: string
-    fullName:string
-    aboutMe:string
-    lookingForAJob:boolean
-    lookingForAJobDescription:string
-    contacts: {
-        github: string
-        vk: string
-        facebook: string
-        instagram: string
-        twitter: string
-        website: string
-        youtube: string
-        mainLink: string
-    }
-}
+type FormData = tGetProfile
 
 type Props = {
-    post:{
-        fullName:string
-        aboutMe:string
-        lookingForAJob:boolean
-        lookingForAJobDescription:string
-        contacts: {
-            github: string
-            vk: string
-            facebook: string
-            instagram: string
-            twitter: string
-            website: string
-            youtube: string
-            mainLink: string
-        }
-    },
-    userId:number,
+    post: tGetProfile | undefined
     propsUserId: number,
-    setNewProfileData: (arg0: tProfileData) => void
+    setNewProfileData: (arg0: tGetProfile) => void
 }
 
-export const AboutProfileForm:React.FC<Props> = ({post, userId, propsUserId,setNewProfileData}) => {
+export const AboutProfileForm:React.FC<Props> = ({post, propsUserId,setNewProfileData}) => {
     const [profileEditMode, setProfileEditMode] = useState(false)
     const {register, handleSubmit, formState: { errors }} = useForm<FormData>()
     const onSubmit:SubmitHandler<FormData> = (data) => {
@@ -64,7 +32,7 @@ export const AboutProfileForm:React.FC<Props> = ({post, userId, propsUserId,setN
 
 
 
-            {userId === propsUserId &&
+            {post?.userId === propsUserId.toString() &&
                 <button className={styles.changeProfileBtn} onClick={toggleProfileEditMode}><img width={"20px"} src={settingsIcon} alt="settings"/></button>
             }
 
@@ -73,35 +41,35 @@ export const AboutProfileForm:React.FC<Props> = ({post, userId, propsUserId,setN
                     <div className={styles.container}>
                         <div>
                             <div className={styles.fieldTitle}>Full name</div>
-                            <div className={styles.fieldContent}>{post.fullName || "missing"}</div>
+                            <div className={styles.fieldContent}>{post?.fullname || "missing"}</div>
                         </div>
                         <div>
                             <div className={styles.fieldTitle}>About me</div>
-                            <div className={styles.fieldContent}>{post.aboutMe || "missing"}</div>
+                            <div className={styles.fieldContent}>{post?.aboutMe || "missing"}</div>
                         </div>
                         <div>
                             <div className={styles.fieldTitle}>Looking for a job</div>
-                            {post.lookingForAJob && <div className={styles.fieldContent}>Yes</div>}
-                            {!post.lookingForAJob && <div className={styles.fieldContent}>No</div>}
+                            {post?.lookingForAJob && <div className={styles.fieldContent}>Yes</div>}
+                            {!post?.lookingForAJob && <div className={styles.fieldContent}>No</div>}
                         </div>
                         <div>
                             <div className={styles.fieldTitle}>Looking for a job description</div>
-                            <div className={styles.fieldContent}>{post.lookingForAJobDescription || "missing"}</div>
+                            <div className={styles.fieldContent}>{post?.lookingForAJobDescription || "missing"}</div>
                         </div>
                     </div>
                     <div className={styles.contacts}>Contacts</div>
                     <div className={styles.container}>
 
                         {
-                            Object.keys(post.contacts || {}).map((i) => {
+                            Object.keys(post?.contacts || {}).map((i) => {
                                 return <div key={i}>
                                     <div className={styles.fieldTitle}>{i}</div>
-                                    { post.contacts[i as keyof typeof post.contacts] &&
+                                    { post?.contacts[i as keyof typeof post.contacts] &&
                                         <a target="_blank"
                                            href={post.contacts[i as keyof typeof post.contacts]}
                                            className={styles.fieldContent}>{post.contacts[i as keyof typeof post.contacts]}</a>
                                     }
-                                    { !post.contacts[i as keyof typeof post.contacts] &&
+                                    { !post?.contacts[i as keyof typeof post.contacts] &&
                                         <div className={styles.fieldContentMissing}>missing</div>
                                     }
                                 </div>
@@ -116,21 +84,21 @@ export const AboutProfileForm:React.FC<Props> = ({post, userId, propsUserId,setN
 
                     <div>
                         <div className={styles.fieldTitle}>Full name</div>
-                        <input className={styles.fieldContentInput} defaultValue={post.fullName} placeholder="Enter your full name" {...register("fullName", {required:true} )}  />
-                        {errors.fullName?.type === 'required' && <div style={{color:'red'}} role="alert">Need to write some text</div>}
+                        <input className={styles.fieldContentInput} defaultValue={post?.fullname} placeholder="Enter your full name" {...register("fullname", {required:true} )}  />
+                        {errors.fullname?.type === 'required' && <div style={{color:'red'}} role="alert">Need to write some text</div>}
                     </div>
                     <div>
                         <div className={styles.fieldTitle}>About me</div>
-                        <input className={styles.fieldContentInput} defaultValue={post.aboutMe}  placeholder="Enter info about yourself" {...register("aboutMe", {required:true} )}  />
+                        <input className={styles.fieldContentInput} defaultValue={post?.aboutMe}  placeholder="Enter info about yourself" {...register("aboutMe", {required:true} )}  />
                         {errors.aboutMe?.type === 'required' && <div style={{color:'red'}} role="alert">Need to write some text</div>}
                     </div>
                     <div>
                         <div className={styles.fieldTitle}>Looking For A Job</div>
-                        <input className={styles.fieldContentInput} defaultValue={String(post.lookingForAJob)}  type={"checkbox"} placeholder="Are you looking for a job?" {...register("lookingForAJob" )}  />
+                        <input className={styles.fieldContentInput} defaultValue={String(post?.lookingForAJob)}  type={"checkbox"} placeholder="Are you looking for a job?" {...register("lookingForAJob" )}  />
                     </div>
                     <div>
                         <div className={styles.fieldTitle}>Looking For A Job Description</div>
-                        <input className={styles.fieldContentInput} defaultValue={post.lookingForAJobDescription} placeholder="Looking for a job description" {...register("lookingForAJobDescription", {required:true} )}  />
+                        <input className={styles.fieldContentInput} defaultValue={post?.lookingForAJobDescription} placeholder="Looking for a job description" {...register("lookingForAJobDescription", {required:true} )}  />
                         {errors.lookingForAJobDescription?.type === 'required' && <div style={{color:'red'}} role="alert">Need to write some text</div>}
                     </div>
                 </div>
@@ -143,7 +111,7 @@ export const AboutProfileForm:React.FC<Props> = ({post, userId, propsUserId,setN
                                         value: /^(https:|http:|www\.)\/\/\S*\.\S+/gm,
                                         message: "Enter correctly URL"
                                     }
-                                })} defaultValue={post.contacts.facebook}/>
+                                })} defaultValue={post?.contacts.facebook}/>
 
                             {errors.contacts && <div style={{color:"red"}}>{errors.contacts.facebook?.message}</div>}
                         </div>
@@ -154,7 +122,7 @@ export const AboutProfileForm:React.FC<Props> = ({post, userId, propsUserId,setN
                                         value: /^(https:|http:|www\.)\/\/\S*\.\S+/gm,
                                         message: "Enter correctly URL"
                                     }
-                                })} defaultValue={post.contacts.website}/>
+                                })} defaultValue={post?.contacts.website}/>
                             {errors.contacts && <div style={{color:"red"}}>{errors.contacts.website?.message}</div>}
                         </div>
                         <div>
@@ -164,7 +132,7 @@ export const AboutProfileForm:React.FC<Props> = ({post, userId, propsUserId,setN
                                         value: /^(https:|http:|www\.)\/\/\S*\.\S+/gm,
                                         message: "Enter correctly URL"
                                     }
-                                })}defaultValue={post.contacts.vk}/>
+                                })}defaultValue={post?.contacts.vk}/>
                             {errors.contacts && <div style={{color:"red"}}>{errors.contacts.vk?.message}</div>}
                         </div>
                         <div>
@@ -174,7 +142,7 @@ export const AboutProfileForm:React.FC<Props> = ({post, userId, propsUserId,setN
                                         value: /^(https:|http:|www\.)\/\/\S*\.\S+/gm,
                                         message: "Enter correctly URL"
                                     }
-                                })}defaultValue={post.contacts.twitter}/>
+                                })}defaultValue={post?.contacts.twitter}/>
                             {errors.contacts && <div style={{color:"red"}}>{errors.contacts.twitter?.message}</div>}
                         </div>
                         <div>
@@ -184,7 +152,7 @@ export const AboutProfileForm:React.FC<Props> = ({post, userId, propsUserId,setN
                                         value: /^(https:|http:|www\.)\/\/\S*\.\S+/gm,
                                         message: "Enter correctly URL"
                                     }
-                                })}defaultValue={post.contacts.instagram}/>
+                                })}defaultValue={post?.contacts.instagram}/>
                             {errors.contacts && <div style={{color:"red"}}>{errors.contacts.instagram?.message}</div>}
                         </div>
                         <div>
@@ -194,7 +162,7 @@ export const AboutProfileForm:React.FC<Props> = ({post, userId, propsUserId,setN
                                         value: /^(https:|http:|www\.)\/\/\S*\.\S+/gm,
                                         message: "Enter correctly URL"
                                     }
-                                })}defaultValue={post.contacts.youtube}/>
+                                })}defaultValue={post?.contacts.youtube}/>
                             {errors.contacts && <div style={{color:"red"}}>{errors.contacts.youtube?.message}</div>}
                         </div>
                         <div>
@@ -204,7 +172,7 @@ export const AboutProfileForm:React.FC<Props> = ({post, userId, propsUserId,setN
                                         value: /^(https:|http:|www\.)\/\/\S*\.\S+/gm,
                                         message: "Enter correctly URL"
                                     }
-                                })}defaultValue={post.contacts.github}/>
+                                })}defaultValue={post?.contacts.github}/>
                             {errors.contacts && <div style={{color:"red"}}>{errors.contacts.github?.message}</div>}
                         </div>
                         <div>
@@ -214,7 +182,7 @@ export const AboutProfileForm:React.FC<Props> = ({post, userId, propsUserId,setN
                                         value: /^(https:|http:|www\.)\/\/\S*\.\S+/gm,
                                         message: "Enter correctly URL"
                                     }
-                                })}defaultValue={post.contacts.mainLink}/>
+                                })}defaultValue={post?.contacts.mainLink}/>
                             {errors.contacts && <div style={{color:"red"}}>{errors.contacts.mainLink?.message}</div>}
                         </div>
                     </div>

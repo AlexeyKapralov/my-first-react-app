@@ -1,7 +1,7 @@
-import React from "react";
+import React, {ReactNode} from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {connect} from "react-redux";
-import {SetAuthData, Login, Logout} from "../../redux/auth-reducer";
+import {actions, Login, Logout} from "../../redux/auth-reducer";
 import {Navigate} from "react-router-dom";
 import styles from "./LoginForm.module.scss"
 import {AppStateType} from "../../redux/redux-store";
@@ -15,7 +15,7 @@ type MapDispatchToPropsType = {
 }
 type MapStateToPropsType = {
     captcha: string | null
-    messages: Array<string>
+    messages: {} | null
     isAuth: boolean
 }
 type OwnPropsType = {
@@ -38,7 +38,7 @@ export const LoginForm: React.FC<PropsType> = props => {
                 <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 
                     <div>
-                        {props.messages && <div className={styles.error}>{props.messages}</div>}
+                        {props.messages && <div className={styles.error}>{props.messages as string}</div>}
 
                         <input className={styles.input} type="text" placeholder={"E-mail"} {...register
                         ("email",
@@ -99,5 +99,5 @@ const mapStateToProps = (state:AppStateType):MapStateToPropsType => {
 }
 
 export default
-    connect(mapStateToProps, {SetAuthData,Login,Logout})
+    connect(mapStateToProps, {SetAuthData: actions.SetAuthData,Login,Logout})
 (LoginForm);

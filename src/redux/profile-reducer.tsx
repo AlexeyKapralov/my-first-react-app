@@ -37,8 +37,6 @@ export const profileReducer = (state = initialData, action:tActions):initialData
 		default:
 			return state;
 	}
-	
-	
 }
 
 type tActions = InferActionsType<typeof actions>

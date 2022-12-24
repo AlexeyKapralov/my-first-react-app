@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Logout, SetAuthData} from "../../redux/auth-reducer";
+import {Logout, actions} from "../../redux/auth-reducer";
 import {Header} from "./Header";
 import {AppStateType} from "../../redux/redux-store";
 import {AuthAPI} from "../../api/auth-api";
@@ -59,4 +59,4 @@ const mapStateToProps = (state: AppStateType) => {
 	}
 }
 
-export default connect(mapStateToProps, {SetAuthData, Logout})(HeaderContainer);
+export default connect(mapStateToProps, {SetAuthData: actions.SetAuthData, Logout})(HeaderContainer);
