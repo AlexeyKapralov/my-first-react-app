@@ -18,7 +18,7 @@ type MapDispatchToProps = {
 type MapStateToPropsType = {
 	posts: Array<PostType>
 	users: Array<UserType>
-	id: number | null
+	userId: number | null
 	isAuth: boolean
 }
 type OwnProps = {
@@ -27,40 +27,40 @@ type OwnProps = {
 type Props = MapStateToPropsType & MapDispatchToProps & OwnProps
 
 const Profile:React.FC<Props> = (props) => {
-	let {userId} = useParams<string>()
+	let {userIde} = useParams<string>()
 	const [post, setPost] = useState<tGetProfile | undefined>();
 	const [img, setImg] = useState<string | null>();
 	const [status, setStatus] = useState('no status');
 	const [isStatusEditMode, setEditMode] = useState(false)
 	const [exErrors, setExErrors] = useState< String[] | undefined>()
 
-	if (!userId) {
-		userId = props.id?.toString()
+	if (!userIde && (props.userId != undefined)) {
+		userIde = props.userId.toString()
 	}
 
 	useEffect(()=>{
-			if (userId) {
-			ProfileAPI.getProfile(userId).then(data => {
-				setPost(data);
+			if (userIde) {
+			ProfileAPI.getProfile(userIde).then(data => {
+					setPost(data);
 					setImg(data.photos.large);
 				}
 			)
 		}
-	}, [userId])
+	}, [userIde])
 
 	useEffect(()=>{
-		if (userId) {
-			ProfileAPI.getStatus(userId).then(response => {
+		if (userIde) {
+			ProfileAPI.getStatus(userIde).then(response => {
 					if (response.data === null) {
 						setStatus('no status')
 					} else (setStatus(response.data))
 				}
 			)
 		}
-	}, [userId])
+	}, [userIde])
 
 	let isChangeStatus = () => {
-		if (userId) {
+		if (userIde) {
 			setEditMode(false)
 			ProfileAPI.setStatus(status).then(response => {
 					if (response.resultCode === 0) {
@@ -90,7 +90,7 @@ const Profile:React.FC<Props> = (props) => {
 	}
 
 	return (
-		(!props.isAuth && !userId)
+		(!props.isAuth && !userIde)
 		? <Navigate to={"/login"}/>
 		: <div className={s.profile}>
 				<div className={s.about}>
@@ -108,9 +108,9 @@ const Profile:React.FC<Props> = (props) => {
 							}
 						</div>
 						<div className={s.nameAndDesc}>
-							<div className={s.name}>{post?.fullname}</div>
+							<div className={s.name}>{post?.fullName || "No name"}</div>
 							<div className={s.profileStatus}>
-								{(isStatusEditMode && (userId === props.id?.toString()) )
+								{(isStatusEditMode && (userIde=== props.userId?.toString()) )
 									? <div><input onChange={e => (setStatus(e.target.value))} onBlur={isChangeStatus} autoFocus
 												  className={s.statusTitleInput} value={status}/></div>
 									:
@@ -120,7 +120,7 @@ const Profile:React.FC<Props> = (props) => {
 						</div>
 					</div>
 
-					{userId === props.id?.toString() &&
+					{userIde === props.userId?.toString() &&
 						<div className={s.setPhoto}>
 							<input id="input__file" accept="image/jpeg,image/png,image/gif" type="file" onChange={setPhotoFunction}/>
 							<label htmlFor="input__file">Change photo</label>
@@ -132,7 +132,7 @@ const Profile:React.FC<Props> = (props) => {
 					<div className={s.setAvatar}></div>
 
 				</div>
-			<Posts posts={props.posts} addPost={actions.addPost} post={post} propsUserId={props.id!} setNewProfileData={setNewProfileData}/>
+			<Posts posts={props.posts} addPost={actions.addPost} post={post} propsUserId={props.userId!} setNewProfileData={setNewProfileData}/>
 			</div>
 	)
 }
@@ -141,7 +141,7 @@ const MapStateToProps = (state: AppStateType) =>  {
 	return {
 		posts: state.profilePage.posts,
 		users: state.usersPage.users,
-		id: state.auth.data.id,
+		id: state.auth.data.userId,
 		isAuth: state.auth.isAuth,
 
 	}

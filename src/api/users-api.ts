@@ -12,7 +12,7 @@ type tUnfollowFollow = {
     data:object
 }
 type User = {
-    id: number
+    userId: number
     name: string
     status: string
     photos: {

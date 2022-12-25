@@ -18,7 +18,7 @@ export type tProfileData = {
     userId: string
     lookingForAJob: boolean
     lookingForAJobDescription: string
-    fullname: string
+    fullName: string
     contacts: ContactsType
 }
 
@@ -31,7 +31,7 @@ export type tGetProfile = {
     userId: string
     lookingForAJob: boolean
     lookingForAJobDescription: string
-    fullname: string
+    fullName: string
     aboutMe: string
     contacts: ContactsType
     photos: PhotoType

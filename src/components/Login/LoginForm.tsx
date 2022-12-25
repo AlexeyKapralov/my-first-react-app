@@ -38,7 +38,7 @@ export const LoginForm: React.FC<PropsType> = props => {
                 <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 
                     <div>
-                        {props.messages && <div className={styles.error}>{props.messages as string}</div>}
+
 
                         <input className={styles.input} type="text" placeholder={"E-mail"} {...register
                         ("email",

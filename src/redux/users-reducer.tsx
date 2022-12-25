@@ -7,7 +7,7 @@ type PhotosType = {
 	large: string
 }
  export type UserType = {
-	id: number
+	userId: number
 	name: string
 	status: string | null
 	photos: PhotosType
@@ -33,7 +33,7 @@ export const usersReducer = (state = initialData, action:tActions):initialDataTy
 			return {
 				...state,
 				users: state.users.map ( u => {
-					if (u.id === action.id){
+					if (u.userId === action.id){
 						return {...u, followed: true}
 					} return u
 				} )
@@ -43,7 +43,7 @@ export const usersReducer = (state = initialData, action:tActions):initialDataTy
 			return {
 				...state,
 				users: state.users.map ( u => {
-					if (u.id === action.id){
+					if (u.userId === action.id){
 						return {...u, followed: false}
 					} return u
 				} )

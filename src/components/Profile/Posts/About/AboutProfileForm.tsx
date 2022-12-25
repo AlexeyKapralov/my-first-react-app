@@ -32,7 +32,7 @@ export const AboutProfileForm:React.FC<Props> = ({post, propsUserId,setNewProfil
 
 
 
-            {post?.userId === propsUserId.toString() &&
+            {post?.userId === propsUserId?.toString() &&
                 <button className={styles.changeProfileBtn} onClick={toggleProfileEditMode}><img width={"20px"} src={settingsIcon} alt="settings"/></button>
             }
 
@@ -41,7 +41,7 @@ export const AboutProfileForm:React.FC<Props> = ({post, propsUserId,setNewProfil
                     <div className={styles.container}>
                         <div>
                             <div className={styles.fieldTitle}>Full name</div>
-                            <div className={styles.fieldContent}>{post?.fullname || "missing"}</div>
+                            <div className={styles.fieldContent}>{post?.fullName || "missing"}</div>
                         </div>
                         <div>
                             <div className={styles.fieldTitle}>About me</div>
@@ -66,8 +66,8 @@ export const AboutProfileForm:React.FC<Props> = ({post, propsUserId,setNewProfil
                                     <div className={styles.fieldTitle}>{i}</div>
                                     { post?.contacts[i as keyof typeof post.contacts] &&
                                         <a target="_blank"
-                                           href={post.contacts[i as keyof typeof post.contacts]}
-                                           className={styles.fieldContent}>{post.contacts[i as keyof typeof post.contacts]}</a>
+                                           href={post?.contacts[i as keyof typeof post.contacts]}
+                                           className={styles.fieldContent}>{post?.contacts[i as keyof typeof post.contacts]}</a>
                                     }
                                     { !post?.contacts[i as keyof typeof post.contacts] &&
                                         <div className={styles.fieldContentMissing}>missing</div>
@@ -84,8 +84,8 @@ export const AboutProfileForm:React.FC<Props> = ({post, propsUserId,setNewProfil
 
                     <div>
                         <div className={styles.fieldTitle}>Full name</div>
-                        <input className={styles.fieldContentInput} defaultValue={post?.fullname} placeholder="Enter your full name" {...register("fullname", {required:true} )}  />
-                        {errors.fullname?.type === 'required' && <div style={{color:'red'}} role="alert">Need to write some text</div>}
+                        <input className={styles.fieldContentInput} defaultValue={post?.fullName} placeholder="Enter your full name" {...register("fullName", {required:true} )}  />
+                        {errors.fullName?.type === 'required' && <div style={{color:'red'}} role="alert">Need to write some text</div>}
                     </div>
                     <div>
                         <div className={styles.fieldTitle}>About me</div>
@@ -113,7 +113,7 @@ export const AboutProfileForm:React.FC<Props> = ({post, propsUserId,setNewProfil
                                     }
                                 })} defaultValue={post?.contacts.facebook}/>
 
-                            {errors.contacts && <div style={{color:"red"}}>{errors.contacts.facebook?.message}</div>}
+                            {errors.contacts && <div style={{color:"red"}}>{errors.contacts?.facebook?.message}</div>}
                         </div>
                         <div>
                             <div className={styles.fieldTitle}>website</div>
@@ -123,7 +123,7 @@ export const AboutProfileForm:React.FC<Props> = ({post, propsUserId,setNewProfil
                                         message: "Enter correctly URL"
                                     }
                                 })} defaultValue={post?.contacts.website}/>
-                            {errors.contacts && <div style={{color:"red"}}>{errors.contacts.website?.message}</div>}
+                            {errors.contacts && <div style={{color:"red"}}>{errors.contacts?.website?.message}</div>}
                         </div>
                         <div>
                             <div className={styles.fieldTitle}>Vk</div>
@@ -133,7 +133,7 @@ export const AboutProfileForm:React.FC<Props> = ({post, propsUserId,setNewProfil
                                         message: "Enter correctly URL"
                                     }
                                 })}defaultValue={post?.contacts.vk}/>
-                            {errors.contacts && <div style={{color:"red"}}>{errors.contacts.vk?.message}</div>}
+                            {errors.contacts && <div style={{color:"red"}}>{errors.contacts?.vk?.message}</div>}
                         </div>
                         <div>
                             <div className={styles.fieldTitle}>twitter</div>
@@ -143,7 +143,7 @@ export const AboutProfileForm:React.FC<Props> = ({post, propsUserId,setNewProfil
                                         message: "Enter correctly URL"
                                     }
                                 })}defaultValue={post?.contacts.twitter}/>
-                            {errors.contacts && <div style={{color:"red"}}>{errors.contacts.twitter?.message}</div>}
+                            {errors.contacts && <div style={{color:"red"}}>{errors.contacts?.twitter?.message}</div>}
                         </div>
                         <div>
                             <div className={styles.fieldTitle}>instagram</div>
@@ -153,7 +153,7 @@ export const AboutProfileForm:React.FC<Props> = ({post, propsUserId,setNewProfil
                                         message: "Enter correctly URL"
                                     }
                                 })}defaultValue={post?.contacts.instagram}/>
-                            {errors.contacts && <div style={{color:"red"}}>{errors.contacts.instagram?.message}</div>}
+                            {errors.contacts && <div style={{color:"red"}}>{errors.contacts?.instagram?.message}</div>}
                         </div>
                         <div>
                             <div className={styles.fieldTitle}>youtube</div>
@@ -163,7 +163,7 @@ export const AboutProfileForm:React.FC<Props> = ({post, propsUserId,setNewProfil
                                         message: "Enter correctly URL"
                                     }
                                 })}defaultValue={post?.contacts.youtube}/>
-                            {errors.contacts && <div style={{color:"red"}}>{errors.contacts.youtube?.message}</div>}
+                            {errors.contacts && <div style={{color:"red"}}>{errors.contacts?.youtube?.message}</div>}
                         </div>
                         <div>
                             <div className={styles.fieldTitle}>Github</div>
@@ -173,7 +173,7 @@ export const AboutProfileForm:React.FC<Props> = ({post, propsUserId,setNewProfil
                                         message: "Enter correctly URL"
                                     }
                                 })}defaultValue={post?.contacts.github}/>
-                            {errors.contacts && <div style={{color:"red"}}>{errors.contacts.github?.message}</div>}
+                            {errors.contacts && <div style={{color:"red"}}>{errors.contacts?.github?.message}</div>}
                         </div>
                         <div>
                             <div className={styles.fieldTitle}>mainLink</div>
@@ -183,7 +183,7 @@ export const AboutProfileForm:React.FC<Props> = ({post, propsUserId,setNewProfil
                                         message: "Enter correctly URL"
                                     }
                                 })}defaultValue={post?.contacts.mainLink}/>
-                            {errors.contacts && <div style={{color:"red"}}>{errors.contacts.mainLink?.message}</div>}
+                            {errors.contacts && <div style={{color:"red"}}>{errors.contacts?.mainLink?.message}</div>}
                         </div>
                     </div>
                 <button className={styles.formButton}>Change info</button>

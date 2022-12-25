@@ -7,7 +7,7 @@ import {CaptchaAPI} from "../api/captcha-api";
 
 let initialData: initialDataType = {
     data: {
-        id: null,
+        userId: null,
         email: null,
         password: null,
         rememberMe: false,
@@ -35,7 +35,7 @@ export const AuthReducer = (state = initialData, action:tActions):initialDataTyp
             return {
                 ...state,
                 data: {
-                    id: null,
+                    userId: null,
                     email: null,
                     password: null,
                     rememberMe: null,
@@ -117,7 +117,7 @@ export const getCaptchaUrl = (isActive= true):CommonThunkType<tActions> => {
 
 type initialDataType = {
     data: {
-        id: number | null
+        userId: number | null
         email: string | null
         password: string | null
         rememberMe: boolean | null
