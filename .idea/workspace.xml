@@ -1,21 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0aa02b60-a84e-42fc-a391-bb183057058e" name="Changes" comment="Added typing to reducers">
+    <list default="true" id="0aa02b60-a84e-42fc-a391-bb183057058e" name="Changes" comment="don't working import actions in Dialogs.tsx and Profile.tsx">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/profile-api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/profile-api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/Dialogs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/Dialogs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header/HeaderContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/HeaderContainer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Login/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login/LoginForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/Posts/About/AboutProfileForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/Posts/About/AboutProfileForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/Posts/Post/Post.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/Posts/Post/Post.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/Posts/Posts.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/Posts/Posts.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/Profile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/auth-reducer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/auth-reducer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/dialogs-reducer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/dialogs-reducer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/profile-reducer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/profile-reducer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/styles.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/styles.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/dialogs-reducer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/profile-reducer.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -242,7 +231,8 @@
       <workItem from="1671737885884" duration="2714000" />
       <workItem from="1671824489549" duration="730000" />
       <workItem from="1671871259331" duration="14000" />
-      <workItem from="1671871274767" duration="16136000" />
+      <workItem from="1671871274767" duration="16368000" />
+      <workItem from="1671952677756" duration="245000" />
     </task>
     <task id="LOCAL-00001" summary="Add redux">
       <created>1662402025825</created>
@@ -573,7 +563,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671132268336</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="don't working import actions in Dialogs.tsx and Profile.tsx">
+      <created>1671895617796</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1671895617796</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -612,7 +609,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added form using React-Hook-Form for CreatePostForm.jsx, LoginComponent.jsx, SendMessageForm.jsx. While there is no data verification for forms" />
     <MESSAGE value="validate all forms, &#10;login work, &#10;logout not work" />
     <MESSAGE value="UI does not expect an asynchronous response on login and an unnecessary redirect occurs" />
     <MESSAGE value="login and logout work correcty, show message from server about correctly data" />
@@ -637,6 +633,7 @@
     <MESSAGE value="Actions was refactor in users-reducer.tsx" />
     <MESSAGE value="In folder API all is typing" />
     <MESSAGE value="Added typing to reducers" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added typing to reducers" />
+    <MESSAGE value="don't working import actions in Dialogs.tsx and Profile.tsx" />
+    <option name="LAST_COMMIT_MESSAGE" value="don't working import actions in Dialogs.tsx and Profile.tsx" />
   </component>
 </project>
