@@ -160,7 +160,7 @@ const MapStateToProps = (state: AppStateType) => {
   return {
     posts: state.profilePage.posts,
     users: state.usersPage.users,
-    userId: state.auth.data.userId,
+    userId: state.auth.data.id,
     isAuth: state.auth.isAuth,
   };
 };

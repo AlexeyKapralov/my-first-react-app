@@ -70,7 +70,7 @@ const App: React.FC<PropsType> = props => {
 					<Routes>
 						<Route path="/" element={<Profile/>}/>
 						<Route path="/profile" element={<Profile/>}/>
-						<Route path="/profile/:userId" element={<Profile/>}/>
+						<Route path="/profile/:userIde" element={<Profile/>}/>
 						<Route path="/dialogs" element={
 							<Suspense fallback={<div>Loading...</div>}>
 								<Dialogs/>

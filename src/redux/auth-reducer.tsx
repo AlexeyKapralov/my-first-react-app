@@ -5,7 +5,7 @@ import { CaptchaAPI } from "../api/captcha-api";
 
 let initialData: initialDataType = {
   data: {
-    userId: null,
+    id: null,
     email: null,
     password: null,
     rememberMe: false,
@@ -34,7 +34,7 @@ export const AuthReducer = (
       return {
         ...state,
         data: {
-          userId: null,
+          id: null,
           email: null,
           password: null,
           rememberMe: null,
@@ -85,7 +85,7 @@ export const Login = (data: any): CommonThunkType<tActions> => {
     actions.setIsInit(true);
     let response = await AuthAPI.login(data);
     if (response.data.resultCode === 0) {
-      dispatch(actions.SetAuthData(data, true));
+      dispatch(actions.SetAuthData(response.data.data, true));
       dispatch(getCaptchaUrl(false));
     } else {
       if (response.data.resultCode === 10) {
@@ -118,7 +118,7 @@ export const getCaptchaUrl = (isActive = true): CommonThunkType<tActions> => {
 
 type initialDataType = {
   data: {
-    userId: number | null;
+    id: number | null;
     email: string | null;
     password: string | null;
     rememberMe: boolean | null;

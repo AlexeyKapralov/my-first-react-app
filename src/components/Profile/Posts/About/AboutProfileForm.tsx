@@ -36,7 +36,7 @@ export const AboutProfileForm: React.FC<Props> = ({
 
   return (
     <div className={styles.wrapper}>
-      {post?.userId === userId?.toString() && (
+      {post?.userId == userId?.toString() && (
         <button
           className={styles.changeProfileBtn}
           onClick={toggleProfileEditMode}
