@@ -6,7 +6,7 @@ type tGetUsers = {
     totalCount: number
     error:string
 }
-type tUnfollowFollow = {
+export type tUnfollowFollow = {
     resultCode: number
     messages: Array<string>
     data:object

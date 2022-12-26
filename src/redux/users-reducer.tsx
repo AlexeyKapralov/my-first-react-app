@@ -3,8 +3,8 @@ import {AppStateType, CommonThunkType, InferActionsType} from "./redux-store";
 import {UsersAPI} from "../api/users-api";
 
 type PhotosType = {
-	small: string
-	large: string
+	small: string | null
+	large: string | null
 }
  export type UserType = {
 	userId: number
@@ -29,7 +29,7 @@ export type initialDataType = typeof initialData
 
 export const usersReducer = (state = initialData, action:tActions):initialDataType => {
 	switch (action.type) {
-		case 'FOLLOW': {
+		case 'usersPage/FOLLOW': {
 			return {
 				...state,
 				users: state.users.map ( u => {
@@ -39,7 +39,7 @@ export const usersReducer = (state = initialData, action:tActions):initialDataTy
 				} )
 			}
 		}
-		case 'UNFOLLOW': {
+		case 'usersPage/UNFOLLOW': {
 			return {
 				...state,
 				users: state.users.map ( u => {
@@ -49,19 +49,19 @@ export const usersReducer = (state = initialData, action:tActions):initialDataTy
 				} )
 			}
 		}
-		case 'SET_USERS': {
+		case 'usersPage/SET_USERS': {
 			return {...state, users: [...action.users]}
 		}
-		case 'SET_TOTAL_USERS_COUNT': {
+		case 'usersPage/SET_TOTAL_USERS_COUNT': {
 			return {...state, totalCount: action.countTotalUsers}
 		}
-		case 'CHANGE_PAGE': {
+		case 'usersPage/CHANGE_PAGE': {
 			return {...state, activePage: action.page}
 		}
-		case 'TOGGLE_IS_FETCHING': {
+		case 'usersPage/TOGGLE_IS_FETCHING': {
 			return {...state, isFetching: action.isFetching}
 		}
-		case 'TOGGLE_IS_FOLLOWING': {
+		case 'usersPage/TOGGLE_IS_FOLLOWING': {
 			return {
 				...state,
 				isToggleFollowingUserID:
@@ -77,14 +77,14 @@ export const usersReducer = (state = initialData, action:tActions):initialDataTy
 
 type tActions = InferActionsType<typeof actions>
 
-const actions = {
-	updateSubscribeFollow: (id:number) => ({ type: 'FOLLOW', id: id } as const),
-	updateSubscribeUnfollow: (id:number) => ({ type: 'UNFOLLOW', id: id } as const),
-	setUsers: (users:Array<UserType>) => ({type: 'SET_USERS', users: users} as const),
-	setTotalUsers: (countTotalUsers: number) => ({ type: 'SET_TOTAL_USERS_COUNT', countTotalUsers} as const),
-	setChangePage: (page:number) => ({ type: 'CHANGE_PAGE', page} as const),
-	toggleIsFetching: (isFetching:boolean) => ({ type: 'TOGGLE_IS_FETCHING', isFetching} as const),
-	ToggleFollowingUserID: (IsToggleFollowingUserID:number, isFetch:boolean) => ({ type: 'TOGGLE_IS_FOLLOWING', IsToggleFollowingUserID, isFetch} as const)
+export const actions = {
+	updateSubscribeFollow: (id:number) => ({ type: 'usersPage/FOLLOW', id: id } as const),
+	updateSubscribeUnfollow: (id:number) => ({ type: 'usersPage/UNFOLLOW', id: id } as const),
+	setUsers: (users:Array<UserType>) => ({type: 'usersPage/SET_USERS', users: users} as const),
+	setTotalUsers: (countTotalUsers: number) => ({ type: 'usersPage/SET_TOTAL_USERS_COUNT', countTotalUsers} as const),
+	setChangePage: (page:number) => ({ type: 'usersPage/CHANGE_PAGE', page} as const),
+	toggleIsFetching: (isFetching:boolean) => ({ type: 'usersPage/TOGGLE_IS_FETCHING', isFetching} as const),
+	ToggleFollowingUserID: (IsToggleFollowingUserID:number, isFetch:boolean) => ({ type: 'usersPage/TOGGLE_IS_FOLLOWING', IsToggleFollowingUserID, isFetch} as const)
 }
 // below thunk functions
 type tUserReducerThunk = CommonThunkType<tActions>
@@ -110,9 +110,9 @@ export const onChangePage = (page:number, usersCountOnPage:number):tUserReducerT
 export const follow = (userID: number):tUserReducerThunk => {
 	return async (dispatch) => {
 		dispatch(actions.ToggleFollowingUserID(userID, true))
-		let data = await UsersAPI.follow(userID)
+		let response = await UsersAPI.follow(userID)
 		dispatch(actions.ToggleFollowingUserID(userID, false))
-		if (data.resultCode === 0) {
+		if (response.resultCode === 0) {
 			dispatch(actions.updateSubscribeFollow(userID))
 		}
 	}
