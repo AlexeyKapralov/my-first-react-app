@@ -29,8 +29,8 @@ test("success follow thunk", async () => {
     await thunk(dispatchMock, getStateMock, {})
 
     expect(dispatchMock).toBeCalledTimes(3)
-    expect(dispatchMock).toHaveBeenNthCalledWith(1, actions.ToggleFollowingUserID(1, true))
-    expect(dispatchMock).toHaveBeenNthCalledWith(2, actions.ToggleFollowingUserID(1, false))
+    expect(dispatchMock).toHaveBeenNthCalledWith(1, actions.toggleFollowingUserID(1, true))
+    expect(dispatchMock).toHaveBeenNthCalledWith(2, actions.toggleFollowingUserID(1, false))
     expect(dispatchMock).toHaveBeenNthCalledWith(3, actions.updateSubscribeFollow(1))
     
 })
@@ -42,8 +42,8 @@ test("success unfollow thunk", async () => {
     await thunk(dispatchMock, getStateMock, {})
 
     expect(dispatchMock).toBeCalledTimes(3)
-    expect(dispatchMock).toHaveBeenNthCalledWith(1, actions.ToggleFollowingUserID(1, true))
-    expect(dispatchMock).toHaveBeenNthCalledWith(2, actions.ToggleFollowingUserID(1, false))
+    expect(dispatchMock).toHaveBeenNthCalledWith(1, actions.toggleFollowingUserID(1, true))
+    expect(dispatchMock).toHaveBeenNthCalledWith(2, actions.toggleFollowingUserID(1, false))
     expect(dispatchMock).toHaveBeenNthCalledWith(3, actions.updateSubscribeUnfollow(1))
 
 })

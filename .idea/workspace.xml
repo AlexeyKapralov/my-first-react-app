@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0aa02b60-a84e-42fc-a391-bb183057058e" name="Changes" comment="fixed Profile.tsx">
-      <change afterPath="$PROJECT_DIR$/src/redux/users-reducer.test.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/redux/users-reducer.thunk.test.ts" afterDir="false" />
+    <list default="true" id="0aa02b60-a84e-42fc-a391-bb183057058e" name="Changes" comment="create tests for users-reducer.tsx">
+      <change afterPath="$PROJECT_DIR$/src/components/Users/UsersSearchForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/api/users-api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/users-api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Users/Users.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Users/Users.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Users/UsersComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Users/UsersComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/users-reducer.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/users-reducer.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/users-reducer.thunk.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/users-reducer.thunk.test.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/users-reducer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/users-reducer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/users-selectors.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/users-selectors.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,8 +41,8 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/App.tsx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/components/Profile/Profile.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/components/Users/Users.jsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/components/Users/UsersComponent.jsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/components/Users/Users.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/components/Users/UsersComponent.tsx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/index.js" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/redux/redux-store.ts" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -55,23 +60,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last.edited.regexp": "Sample Text",
-    "last_opened_file_path": "D:/Frontend/2022/Projects/social-network/src/redux",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs.jest.jest_package": "D:/Frontend/2022/Projects/social-network/node_modules/react-scripts",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
-    "ts.external.directory.path": "D:\\Frontend\\2022\\Projects\\social-network\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last.edited.regexp&quot;: &quot;Sample Text&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Frontend/2022/Projects/social-network/src/redux&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs.jest.jest_package&quot;: &quot;D:/Frontend/2022/Projects/social-network/node_modules/react-scripts&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\Frontend\\2022\\Projects\\social-network\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Frontend\2022\Projects\social-network\src\redux" />
@@ -87,13 +92,14 @@
       <recent name="D:\Frontend\2022\LearningBasics\react\01\my-first-react-app\src\components\CommonComponents" />
     </key>
     <key name="es6.move.members.recent.items">
+      <recent name="D:\Frontend\2022\Projects\social-network\src\components\Users\UsersSearchForm.tsx" />
       <recent name="D:\Frontend\2022\Projects\social-network\src\api\captcha-api.ts" />
       <recent name="D:\Frontend\2022\Projects\social-network\src\api\profile-api.ts" />
       <recent name="D:\Frontend\2022\Projects\social-network\src\api\auth-api.ts" />
       <recent name="D:\Frontend\2022\Projects\social-network\src\api\users-api.ts" />
     </key>
   </component>
-  <component name="RunManager" selected="Jest.Unnamed">
+  <component name="RunManager" selected="npm.start">
     <configuration name="Unnamed" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -152,8 +158,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Jest.Unnamed" />
         <item itemvalue="npm.start" />
+        <item itemvalue="Jest.Unnamed" />
         <item itemvalue="npm.deploy" />
         <item itemvalue="npm.build" />
         <item itemvalue="Jest.should add new post" />
@@ -240,14 +246,9 @@
       <workItem from="1671871274767" duration="16368000" />
       <workItem from="1671952677756" duration="299000" />
       <workItem from="1671970458118" duration="9992000" />
-      <workItem from="1672057611351" duration="13243000" />
-    </task>
-    <task id="LOCAL-00003" summary="navContainer error (i don't know it)">
-      <created>1662490844596</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1662490844596</updated>
+      <workItem from="1672057611351" duration="13904000" />
+      <workItem from="1672211248841" duration="12071000" />
+      <workItem from="1672420596869" duration="8402000" />
     </task>
     <task id="LOCAL-00004" summary="learn and Add basic container component">
       <created>1662618620607</created>
@@ -585,7 +586,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672061638909</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="create tests for users-reducer.tsx">
+      <created>1672083344897</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1672083344897</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -616,7 +624,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="initialization work correct, without rerender and unnecessary redirects" />
     <MESSAGE value="add reselect" />
     <MESSAGE value="app.js refactor" />
     <MESSAGE value="refactor all reducers &#10;add test profile-reducer.test.js" />
@@ -641,6 +648,7 @@
     <MESSAGE value="corrected some moments" />
     <MESSAGE value="need to corrected type with userID links" />
     <MESSAGE value="fixed Profile.tsx" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed Profile.tsx" />
+    <MESSAGE value="create tests for users-reducer.tsx" />
+    <option name="LAST_COMMIT_MESSAGE" value="create tests for users-reducer.tsx" />
   </component>
 </project>

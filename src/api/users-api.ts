@@ -12,7 +12,7 @@ export type tUnfollowFollow = {
     data:object
 }
 type User = {
-    userId: number
+    id: number
     name: string
     status: string
     photos: {
@@ -23,8 +23,8 @@ type User = {
 }
 
 export const UsersAPI = {
-    getUsers(activePage = 1, usersCountOnPage = 10) {
-        return instance.get<tGetUsers>(`users?page=${activePage}&count=${usersCountOnPage}`)
+    getUsers(activePage = 1, usersCountOnPage = 10, term: string ="", friend: null | boolean = null) {
+        return instance.get<tGetUsers>(`users?page=${activePage}&count=${usersCountOnPage}&term=${term}` + (friend === null ? '' : `&friend=${friend}`) )
             .then(response => (response.data))
     },
     unfollow(userID: number) {

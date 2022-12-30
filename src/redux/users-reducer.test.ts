@@ -6,7 +6,7 @@ beforeEach(()=>{
     state = {
         users: [
             {
-                userId:0,
+                id:0,
                 followed:false,
                 name: "Alexey 0",
                 photos:{
@@ -16,7 +16,7 @@ beforeEach(()=>{
                 status: "status 0"
             },
             {
-                userId:1,
+                id:1,
                 followed:false,
                 name: "Alexey 1",
                 photos:{
@@ -26,7 +26,7 @@ beforeEach(()=>{
                 status: "status 1"
             },
             {
-                userId:2,
+                id:2,
                 followed:true,
                 name: "Alexey 2",
                 photos:{
@@ -36,7 +36,7 @@ beforeEach(()=>{
                 status: "status 2"
             },
             {
-                userId:3,
+                id:3,
                 followed:true,
                 name: "Alexey 3",
                 photos:{
@@ -51,7 +51,11 @@ beforeEach(()=>{
         activePage: 1,
         totalCount: 100,
         isFetching: false,
-        isToggleFollowingUserID: []
+        isToggleFollowingUserID: [],
+        filter: {
+            term:'',
+            friend: null as null | boolean
+        }
     }
 })
 

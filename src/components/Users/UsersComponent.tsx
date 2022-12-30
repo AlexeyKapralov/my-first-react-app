@@ -2,13 +2,29 @@ import styles from "./Users.module.scss";
 import React from "react";
 import {NavLink} from "react-router-dom";
 import {Paginator} from "../CommonComponents/Paginator/Paginator";
+import {initialDataType, UserType} from "../../redux/users-reducer";
 
-export const UsersComponent = (props) => {
+type MapDispatchToPropsType = {
+    onChangePage: (page: number, usersCountOnPage: number) => void
+    follow: (userID: number) => void
+    unfollow: (userID: number) => void
+}
+
+type MapStateToPropsType = {
+    users: []
+    state: initialDataType
+}
+
+type OwmPropsType = {}
+
+type Props = MapDispatchToPropsType & MapStateToPropsType & OwmPropsType
+
+export const UsersComponent:React.FC<Props> = (props) => {
 
     return (
         <div>
             <div className={styles.users}>
-                {props.users.map((u) => {
+                {props.users.map((u: UserType) => {
                     return (
                         <div className={styles.user}>
                             <NavLink to={`/profile/${u.id}`}>
@@ -28,7 +44,7 @@ export const UsersComponent = (props) => {
                                 {u.id}
                             </div>
                             <div>
-                                {u.followed === false
+                                {!u.followed
                                     ? <button disabled={props.state.isToggleFollowingUserID.some(i => i === u.id)}
                                               onClick={() => {
 
