@@ -1,13 +1,10 @@
 import './App.scss';
-import {Route, Routes, Navigate} from 'react-router-dom';
-import News from './components/News/News';
-import Music from './components/Music/Music';
-import Settings from './components/Settings/Settings';
+import {Navigate, Route, Routes} from 'react-router-dom';
 import NavbarContainer from "./components/Navbar/NavbarContainer";
 import Profile from "./components/Profile/Profile";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginForm from "./components/Login/LoginForm";
-import {useEffect, lazy, Suspense} from "react";
+import {lazy, Suspense, useEffect} from "react";
 import {Preloader} from "./components/CommonComponents/Preloader/Preloader";
 import {connect} from "react-redux";
 import {actions} from "./redux/auth-reducer";
@@ -78,7 +75,7 @@ const App: React.FC<PropsType> = props => {
 						}/>
 						<Route path="/users" element={
 							<Suspense fallback={<div>Loading...</div>}>
-								<Users/>
+								<Users />
 							</Suspense>
 						}/>
 						<Route path='/news' element={<div>Sorry. Functionality not implemented</div>}/>

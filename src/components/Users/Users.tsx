@@ -1,83 +1,67 @@
-import {connect} from "react-redux";
-import {FilterType, follow, getUsers, initialDataType, onChangePage, unfollow} from "../../redux/users-reducer";
-import React from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {FilterType, follow, getUsers, tUserReducerThunk, unfollow} from "../../redux/users-reducer";
+import React, {useEffect} from "react";
 import {UsersComponent} from "./UsersComponent";
 import {Preloader} from "../CommonComponents/Preloader/Preloader";
-import {withAuthRedirect} from "../HOC/withAuthRedirect";
-import {compose} from "redux";
-import {getStateSelector, getUsersFilter, getUsersSelector} from "../../redux/users-selectors";
+import {
+    getActivePageSelector,
+    getIsFetchingSelector,
+    getStateSelector, getTotalCountSelector,
+    getUsersArraySelector,
+    getUsersCountOnPageSelector,
+    getUsersFilter
+} from "../../redux/users-selectors";
 import {Paginator} from "../CommonComponents/Paginator/Paginator";
-import {AppStateType} from "../../redux/redux-store";
 import {UsersSearchForm} from "./UsersSearchForm";
 
+const Users:React.FC = React.memo(() => {
 
-type MapDispatchToProps = {
-    getUsers: (activePage: number, usersCountOnPage: number, filter:FilterType) => void
-    onChangePage: (page: number, usersCountOnPage: number, filter:FilterType) => void
-    follow: (userID: number) => void
-    unfollow: (userID: number) => void
-}
-type MapStateToPropsType = {
-    users: []
-    state: initialDataType
-    filter: FilterType
-}
-type OwmPropsType = {
-    onFilterChanged: (filter: FilterType) => void
-}
+    const dispatch = useDispatch()
 
-type PropsType = MapDispatchToProps & MapStateToPropsType & OwmPropsType
+    const users = useSelector(getUsersArraySelector)
+    const state = useSelector(getStateSelector)
+    const filter = useSelector(getUsersFilter)
+    const usersCountOnPage = useSelector(getUsersCountOnPageSelector)
+    const activePage = useSelector(getActivePageSelector)
+    const totalCount = useSelector(getTotalCountSelector)
+    const isFetching = useSelector(getIsFetchingSelector)
 
-export const Users = React.memo(class extends React.Component<PropsType> {
+    useEffect(() => {
+        // @ts-ignore
+        dispatch(getUsers(activePage, usersCountOnPage, filter))
+    }, [])
 
-    componentDidMount() {
-        this.props.getUsers(this.props.state.activePage, this.props.state.usersCountOnPage, this.props.filter)
+    const onChangePage = (p: number) => {
+        // @ts-ignore
+        dispatch(getUsers(p, usersCountOnPage, filter))
     }
 
-    onChangePage = (p: number) => {
-        this.props.onChangePage(p, this.props.state.usersCountOnPage, this.props.filter)
+    const onFilterChanged = (filter: FilterType) => {
+        // @ts-ignore
+        dispatch(getUsers(1, usersCountOnPage, filter))
     }
 
-    onFilterChanged = (filter: FilterType) => {
-        this.props.getUsers(1, this.props.state.usersCountOnPage, filter)
-    }
-
-    render() {
-        return (
+    return (
+        <div>
+            <UsersSearchForm
+                onFilterChanged={onFilterChanged}/>
             <div>
-                <UsersSearchForm
-                    onFilterChanged={this.onFilterChanged}/>
-                <div>
-                    <Paginator totalCount={this.props.state.totalCount}
-                               usersCountOnPage={this.props.state.usersCountOnPage} onChangePage={this.onChangePage}
-                               activePage={this.props.state.activePage}/>
-                </div>
-                {this.props.state.isFetching
-                    ? <Preloader/>
-                    : <UsersComponent
-                        state={this.props.state}
-                        users={this.props.users}
-                        follow={this.props.follow}
-                        unfollow={this.props.unfollow}
-                        onChangePage={this.onChangePage}
-
-                    />}
+                <Paginator totalCount={totalCount}
+                           usersCountOnPage={usersCountOnPage} onChangePage={onChangePage}
+                           activePage={activePage}/>
             </div>
-        )
-    }
-}
-)
+            {isFetching
+                ? <Preloader/>
+                : <UsersComponent
+                    state={state}
+                    users={users}
+                    follow={follow}
+                    unfollow={unfollow}
+                    onChangePage={onChangePage}
 
-const mapStateToProps = (state: AppStateType) => {
+                />}
+        </div>
+    )
+})
 
-    return {
-        users: getUsersSelector(state),
-        state: getStateSelector(state),
-        filter: getUsersFilter(state)
-    }
-}
-
-export default compose(
-    connect(mapStateToProps, {getUsers, onChangePage, follow, unfollow}),
-    withAuthRedirect,
-)(Users);
+export default Users

@@ -11,7 +11,7 @@ type MapDispatchToPropsType = {
 }
 
 type MapStateToPropsType = {
-    users: []
+    users: UserType[]
     state: initialDataType
 }
 

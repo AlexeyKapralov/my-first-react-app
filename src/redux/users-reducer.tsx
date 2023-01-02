@@ -84,7 +84,7 @@ export const usersReducer = (state = initialData, action:tActions):initialDataTy
 	}
 }
 
-type tActions = InferActionsType<typeof actions>
+
 
 export const actions = {
 	updateSubscribeFollow: (id:number) => ({ type: 'usersPage/FOLLOW', id: id } as const),
@@ -97,7 +97,6 @@ export const actions = {
 	setFilter: (filter:FilterType) => ({type: 'userPage/SET_FILTER', payload: filter } as const)
 }
 // below thunk functions
-type tUserReducerThunk = CommonThunkType<tActions>
 export const getUsers = (activePage:number, usersCountOnPage:number, filter: FilterType):tUserReducerThunk => {
 	return async (dispatch, getState) => {
 		dispatch(actions.toggleIsFetching(true))
@@ -139,3 +138,5 @@ export const unfollow = (userID:number):tUserReducerThunk => {
 		}
 	}
 }
+type tActions = InferActionsType<typeof actions>
+export type tUserReducerThunk = CommonThunkType<tActions>
