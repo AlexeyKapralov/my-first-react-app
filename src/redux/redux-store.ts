@@ -5,6 +5,8 @@ import {navbarReducer} from "./navbar-reducer";
 import {usersReducer} from "./users-reducer";
 import {AuthReducer} from "./auth-reducer";
 import thunkMiddleware, {ThunkAction} from "redux-thunk";
+import {useDispatch} from "react-redux";
+import {configureStore} from "@reduxjs/toolkit";
 
 let RootReducer = combineReducers({
     dialogsPage: dialogsReducer,
@@ -24,7 +26,16 @@ export type CommonThunkType<A extends Action, R = Promise<void>> = ThunkAction<R
 
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-export const store = createStore(RootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)));
+// deprecated method createStore replace configureStore
+// export const store = createStore(RootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)));
+
+export const store = configureStore({
+    reducer: RootReducer,
+    middleware: getDefaultMiddleware =>
+        getDefaultMiddleware().concat(thunkMiddleware)
+})
 
 // @ts-ignore
 window.__store__ = store;
+
+export type AppDispatch = typeof store.dispatch

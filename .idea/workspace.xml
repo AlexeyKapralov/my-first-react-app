@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0aa02b60-a84e-42fc-a391-bb183057058e" name="Changes" comment="Add Form for search users&#10;- Add form use Formik library&#10;- Update GetUsers method&#10;- Add action for setFilter and case in users-reducer.tsx&#10;- Создать метод в компоненте Users с изменениями filter&#10;- Create method in component Users.tsx with change filter&#10;- Throw props in UsersSearchForm.tsx">
+    <list default="true" id="0aa02b60-a84e-42fc-a391-bb183057058e" name="Changes" comment="- added react hooks instead mapState/DispatchToProps&#10;&#10;p.s.need delete @ts-ignore in Users.tsx">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Users/Users.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Users/Users.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Users/UsersComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Users/UsersComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/redux-store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/redux-store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/users-reducer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/users-reducer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/users-selectors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/users-selectors.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -248,14 +243,7 @@
       <workItem from="1672211248841" duration="12071000" />
       <workItem from="1672420596869" duration="8520000" />
       <workItem from="1672556680007" duration="12744000" />
-      <workItem from="1672661637733" duration="2289000" />
-    </task>
-    <task id="LOCAL-00005" summary="learn and Add basic container component">
-      <created>1662620153492</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1662620153492</updated>
+      <workItem from="1672661637733" duration="6994000" />
     </task>
     <task id="LOCAL-00006" summary="Add all basic container components">
       <created>1662621047068</created>
@@ -593,7 +581,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672429633455</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="- added react hooks instead mapState/DispatchToProps&#10;&#10;p.s.need delete @ts-ignore in Users.tsx">
+      <created>1672664868457</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1672664868458</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -624,7 +619,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="app.js refactor" />
     <MESSAGE value="refactor all reducers &#10;add test profile-reducer.test.js" />
     <MESSAGE value="update paginator &#10;add sass modules" />
     <MESSAGE value="added lazyLoading to App.js for some components" />
@@ -649,6 +643,7 @@
     <MESSAGE value="fixed Profile.tsx" />
     <MESSAGE value="create tests for users-reducer.tsx" />
     <MESSAGE value="Add Form for search users&#10;- Add form use Formik library&#10;- Update GetUsers method&#10;- Add action for setFilter and case in users-reducer.tsx&#10;- Создать метод в компоненте Users с изменениями filter&#10;- Create method in component Users.tsx with change filter&#10;- Throw props in UsersSearchForm.tsx" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Form for search users&#10;- Add form use Formik library&#10;- Update GetUsers method&#10;- Add action for setFilter and case in users-reducer.tsx&#10;- Создать метод в компоненте Users с изменениями filter&#10;- Create method in component Users.tsx with change filter&#10;- Throw props in UsersSearchForm.tsx" />
+    <MESSAGE value="- added react hooks instead mapState/DispatchToProps&#10;&#10;p.s.need delete @ts-ignore in Users.tsx" />
+    <option name="LAST_COMMIT_MESSAGE" value="- added react hooks instead mapState/DispatchToProps&#10;&#10;p.s.need delete @ts-ignore in Users.tsx" />
   </component>
 </project>
