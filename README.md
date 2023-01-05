@@ -1,6 +1,13 @@
 # React-Social-Network
 A reactive Single-Page Social-Network!! 
 
+# Stack
+- React
+- Redux Toolkit
+- SCSS Modules
+- React Hook Form
+- Formik
+
 # Test Account
 - Login - free@samuraijs.com
 - Password - **free**
