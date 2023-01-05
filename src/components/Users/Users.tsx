@@ -14,10 +14,14 @@ import {
 import {Paginator} from "../CommonComponents/Paginator/Paginator";
 import {UsersSearchForm} from "./UsersSearchForm";
 import {AppDispatch} from "../../redux/redux-store";
+import {useLocation, useNavigate} from "react-router-dom";
+
 
 const Users:React.FC = React.memo(() => {
 
     const dispatch = useDispatch<AppDispatch>()
+    const navigate = useNavigate()
+    const location = useLocation()
 
     const users = useSelector(getUsersArraySelector)
     const state = useSelector(getStateSelector)
@@ -28,8 +32,36 @@ const Users:React.FC = React.memo(() => {
     const isFetching = useSelector(getIsFetchingSelector)
 
     useEffect(() => {
-        dispatch(getUsers(activePage, usersCountOnPage, filter))
+        const parsed =  new URLSearchParams(location.search)
+
+        let actualFilter = filter
+        let actualPage = activePage
+
+        if (!!parsed.get("page")) actualPage = Number(parsed.get("page"))
+
+        if (!!parsed.get("term")) actualFilter = {
+            ...actualFilter, term: parsed.get("term") as string
+        }
+
+        switch (parsed.get("friend")) {
+            case "null":
+                actualFilter = {...actualFilter,friend: null}
+                break;
+            case "true":
+                actualFilter = {...actualFilter,friend: true}
+                break;
+            case "false":
+                actualFilter = {...actualFilter,friend: false}
+                break;
+        }
+
+        dispatch(getUsers(actualPage, usersCountOnPage, actualFilter))
     }, [])
+
+    useEffect(()=>{
+        //добавить конкатенацию
+        navigate(`?page=${activePage}&count=${usersCountOnPage}&term=${filter.term}&friend=${filter.friend}`)
+    }, [filter, activePage])
 
     const onChangePage = (p: number) => {
         dispatch(getUsers(p, usersCountOnPage, filter))
@@ -48,7 +80,7 @@ const Users:React.FC = React.memo(() => {
     return (
         <div>
             <UsersSearchForm
-                onFilterChanged={onFilterChanged}/>
+                onFilterChanged={onFilterChanged} filter={filter}/>
             <div>
                 <Paginator totalCount={totalCount}
                            usersCountOnPage={usersCountOnPage} onChangePage={onChangePage}

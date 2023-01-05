@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0aa02b60-a84e-42fc-a391-bb183057058e" name="Changes" comment="- added react hooks instead mapState/DispatchToProps&#10;&#10;p.s.need delete @ts-ignore in Users.tsx">
+    <list default="true" id="0aa02b60-a84e-42fc-a391-bb183057058e" name="Changes" comment="- added react hooks instead mapState/DispatchToProps without @ts-ignore&#10;- delete deprecated method createStore. Is use instead configureStore from redux-toolkit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Users/Users.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Users/Users.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/redux-store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/redux-store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Users/UsersSearchForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Users/UsersSearchForm.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,23 +52,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last.edited.regexp": "Sample Text",
-    "last_opened_file_path": "D:/Frontend/2022/Projects/social-network/src/redux/reducers",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs.jest.jest_package": "D:/Frontend/2022/Projects/social-network/node_modules/react-scripts",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
-    "ts.external.directory.path": "D:\\Frontend\\2022\\Projects\\social-network\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last.edited.regexp&quot;: &quot;Sample Text&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Frontend/2022/Projects/Instructions&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs.jest.jest_package&quot;: &quot;D:/Frontend/2022/Projects/social-network/node_modules/react-scripts&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\Frontend\\2022\\Projects\\social-network\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Frontend\2022\Projects\social-network\src\redux\reducers" />
@@ -243,14 +242,10 @@
       <workItem from="1672211248841" duration="12071000" />
       <workItem from="1672420596869" duration="8520000" />
       <workItem from="1672556680007" duration="12744000" />
-      <workItem from="1672661637733" duration="6994000" />
-    </task>
-    <task id="LOCAL-00006" summary="Add all basic container components">
-      <created>1662621047068</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1662621047068</updated>
+      <workItem from="1672661637733" duration="7170000" />
+      <workItem from="1672767994966" duration="4434000" />
+      <workItem from="1672902992249" duration="680000" />
+      <workItem from="1672907859282" duration="7102000" />
     </task>
     <task id="LOCAL-00007" summary="dasda">
       <created>1662621221437</created>
@@ -588,7 +583,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672664868458</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="- added react hooks instead mapState/DispatchToProps without @ts-ignore&#10;- delete deprecated method createStore. Is use instead configureStore from redux-toolkit">
+      <created>1672672317732</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1672672317732</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -619,7 +621,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="refactor all reducers &#10;add test profile-reducer.test.js" />
     <MESSAGE value="update paginator &#10;add sass modules" />
     <MESSAGE value="added lazyLoading to App.js for some components" />
     <MESSAGE value="add some features for deploy on gitHub Pages" />
@@ -644,6 +645,7 @@
     <MESSAGE value="create tests for users-reducer.tsx" />
     <MESSAGE value="Add Form for search users&#10;- Add form use Formik library&#10;- Update GetUsers method&#10;- Add action for setFilter and case in users-reducer.tsx&#10;- Создать метод в компоненте Users с изменениями filter&#10;- Create method in component Users.tsx with change filter&#10;- Throw props in UsersSearchForm.tsx" />
     <MESSAGE value="- added react hooks instead mapState/DispatchToProps&#10;&#10;p.s.need delete @ts-ignore in Users.tsx" />
-    <option name="LAST_COMMIT_MESSAGE" value="- added react hooks instead mapState/DispatchToProps&#10;&#10;p.s.need delete @ts-ignore in Users.tsx" />
+    <MESSAGE value="- added react hooks instead mapState/DispatchToProps without @ts-ignore&#10;- delete deprecated method createStore. Is use instead configureStore from redux-toolkit" />
+    <option name="LAST_COMMIT_MESSAGE" value="- added react hooks instead mapState/DispatchToProps without @ts-ignore&#10;- delete deprecated method createStore. Is use instead configureStore from redux-toolkit" />
   </component>
 </project>

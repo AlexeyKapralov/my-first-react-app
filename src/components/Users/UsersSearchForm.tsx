@@ -4,6 +4,7 @@ import {FilterType} from "../../redux/users-reducer";
 
 type PropsType = {
     onFilterChanged: (filter: FilterType) => void
+    filter: FilterType
 }
 type FormType = {
     term: string
@@ -24,7 +25,9 @@ export const UsersSearchForm:React.FC<PropsType> = React.memo((props) => {
 
     return <>
         <Formik
-            initialValues={{term: '', friend: 'null'}}
+            //для возможности обновления значений пропсов после их обновления
+            enableReinitialize
+            initialValues={{term: props.filter.term, friend: String(props.filter.friend) as "true" | "false" | "null"}}
             validate={values => {
                 const errors: any = {};
                 return errors;
