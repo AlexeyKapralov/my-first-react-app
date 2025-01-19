@@ -1,7 +1,7 @@
 {
   "name": "my-first-react-app",
   "version": "0.1.0",
-  "homepage": "https://alexeykapralov.github.io/social-network-react-spa",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@hookform/error-message": "^2.0.0",
